@@ -22,6 +22,29 @@ public abstract class Item {
 		this.maxCount = maxCount;
 	}
 	
+	public boolean isSameType(Item item) {
+		return getClass() == item.getClass();
+	}
+	
+	public boolean addCount() {
+		if (this.count < this.maxCount) {
+			this.count++;
+			return true;
+		}
+		return false;
+	}
+	
+	public void use() {
+		if (count > 0) {
+			activate();
+			count--;
+		}
+	}
+	
+	public abstract void activate();
+	
+	// Getters & Setters
+	
 	public String getName() {
 		return name;
 	}
@@ -41,25 +64,9 @@ public abstract class Item {
 	public int getCount() {
 		return count;
 	}
-	
-	public boolean addCount() {
-		if (this.count < this.maxCount) {
-			this.count++;
-			return true;
-		}
-		return false;
-	}
 
 	public int getMaxCount() {
 		return maxCount;
 	}
 	
-	public void use() {
-		if (count > 0) {
-			activate();
-			count--;
-		}
-	}
-	
-	public abstract void activate();
 }
