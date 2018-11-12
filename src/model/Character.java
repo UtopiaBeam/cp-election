@@ -3,7 +3,7 @@ package model;
 import javafx.scene.image.Image;
 import model.type.CCType;
 
-public class Character {
+public abstract class Character {
 
 	private int hp;
 	private int maxHp;
@@ -17,7 +17,7 @@ public class Character {
 	private float speed;
 	private float maxSpeed;
 	
-	public Character(int hp, int maxHp, int atk, int def, CCType status, Image image, float posX, float posY,
+	public Character(int hp, int maxHp, int atk, int def, Image image, float posX, float posY,
 			float speed, float maxSpeed) {
 		this.hp = hp;
 		this.maxHp = maxHp;
@@ -30,6 +30,27 @@ public class Character {
 		this.speed = speed;
 		this.maxSpeed = maxSpeed;
 	}
+	
+	public void takeDamge(int damage) {
+		damage -= def;
+		if (damage < 0) {
+			damage = 0;
+		}
+		
+		hp -= damage;
+	}
+	
+	public boolean isDead() {
+		return (hp == 0);
+	}
+	
+	public boolean canAttack() {
+		return (status == CCType.NONE);
+	}
+	
+	public abstract void attack();
+	
+	// Getters & Setters
 
 	public int getHp() {
 		return hp;
