@@ -31,6 +31,25 @@ public abstract class Character {
 		this.maxSpeed = maxSpeed;
 	}
 	
+	public boolean isDead() {
+		return (hp <= 0);
+	}
+	
+	public boolean canAttack() {
+		return (status == CCType.NONE);
+	}
+	
+	public boolean canMove() {
+		return (status != CCType.STUN);
+	}
+	
+	public void heal(int hp) {
+		this.hp += hp;
+		if (this.hp > this.maxHp) {
+			this.hp = this.maxHp;
+		}
+	}
+	
 	public void takeDamge(int damage) {
 		damage -= def;
 		if (damage < 0) {
@@ -40,24 +59,12 @@ public abstract class Character {
 		hp -= damage;
 	}
 	
-	public boolean isDead() {
-		return (hp == 0);
-	}
-	
-	public boolean canAttack() {
-		return (status == CCType.NONE);
-	}
-	
 	public abstract void attack();
 	
 	// Getters & Setters
 
 	public int getHp() {
 		return hp;
-	}
-
-	public void setHp(int hp) {
-		this.hp = hp;
 	}
 
 	public int getAtk() {
