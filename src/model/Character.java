@@ -1,7 +1,7 @@
 package model;
 
+import constants.CCType;
 import javafx.scene.image.Image;
-import model.type.CCType;
 
 public abstract class Character {
 
