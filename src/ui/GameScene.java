@@ -6,10 +6,10 @@ import javafx.scene.layout.StackPane;
 
 public class GameScene extends Scene{
 	public GameScene() {
-		super(new StackPane(), 1000, 600);
+		super(new StackPane(), 900, 600);
 		StackPane root = (StackPane)getRoot();
 		
-		Canvas canvas = new Canvas(1000, 600);
+		Canvas canvas = new Canvas(900, 600);
 		root.getChildren().add(canvas);
 	}
 }

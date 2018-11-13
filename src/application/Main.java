@@ -1,7 +1,9 @@
 package application;
 	
 import javafx.application.Application;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
+import ui.GameScene;
 import ui.StartScene;
 
 
@@ -9,7 +11,11 @@ public class Main extends Application {
 	
 	private static Stage stage;
 	private static StartScene startScene;
-//	private static Scene gameScene = new GameScene();
+	private static Scene gameScene = new GameScene();
+	
+	public static void main(String[] args) {
+		launch(args);
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -19,18 +25,29 @@ public class Main extends Application {
 			stage.setTitle("CP-Election4.0!");
 			stage.setScene(startScene);
 			stage.show();
-			
-//			BorderPane root = new BorderPane();
-//			Scene scene = new Scene(root, 900, 600);
-//			scene.getStylesheets().add(getClass().getResource("application.css").toExternalForm());
-//			primaryStage.setScene(scene);
-//			primaryStage.show();
+
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
+
+	public static StartScene getStartScene() {
+		return startScene;
+	}
+
+	public static void setStartScene(StartScene startScene) {
+		Main.startScene = startScene;
+	}
+
+	public static Stage getStage() {
+		return stage;
+	}
+
+	public static Scene getGameScene() {
+		return gameScene;
+	}
 	
-	public static void main(String[] args) {
-		launch(args);
+	public static void setCenter() {
+		stage.centerOnScreen(); 
 	}
 }
