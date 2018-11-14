@@ -3,34 +3,24 @@ package model;
 import constants.CCType;
 import javafx.scene.image.Image;
 
-public abstract class Character {
+public abstract class Character extends Moveable {
 
-	private int hp;
-	private int maxHp;
-	private int atk;
-	private int def;
-	private CCType status;
+	protected int hp;
+	protected int maxHp;
+	protected int atk;
+	protected int def;
+	protected CCType status;
 	
-	private Image image;
-	private float posX;
-	private float posY;
-	private float speed;
-	private float maxSpeed;
 	
-	public Character(int hp, int maxHp, int atk, int def, Image image, float posX, float posY,
-			float speed, float maxSpeed) {
-		this.hp = hp;
+	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
+		super(name, image, posX, posY);
+		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
-		this.image = image;
-		this.posX = posX;
-		this.posY = posY;
-		this.speed = speed;
-		this.maxSpeed = maxSpeed;
 	}
-	
+
 	public boolean isDead() {
 		return (hp <= 0);
 	}
@@ -50,6 +40,15 @@ public abstract class Character {
 		}
 	}
 	
+	public void refresh() {
+		this.hp = this.maxHp;
+	}
+	
+	public void revive() {
+		refresh();
+		status = CCType.NONE;
+	}
+	
 	public void takeDamge(int damage) {
 		damage -= def;
 		if (damage < 0) {
@@ -57,9 +56,14 @@ public abstract class Character {
 		}
 		
 		hp -= damage;
+		if (hp <= 0) {
+			dead();
+		}
 	}
 	
 	public abstract void attack();
+	
+	public abstract void dead();
 	
 	// Getters & Setters
 
@@ -67,68 +71,32 @@ public abstract class Character {
 		return hp;
 	}
 
-	public int getAtk() {
-		return atk;
+	public int getMaxHp() {
+		return maxHp;
 	}
 
-	public void setAtk(int atk) {
-		this.atk = atk;
+	public int getAtk() {
+		return atk;
 	}
 
 	public int getDef() {
 		return def;
 	}
 
-	public void setDef(int def) {
-		this.def = def;
-	}
-
 	public CCType getStatus() {
 		return status;
 	}
 
+	public void setAtk(int atk) {
+		this.atk = atk;
+	}
+
+	public void setDef(int def) {
+		this.def = def;
+	}
+
 	public void setStatus(CCType status) {
 		this.status = status;
-	}
-
-	public Image getImage() {
-		return image;
-	}
-
-	public float getPosX() {
-		return posX;
-	}
-
-	public void setPosX(float posX) {
-		this.posX = posX;
-	}
-
-	public float getPosY() {
-		return posY;
-	}
-
-	public void setPosY(float posY) {
-		this.posY = posY;
-	}
-
-	public float getSpeed() {
-		return speed;
-	}
-
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-
-	public float getMaxSpeed() {
-		return maxSpeed;
-	}
-
-	public void setMaxSpeed(float maxSpeed) {
-		this.maxSpeed = maxSpeed;
-	}
-
-	public int getMaxHp() {
-		return maxHp;
 	}
 	
 }
