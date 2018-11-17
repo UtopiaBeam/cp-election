@@ -1,7 +1,9 @@
 package model.player;
 
 import exception.InventoryFullException;
+import input.KeyInput;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import model.Character;
 import model.item.Item;
 
@@ -44,6 +46,30 @@ public class Player extends Character {
 		throw new InventoryFullException();
 	}
 	
+	public void updateByPressingKeys() {
+		if (KeyInput.pressingKey(KeyCode.LEFT)) {
+			move(-5,0);
+		}
+		if (KeyInput.pressingKey(KeyCode.RIGHT)) {
+			move(5,0);
+		}
+		if (KeyInput.pressingKey(KeyCode.UP)) {
+			move(0,-5);
+		}
+		if (KeyInput.pressingKey(KeyCode.DOWN)) {
+			move(0,5);
+		}
+	}
+	
+	
+	
+	
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		updateByPressingKeys();
+	}
+	
 	// Getters & Setters
 	
 	public double getAcc() {
@@ -53,5 +79,6 @@ public class Player extends Character {
 	public Item[] getInventory() {
 		return inventory;
 	}
+
 
 }

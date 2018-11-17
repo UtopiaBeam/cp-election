@@ -1,8 +1,10 @@
 package model;
 
+import controller.GameManager;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Moveable extends Frame {
+public abstract class Moveable extends Frame {
 
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
@@ -50,6 +52,12 @@ public class Moveable extends Frame {
 		if (this.speed > this.maxSpeed) {
 			this.speed = this.maxSpeed;
 		}
+	}
+	
+	public abstract void update();
+	
+	public void render(GraphicsContext gc) {
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().posX, posY-GameManager.getInstance().getCurrentMap().posY);
 	}
 	
 	// Getters & Setters
