@@ -33,6 +33,13 @@ public class NPC extends Character {
 			return;
 		}
 	}
+	
+	
+	@Override
+	public void update() {
+		// TODO Auto-generated method stub
+		
+	}
 
 	// Getters & Setters
 	
