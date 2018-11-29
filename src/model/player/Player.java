@@ -1,5 +1,8 @@
 package model.player;
 
+import java.util.List;
+
+import controller.GameManager;
 import exception.InventoryFullException;
 import input.KeyInput;
 import javafx.scene.image.Image;
@@ -11,19 +14,22 @@ public class Player extends Character {
 
 	public static final int INVENTORY_SIZE = 5;
 	
-	private double acc = 0.1;
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	
-	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double acc) {
+	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY, maxHp, atk, def);
-		this.acc = acc;
+	}
+	
+	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
+		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 	}
 
 	@Override
-	public void attack() {
+	public boolean attack() {
 		if (!canAttack()) {
-			return;
+			return false;
 		}
+		return true;
 	}
 	
 	@Override
@@ -46,23 +52,29 @@ public class Player extends Character {
 		throw new InventoryFullException();
 	}
 	
+//	public void pushAccX(double acc) {
+//		this.speedX += acc;
+//		if (this.speedX > this.maxSpeed) {
+//			this.speedX = this.maxSpeed;
+//		}
+//	}
+	
 	public void updateByPressingKeys() {
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
-			move(-5,0);
+			setFacing(LEFT);
+			move(-5, 0);
 		}
 		if (KeyInput.pressingKey(KeyCode.RIGHT)) {
-			move(5,0);
+			setFacing(RIGHT);
+			move(5, 0);
 		}
 		if (KeyInput.pressingKey(KeyCode.UP)) {
-			move(0,-5);
+			move(0, -5);
 		}
 		if (KeyInput.pressingKey(KeyCode.DOWN)) {
-			move(0,5);
+			move(0, 5);
 		}
 	}
-	
-	
-	
 	
 	@Override
 	public void update() {
@@ -71,14 +83,9 @@ public class Player extends Character {
 	}
 	
 	// Getters & Setters
-	
-	public double getAcc() {
-		return acc;
-	}
 
 	public Item[] getInventory() {
 		return inventory;
 	}
-
 
 }

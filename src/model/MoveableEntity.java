@@ -4,34 +4,34 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public abstract class Moveable extends Frame {
+public abstract class MoveableEntity extends Frame {
 
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
 	
 	protected String name;
-	protected double speed;
+	protected double speedX = 3.5;
+	protected double speedY = 0;
 	protected double maxSpeed;
-	protected double acc;
 	protected int facing;
 	
 	private Image image, imageL, imageR;
 
-	public Moveable(String name, Image image, double posX, double posY) {
+	public MoveableEntity(String name, Image image, double posX, double posY) {
 		super(posX, posY, image.getWidth(), image.getHeight());
 		this.setImage(image);
-		this.imageL = null;
-		this.imageR = null;
+		this.imageL = image;
+		this.imageR = image;
 	}
 	
-	public Moveable(String name, Image imageL, Image imageR, double posX, double posY) {
+	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY) {
 		super(posX, posY, imageL.getWidth(), imageL.getHeight());
 		this.imageL = imageL;
 		this.imageR = imageR;
 		setFacing(RIGHT);
 	}
 	
-	public Moveable(String name, Image imageL, Image imageR, double posX, double posY, int facing) {
+	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY, int facing) {
 		super(posX, posY, imageL.getWidth(), imageL.getHeight());
 		this.imageL = imageL;
 		this.imageR = imageR;
@@ -39,19 +39,13 @@ public abstract class Moveable extends Frame {
 	}
 	
 	public void move() {
-		this.posX += facing * speed;
+		this.posX += facing * speedX;
+		this.posY += speedY;
 	}
 	
 	public void move(double x, double y) {
 		this.posX += x;
 		this.posY += y;
-	}
-	
-	public void accelerate() {
-		this.speed += this.acc;
-		if (this.speed > this.maxSpeed) {
-			this.speed = this.maxSpeed;
-		}
 	}
 	
 	public abstract void update();
@@ -62,16 +56,16 @@ public abstract class Moveable extends Frame {
 	
 	// Getters & Setters
 	
-	public double getSpeed() {
-		return speed;
+	public double getSpeedX() {
+		return speedX;
+	}
+	
+	public double getSpeedY() {
+		return speedY;
 	}
 
 	public double getMaxSpeed() {
 		return maxSpeed;
-	}
-
-	public double getAcc() {
-		return acc;
 	}
 
 	public int getFacing() {
@@ -82,16 +76,16 @@ public abstract class Moveable extends Frame {
 		return image;
 	}
 
-	public void setSpeed(double speed) {
-		this.speed = speed;
+	public void setSpeedX(double speed) {
+		this.speedX = speed;
+	}
+	
+	public void setSpeedY(double speed) {
+		this.speedY = speed;
 	}
 
 	public void setMaxSpeed(double maxSpeed) {
 		this.maxSpeed = maxSpeed;
-	}
-
-	public void setAcc(double acc) {
-		this.acc = acc;
 	}
 
 	public void setFacing(int facing) {

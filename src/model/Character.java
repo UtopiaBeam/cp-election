@@ -3,7 +3,7 @@ package model;
 import constants.CCType;
 import javafx.scene.image.Image;
 
-public abstract class Character extends Moveable {
+public abstract class Character extends MoveableEntity {
 
 	protected int hp;
 	protected int maxHp;
@@ -11,9 +11,17 @@ public abstract class Character extends Moveable {
 	protected int def;
 	protected CCType status;
 	
-	
 	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY);
+		this.hp = maxHp;
+		this.maxHp = maxHp;
+		this.atk = atk;
+		this.def = def;
+		this.status = CCType.NONE;
+	}
+
+	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
+		super(name, imageL, imageR, posX, posY);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
@@ -26,11 +34,11 @@ public abstract class Character extends Moveable {
 	}
 	
 	public boolean canAttack() {
-		return (status == CCType.NONE);
+		return !isDead() && (status == CCType.NONE);
 	}
 	
 	public boolean canMove() {
-		return (status != CCType.STUN);
+		return !isDead() && (status != CCType.STUN);
 	}
 	
 	public void heal(int hp) {
@@ -61,7 +69,7 @@ public abstract class Character extends Moveable {
 		}
 	}
 	
-	public abstract void attack();
+	public abstract boolean attack();
 	
 	public abstract void dead();
 	

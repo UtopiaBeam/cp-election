@@ -1,6 +1,8 @@
 package model.map;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,15 +10,19 @@ import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import model.Moveable;
+import model.MoveableEntity;
 import model.Frame;
 import model.player.Player;
 import sharedObject.SharedEntity;
+import ui.GameScene;
 
-public class Map extends Frame{
+public class Map extends Frame {
+	
+	public static final int X_PADDING = 100;
+	public static final int Y_PADDING = 50;
 	
 	private Image img;
-	private double movementSpeed = 3.9;
+	private double moveSpeed = 5;
 	
 	private MediaPlayer bgm;
 	
@@ -25,41 +31,50 @@ public class Map extends Frame{
 		this.img = img;
 	}
 	
-	public void motion(Moveable e) {
-		moveMoveable(e);
+	public void motion(MoveableEntity e) {
+		moveMoveableEntity(e);
 		moveMap();
 	}
 	
 	public void motionAll() {
-		for (Moveable i : SharedEntity.getInstance().getEntitiesOfMap(this)) {
+		for (MoveableEntity i : SharedEntity.getInstance().getEntitiesOfMap(this)) {
 			motion(i);
 		}
+	}
+	
+	public List<Character> collideCharacter(Frame f) {
+		List<Character> ls = new ArrayList<Character>();
+		return ls;
 	}
 	
 	private void moveMap() {
 		// Move map by object inside
 		Player player = GameManager.getInstance().getPlayer();
-		if (player.getPosX() > 900 + posX - player.getWidth() - 200)
-			posX += movementSpeed;
-		else if (player.getPosX() < posX + 200)
-			posX -= movementSpeed;
-		if (player.getPosY() > 600 + posY - player.getHeight() - 150)
-			posY += movementSpeed;
-		else if (player.getPosY() < posY + 150)
-			posY -= movementSpeed;
+		if (player.getPosX() > GameScene.WINDOW_WIDTH + posX - player.getWidth() - X_PADDING) {			
+			posX += moveSpeed;
+		} else if (player.getPosX() < posX + X_PADDING) {			
+			posX -= moveSpeed;
+		}
+		if (player.getPosY() > GameScene.WINDOW_HEIGHT + posY - player.getHeight() - Y_PADDING) {			
+			posY += moveSpeed;
+		} else if (player.getPosY() < posY + Y_PADDING) {			
+			posY -= moveSpeed;
+		}
 
 		// Map boundary
-		if (posX < 0)
+		if (posX < 0) {			
 			posX = 0;
-		else if (posX > width - 900)
-			posX = width - 900;
-		if (posY < 0)
+		} else if (posX > width - GameScene.WINDOW_WIDTH) {			
+			posX = width - GameScene.WINDOW_WIDTH;
+		}
+		if (posY < 0) {			
 			posY = 0;
-		else if (posY > height - 600)
-			posY = height - 600;
+		} else if (posY > height - GameScene.WINDOW_HEIGHT) {			
+			posY = height - GameScene.WINDOW_HEIGHT;
+		}
 	}
 	
-	private void moveMoveable(Moveable e) {
+	private void moveMoveableEntity(MoveableEntity e) {
 		e.move();
 		if (e.getPosX() < 0)
 			e.setPosX(0);
@@ -74,14 +89,14 @@ public class Map extends Frame{
 	public void render(GraphicsContext gc) {
 		gc.drawImage(img, -posX, -posY);
 		GameManager.getInstance().getPlayer().render(gc);
-		for (Moveable i : SharedEntity.getInstance().getEntitiesOfMap(this))
+		for (MoveableEntity i : SharedEntity.getInstance().getEntitiesOfMap(this))
 			i.render(gc);
 	}
 
 	public void update() {
-		for (Moveable i: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+		for (MoveableEntity i: SharedEntity.getInstance().getEntitiesOfMap(this)) {
 			i.update();
 		}
 	}
-	
+
 }

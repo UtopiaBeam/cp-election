@@ -9,7 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import application.Main;
 
-public class StartScene extends Scene{
+public class StartScene extends Scene {
 	private Pane root;
 	private Canvas canvas;
 	
