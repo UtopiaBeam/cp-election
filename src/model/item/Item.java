@@ -1,32 +1,25 @@
 package model.item;
 
 import javafx.scene.image.Image;
-import model.Frame;
+import model.Entity;
 
-public abstract class Item extends Frame {
+public abstract class Item extends Entity {
 	
-	protected String name;
 	protected int count = 1;
 	protected int maxCount;
-	
-	private Image image;
 
 	public Item(double posX, double posY, double width, double height, String name, int maxCount, Image image) {
-		super(posX, posY, width, height);
-		this.name = name;
+		super(posX, posY, width, height, name, image);
 		this.maxCount = maxCount;
-		this.image = image;
 	}
 	
 	public Item(String name, int maxCount, Image image) {
-		super(0, 0, 0, 0);
-		this.name = name;
+		super(0, 0, 0, 0, name, image);
 		this.maxCount = maxCount;
-		this.image = image;
 	}
 	
 	public boolean isSame(Item item) {
-		return name == item.getName();
+		return this.getName() == item.getName();
 	}
 	
 	public boolean addCount(int count) {
@@ -47,10 +40,6 @@ public abstract class Item extends Frame {
 	public abstract void activate();
 	
 	// Getters & Setters
-	
-	public String getName() {
-		return name;
-	}
 
 	public int getCount() {
 		return count;
@@ -58,10 +47,6 @@ public abstract class Item extends Frame {
 
 	public int getMaxCount() {
 		return maxCount;
-	}
-
-	public Image getImage() {
-		return image;
 	}
 	
 }

@@ -8,7 +8,9 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
 import model.Character;
+import model.Entity;
 import model.MoveableEntity;
+import model.item.Item;
 import model.npc.NPC;
 import model.Frame;
 import model.player.Player;
@@ -36,19 +38,30 @@ public class Map extends Frame {
 	}
 	
 	public void motionAll() {
-		for (MoveableEntity i : SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			motion(i);
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+			if (e instanceof MoveableEntity) {				
+				motion((MoveableEntity) e);
+			}
 		}
 	}
 	
 	public List<NPC> collideCharacter(Frame f) {
-		List<NPC> ls = new ArrayList<NPC>();
-		for (Character c: SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			if (c instanceof NPC && f.isCollideWith(c)) {
-				ls.add((NPC) c);
+		List<NPC> npcs = new ArrayList<NPC>();
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+			if (e instanceof NPC && f.isCollideWith(e)) {
+				npcs.add((NPC) e);
 			}
 		}
-		return ls;
+		return npcs;
+	}
+	
+	public Item collideItem(Frame f) {
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfCurrentMap(this)) {
+			if (e instanceof Item && f.isCollideWith(e)) {
+				return (Item) e;
+			}
+		}
+		return null;
 	}
 	
 	private void moveMap() {

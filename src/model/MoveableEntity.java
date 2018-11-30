@@ -4,35 +4,34 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public abstract class MoveableEntity extends Frame {
+public abstract class MoveableEntity extends Entity {
 
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
 	
-	protected String name;
 	protected double speedX = 0;
 	protected double speedY = 0;
 	protected double maxSpeed;
 	protected int facing;
 	
-	private Image image, imageL, imageR;
+	private Image imageL;
+	private Image imageR;
 
 	public MoveableEntity(String name, Image image, double posX, double posY) {
-		super(posX, posY, image.getWidth(), image.getHeight());
-		this.setImage(image);
+		super(posX, posY, image.getWidth(), image.getHeight(), name, image);
 		this.imageL = image;
 		this.imageR = image;
 	}
 	
 	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY) {
-		super(posX, posY, imageL.getWidth(), imageL.getHeight());
+		super(posX, posY, imageL.getWidth(), imageL.getHeight(), name, null);
 		this.imageL = imageL;
 		this.imageR = imageR;
 		setFacing(RIGHT);
 	}
 	
 	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY, int facing) {
-		super(posX, posY, imageL.getWidth(), imageL.getHeight());
+		super(posX, posY, imageL.getWidth(), imageL.getHeight(), name, null);
 		this.imageL = imageL;
 		this.imageR = imageR;
 		setFacing(facing);
@@ -71,10 +70,6 @@ public abstract class MoveableEntity extends Frame {
 	public int getFacing() {
 		return facing;
 	}
-	
-	public Image getImage() {
-		return image;
-	}
 
 	public void setSpeedX(double speed) {
 		this.speedX = speed;
@@ -90,11 +85,7 @@ public abstract class MoveableEntity extends Frame {
 
 	public void setFacing(int facing) {
 		this.facing = facing;
-		this.image = (facing == LEFT) ? imageL : imageR;
-	}
-
-	public void setImage(Image image) {
-		this.image = image;
+		this.setImage((facing == LEFT) ? imageL : imageR);
 	}
 	
 }
