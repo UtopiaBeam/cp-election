@@ -1,7 +1,5 @@
 package model;
 
-import controller.GameManager;
-import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
 public abstract class MoveableEntity extends Entity {
@@ -48,10 +46,6 @@ public abstract class MoveableEntity extends Entity {
 	}
 	
 	public abstract void update();
-	
-	public void render(GraphicsContext gc) {
-		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().posX, posY-GameManager.getInstance().getCurrentMap().posY);
-	}
 	
 	// Getters & Setters
 	

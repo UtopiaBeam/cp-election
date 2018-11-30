@@ -1,8 +1,10 @@
 package model;
 
+import controller.GameManager;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
-public class Entity extends Frame {
+public abstract class Entity extends Frame {
 
 	protected String name;
 
@@ -13,6 +15,14 @@ public class Entity extends Frame {
 		this.name = name;
 		this.image = image;
 	}
+	
+	public void render(GraphicsContext gc) {
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().posX, posY-GameManager.getInstance().getCurrentMap().posY);
+	}
+	
+	public abstract void update();
+	
+	// Getters & Setters
 
 	public String getName() {
 		return name;

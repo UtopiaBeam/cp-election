@@ -7,7 +7,6 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
-import model.Character;
 import model.Entity;
 import model.MoveableEntity;
 import model.item.Item;
@@ -56,7 +55,7 @@ public class Map extends Frame {
 	}
 	
 	public Item collideItem(Frame f) {
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfCurrentMap(this)) {
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
 			if (e instanceof Item && f.isCollideWith(e)) {
 				return (Item) e;
 			}
@@ -106,13 +105,14 @@ public class Map extends Frame {
 	public void render(GraphicsContext gc) {
 		gc.drawImage(img, -posX, -posY);
 		GameManager.getInstance().getPlayer().render(gc);
-		for (MoveableEntity i : SharedEntity.getInstance().getEntitiesOfMap(this))
-			i.render(gc);
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {			
+			e.render(gc);
+		}
 	}
 
 	public void update() {
-		for (MoveableEntity i: SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			i.update();
+		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+			e.update();
 		}
 	}
 
