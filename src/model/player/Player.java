@@ -2,6 +2,7 @@ package model.player;
 
 import java.util.List;
 
+import constants.CCType;
 import controller.GameManager;
 import exception.InventoryFullException;
 import input.KeyInput;
@@ -15,6 +16,7 @@ public class Player extends Character {
 	public static final int INVENTORY_SIZE = 5;
 	
 	private Item[] inventory = new Item[INVENTORY_SIZE];
+	private boolean isRevivable = false;
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY, maxHp, atk, def);
@@ -23,12 +25,22 @@ public class Player extends Character {
 	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 	}
+	
+	public void revive() {
+		if (!isRevivable()) {
+			return;
+		}
+		refresh();
+		setRevivable(false);
+		status = CCType.NONE;
+	}
 
 	@Override
 	public boolean attack() {
 		if (!canAttack()) {
 			return false;
 		}
+//		List<Character> collideCharacters = GameManager.getInstance().getCurrentMap().collideCharacter();
 		return true;
 	}
 	
@@ -52,27 +64,24 @@ public class Player extends Character {
 		throw new InventoryFullException();
 	}
 	
-//	public void pushAccX(double acc) {
-//		this.speedX += acc;
-//		if (this.speedX > this.maxSpeed) {
-//			this.speedX = this.maxSpeed;
-//		}
-//	}
-	
 	public void updateByPressingKeys() {
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
 			setFacing(LEFT);
-			move(-5, 0);
+			setSpeedX(5);
 		}
 		if (KeyInput.pressingKey(KeyCode.RIGHT)) {
 			setFacing(RIGHT);
-			move(5, 0);
+			setSpeedX(5);
 		}
 		if (KeyInput.pressingKey(KeyCode.UP)) {
-			move(0, -5);
+			setSpeedY(-5);
 		}
 		if (KeyInput.pressingKey(KeyCode.DOWN)) {
-			move(0, 5);
+			setSpeedY(5);
+		}
+		if (!KeyInput.pressingKey(KeyCode.LEFT) && !KeyInput.pressingKey(KeyCode.RIGHT) && !KeyInput.pressingKey(KeyCode.UP) && !KeyInput.pressingKey(KeyCode.DOWN)) {
+			setSpeedX(0);
+			setSpeedY(0);
 		}
 	}
 	
@@ -86,6 +95,14 @@ public class Player extends Character {
 
 	public Item[] getInventory() {
 		return inventory;
+	}
+
+	public boolean isRevivable() {
+		return isRevivable;
+	}
+
+	public void setRevivable(boolean isRevivable) {
+		this.isRevivable = isRevivable;
 	}
 
 }
