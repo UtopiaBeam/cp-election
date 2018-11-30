@@ -1,8 +1,10 @@
 package model.npc;
 
+import controller.GameManager;
 import javafx.scene.image.Image;
 import model.Character;
 import model.item.Item;
+import model.player.Player;
 
 public class NPC extends Character {
 
@@ -38,8 +40,21 @@ public class NPC extends Character {
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
-		
+		Player player = GameManager.getInstance().getPlayer();
+		if (posX < player.getPosX()) {
+			setSpeedX(2);
+		} else if (posX > player.getPosX()) {
+			setSpeedX(-2);
+		} else {
+			setSpeedX(0);
+		}
+		if (posY < player.getPosY()) {
+			setSpeedY(2);
+		} else if (posY > player.getPosY()) {
+			setSpeedY(-2);
+		} else {
+			setSpeedY(0);
+		}
 	}
 
 	// Getters & Setters
