@@ -7,7 +7,9 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.media.MediaPlayer;
+import model.Character;
 import model.MoveableEntity;
+import model.npc.NPC;
 import model.Frame;
 import model.player.Player;
 import sharedObject.SharedEntity;
@@ -39,8 +41,13 @@ public class Map extends Frame {
 		}
 	}
 	
-	public List<Character> collideCharacter(Frame f) {
-		List<Character> ls = new ArrayList<Character>();
+	public List<NPC> collideCharacter(Frame f) {
+		List<NPC> ls = new ArrayList<NPC>();
+		for (Character c: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+			if (c instanceof NPC && f.isCollideWith(c)) {
+				ls.add((NPC) c);
+			}
+		}
 		return ls;
 	}
 	

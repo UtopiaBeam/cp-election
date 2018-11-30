@@ -9,7 +9,9 @@ import input.KeyInput;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import model.Character;
+import model.Frame;
 import model.item.Item;
+import model.npc.NPC;
 
 public class Player extends Character {
 
@@ -17,6 +19,7 @@ public class Player extends Character {
 	
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	private boolean isRevivable = false;
+	private double attackRange = 3;
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY, maxHp, atk, def);
@@ -40,7 +43,10 @@ public class Player extends Character {
 		if (!canAttack()) {
 			return false;
 		}
-//		List<Character> collideCharacters = GameManager.getInstance().getCurrentMap().collideCharacter();
+		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
+		for (NPC n: collideNPCs) {
+			n.takeDamge(getAtk());
+		}
 		return true;
 	}
 	
@@ -49,6 +55,16 @@ public class Player extends Character {
 		if (!isDead()) {
 			return;
 		}
+	}
+	
+	public Frame getAttackArea() {
+		Frame attackArea = new Frame(posX, posY, width + attackRange, height + attackRange);
+		if (getFacing() == LEFT) {
+			attackArea.setPosX(posX - attackRange);
+		} else {
+			attackArea.setPosX(posX + attackRange);
+		}
+		return attackArea;
 	}
 
 	public void collectItem(Item item) throws InventoryFullException {
