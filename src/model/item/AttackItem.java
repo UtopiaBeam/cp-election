@@ -21,6 +21,11 @@ public class AttackItem extends Item {
 		// TODO Auto-generated method stub
 		
 	}
+	
+	@Override
+	public void update() {
+		// Do nothing
+	}
 
 	// Getters & Setters
 	

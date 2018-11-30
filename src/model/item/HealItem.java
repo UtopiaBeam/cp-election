@@ -22,6 +22,11 @@ public class HealItem extends Item {
 
 	}
 	
+	@Override
+	public void update() {
+		// DO nothing
+	}
+	
 	// Getters & Setters
 	
 	public int getHealHp() {

@@ -17,5 +17,10 @@ public class ReviveItem extends Item {
 		// TODO Auto-generated method stub
 
 	}
+
+	@Override
+	public void update() {
+		// Do nothing
+	}
 	
 }
