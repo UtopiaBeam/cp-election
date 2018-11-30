@@ -1,14 +1,11 @@
 package model.map;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.media.AudioClip;
-import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.MoveableEntity;
 import model.Frame;

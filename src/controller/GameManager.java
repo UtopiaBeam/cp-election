@@ -4,21 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constants.Images;
-import javafx.application.Platform;
-import javafx.geometry.VPos;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Alert.AlertType;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
-import javafx.stage.Stage;
-import application.Main;
 import model.map.Map;
 import model.player.Player;
-import sharedObject.SharedEntity;
-import ui.StartScene;
 
 
 
@@ -35,7 +23,7 @@ private static GameManager instance = new GameManager();
 	public GameManager() {
 		generateMap();
 		//TODO add player
-		player = new Player("Netikun", Images.playerR, 0, 0, 100, 100, 100, 1);
+		player = new Player("Netikun", Images.playrerL, Images.playerR, 0, 0, 100, 100, 100);
 	}
 	
 	public void render(GraphicsContext gc) {

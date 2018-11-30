@@ -10,7 +10,7 @@ public abstract class MoveableEntity extends Frame {
 	public static final int RIGHT = 1;
 	
 	protected String name;
-	protected double speedX = 3.5;
+	protected double speedX = 0;
 	protected double speedY = 0;
 	protected double maxSpeed;
 	protected int facing;

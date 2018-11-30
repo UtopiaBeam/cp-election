@@ -52,11 +52,6 @@ public abstract class Character extends MoveableEntity {
 		this.hp = this.maxHp;
 	}
 	
-	public void revive() {
-		refresh();
-		status = CCType.NONE;
-	}
-	
 	public void takeDamge(int damage) {
 		damage -= def;
 		if (damage < 0) {

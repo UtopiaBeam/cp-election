@@ -1,20 +1,15 @@
 package ui;
 
-import java.util.ArrayList;
-
 import controller.GameManager;
 import input.KeyInput;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.StackPane;
 import javafx.util.Duration;
-import model.player.Player;
 
-public class GameScene extends Scene{
+public class GameScene extends Scene {
 	
 	public static final int WINDOW_WIDTH = 900;
 	public static final int WINDOW_HEIGHT = 600;

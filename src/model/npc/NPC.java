@@ -21,10 +21,11 @@ public class NPC extends Character {
 	}
 	
 	@Override
-	public void attack() {
+	public boolean attack() {
 		if (!canAttack()) {
-			return;
+			return false;
 		}
+		return true;
 	}
 
 	@Override
