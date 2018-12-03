@@ -12,9 +12,9 @@ public class NPC extends Character {
 	private Item dropItem;
 	private double dropChance;
 	
-	//for test
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY, maxHp, atk, def);
+		setSpeedX(1);
 	}
 	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
@@ -22,10 +22,11 @@ public class NPC extends Character {
 		super(name, image, posX, posY, maxHp, atk, def);
 		this.dropItem = dropItem;
 		this.dropChance = dropChance;
+		setSpeedX(1);
 	}
 
 	public boolean isDropItem() {
-		return dropChance < Math.random();
+		return dropChance <= Math.random();
 	}
 	
 	@Override
@@ -47,18 +48,16 @@ public class NPC extends Character {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		if (posX <= player.getPosX()) {
-			System.out.println("helo");
-			setSpeedX(2);
+			setFacing(RIGHT);
 		} else {
-			setSpeedX(-2);
-			System.out.println("heloha");
+			setFacing(LEFT);
 		}
-		if (posY <= player.getPosY()) {
-			System.out.println("kuy");
+		if (posY < player.getPosY()) {
 			setSpeedY(2);
-		} else {
+		} else if (posY > player.getPosY()) {
 			setSpeedY(-2);
-			System.out.println("kuyyai");
+		} else {
+			setSpeedY(0);
 		}
 	}
 
