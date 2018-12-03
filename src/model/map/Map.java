@@ -12,11 +12,12 @@ import model.MoveableEntity;
 import model.item.Item;
 import model.npc.NPC;
 import model.Frame;
+import model.IUpdatable;
 import model.player.Player;
 import sharedObject.SharedEntity;
 import ui.GameScene;
 
-public class Map extends Frame {
+public class Map extends Frame implements IUpdatable {
 	
 	public static final int X_PADDING = 100;
 	public static final int Y_PADDING = 50;
@@ -112,7 +113,9 @@ public class Map extends Frame {
 
 	public void update() {
 		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			e.update();
+			if (e instanceof IUpdatable) {				
+				((IUpdatable) e).update();
+			}
 		}
 	}
 
