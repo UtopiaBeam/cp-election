@@ -41,19 +41,15 @@ public class NPC extends Character {
 	@Override
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
-		if (posX < player.getPosX()) {
+		if (posX <= player.getPosX()) {
 			setSpeedX(2);
-		} else if (posX > player.getPosX()) {
+		} else {
 			setSpeedX(-2);
-		} else {
-			setSpeedX(0);
 		}
-		if (posY < player.getPosY()) {
+		if (posY <= player.getPosY()) {
 			setSpeedY(2);
-		} else if (posY > player.getPosY()) {
-			setSpeedY(-2);
 		} else {
-			setSpeedY(0);
+			setSpeedY(-2);
 		}
 	}
 
