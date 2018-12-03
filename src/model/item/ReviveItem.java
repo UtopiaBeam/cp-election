@@ -1,6 +1,8 @@
 package model.item;
 
+import controller.GameManager;
 import javafx.scene.image.Image;
+import model.player.Player;
 
 public class ReviveItem extends Item {
 
@@ -13,14 +15,13 @@ public class ReviveItem extends Item {
 	}
 	
 	@Override
-	public void activate() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		// Do nothing
+	public boolean activate() {
+		Player player = GameManager.getInstance().getPlayer();
+		if (player.isRevivable()) {
+			return false;
+		}
+		player.setRevivable(true);
+		return true;
 	}
 	
 }

@@ -17,14 +17,8 @@ public class AttackItem extends Item {
 	}
 
 	@Override
-	public void activate() {
-		// TODO Auto-generated method stub
-		
-	}
-	
-	@Override
-	public void update() {
-		// Do nothing
+	public boolean activate() {
+		return true;
 	}
 
 	// Getters & Setters

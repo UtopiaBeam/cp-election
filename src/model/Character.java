@@ -41,11 +41,15 @@ public abstract class Character extends MoveableEntity {
 		return !isDead() && (status != CCType.STUN);
 	}
 	
-	public void heal(int hp) {
+	public boolean heal(int hp) {
+		if (this.hp == this.maxHp) {
+			return false;
+		}
 		this.hp += hp;
 		if (this.hp > this.maxHp) {
 			this.hp = this.maxHp;
 		}
+		return true;
 	}
 	
 	public void refresh() {

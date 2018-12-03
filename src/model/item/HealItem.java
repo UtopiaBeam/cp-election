@@ -1,6 +1,8 @@
 package model.item;
 
+import controller.GameManager;
 import javafx.scene.image.Image;
+import model.player.Player;
 
 public class HealItem extends Item {
 	
@@ -17,14 +19,9 @@ public class HealItem extends Item {
 	}
 	
 	@Override
-	public void activate() {
-		// TODO Auto-generated method stub
-
-	}
-	
-	@Override
-	public void update() {
-		// DO nothing
+	public boolean activate() {
+		Player player = GameManager.getInstance().getPlayer();
+		return player.heal(healHp);
 	}
 	
 	// Getters & Setters

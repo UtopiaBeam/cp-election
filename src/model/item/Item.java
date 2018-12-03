@@ -2,9 +2,8 @@ package model.item;
 
 import javafx.scene.image.Image;
 import model.Entity;
-import model.IUpdatable;
 
-public abstract class Item extends Entity implements IUpdatable {
+public abstract class Item extends Entity {
 	
 	protected int count = 1;
 	protected int maxCount;
@@ -33,12 +32,13 @@ public abstract class Item extends Entity implements IUpdatable {
 	
 	public void use() {
 		if (count > 0) {
-			activate();
-			count--;
+			if (activate()) {				
+				count--;
+			};
 		}
 	}
 	
-	public abstract void activate();
+	public abstract boolean activate();
 	
 	// Getters & Setters
 
