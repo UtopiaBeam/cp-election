@@ -12,4 +12,6 @@ public class Images {
 	public static final Image playerR = new Image(ClassLoader.getSystemResource("playerR.png").toString());
 	public static final Image stage1 = new Image(ClassLoader.getSystemResource("stage1.jpg").toString());
 	
+	public static final Image monster = new Image(ClassLoader.getSystemResource("Monster.png").toString());
+	
 }

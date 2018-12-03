@@ -27,7 +27,7 @@ public class GameScene extends Scene {
 			if (GameManager.getInstance().isGameRunning()) {
                 
 				if (!GameManager.getInstance().isPausing()) {
-					GameManager.getInstance().getCurrentMap().motion(GameManager.getInstance().getPlayer());
+					GameManager.getInstance().getCurrentMap().motionPlayer(GameManager.getInstance().getPlayer());
 					GameManager.getInstance().getCurrentMap().motionAll();
 					GameManager.getInstance().update();
 				}

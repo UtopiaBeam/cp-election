@@ -18,11 +18,15 @@ private static GameManager instance = new GameManager();
 	private boolean isPausing = false;
 	private List<Map> maps = new ArrayList<>();
 	private Player player;
+	private MonsterGen monsterGen;
+	private MonsterAi monsterAi;
 	private Map currentMap;
 	
 	public GameManager() {
 		generateMap();
 		//TODO add player
+		monsterGen = new MonsterGen();
+		monsterAi = new MonsterAi();
 		player = new Player("Netikun", Images.playrerL, Images.playerR, 0, 0, 100, 100, 100);
 	}
 	
@@ -48,7 +52,12 @@ private static GameManager instance = new GameManager();
 	}
 	
 	public void stopGame() {
-		
+		terminate();
+	}
+	
+	public void terminate() {
+		monsterGen.interrupt();
+		monsterAi.interrupt();
 	}
 	
 	

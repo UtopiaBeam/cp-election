@@ -12,6 +12,11 @@ public class NPC extends Character {
 	private Item dropItem;
 	private double dropChance;
 	
+	//for test
+	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
+		super(name, image, posX, posY, maxHp, atk, def);
+	}
+	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
 			double dropChance) {
 		super(name, image, posX, posY, maxHp, atk, def);
@@ -42,14 +47,18 @@ public class NPC extends Character {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		if (posX <= player.getPosX()) {
+			System.out.println("helo");
 			setSpeedX(2);
 		} else {
 			setSpeedX(-2);
+			System.out.println("heloha");
 		}
 		if (posY <= player.getPosY()) {
+			System.out.println("kuy");
 			setSpeedY(2);
 		} else {
 			setSpeedY(-2);
+			System.out.println("kuyyai");
 		}
 	}
 

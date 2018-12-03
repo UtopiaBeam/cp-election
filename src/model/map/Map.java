@@ -3,6 +3,7 @@ package model.map;
 import java.util.ArrayList;
 import java.util.List;
 
+import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -14,7 +15,6 @@ import model.npc.NPC;
 import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
-import sharedObject.SharedEntity;
 import ui.GameScene;
 
 public class Map extends Frame implements IUpdatable {
@@ -27,27 +27,18 @@ public class Map extends Frame implements IUpdatable {
 	
 	private MediaPlayer bgm;
 	
+	private List<NPC> listNPC= new ArrayList<>();
+	private List<Item> listItem = new ArrayList<>();
+
+	
 	public Map(Image img) {
 		super(0, 0, img.getWidth(), img.getHeight());
 		this.img = img;
 	}
 	
-	public void motion(MoveableEntity e) {
-		moveMoveableEntity(e);
-		moveMap();
-	}
-	
-	public void motionAll() {
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			if (e instanceof MoveableEntity) {				
-				motion((MoveableEntity) e);
-			}
-		}
-	}
-	
 	public List<NPC> collideCharacter(Frame f) {
 		List<NPC> npcs = new ArrayList<NPC>();
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+		for (NPC e: listNPC) {
 			if (e instanceof NPC && f.isCollideWith(e)) {
 				npcs.add((NPC) e);
 			}
@@ -56,7 +47,7 @@ public class Map extends Frame implements IUpdatable {
 	}
 	
 	public Item collideItem(Frame f) {
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
+		for (Item e: listItem) {
 			if (e instanceof Item && f.isCollideWith(e)) {
 				return (Item) e;
 			}
@@ -91,7 +82,7 @@ public class Map extends Frame implements IUpdatable {
 		}
 	}
 	
-	private void moveMoveableEntity(MoveableEntity e) {
+	private void motion(MoveableEntity e) {
 		e.move();
 		if (e.getPosX() < 0)
 			e.setPosX(0);
@@ -103,20 +94,46 @@ public class Map extends Frame implements IUpdatable {
 			e.setPosY(height - e.getHeight());
 	}
 	
+	public void motionPlayer(Player p) {
+		motion(p);
+		moveMap();
+	}
+	
+	public void motionAll() {
+		for (NPC i: listNPC) {
+			motion(i);
+		}
+	}
+	
+	public void spawnRandom() {
+		double x = (Math.random() * height);
+		double y = (Math.random() * width);
+		NPC monster = new NPC("mon", Images.monster, x, y, 100, 20, 50);
+		listNPC.add(monster);
+	}
+	
 	public void render(GraphicsContext gc) {
 		gc.drawImage(img, -posX, -posY);
 		GameManager.getInstance().getPlayer().render(gc);
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {			
+		for (NPC e: listNPC) {			
 			e.render(gc);
 		}
 	}
 
 	public void update() {
-		for (Entity e: SharedEntity.getInstance().getEntitiesOfMap(this)) {
-			if (e instanceof IUpdatable) {				
-				((IUpdatable) e).update();
-			}
+		for (NPC e: listNPC) {
+			e.update();
 		}
 	}
+
+	public List<NPC> getListNPC() {
+		return listNPC;
+	}
+
+	public List<Item> getListItem() {
+		return listItem;
+	}
+	
+	
 
 }
