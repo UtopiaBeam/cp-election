@@ -1,6 +1,7 @@
 package model;
 
 import constants.CCType;
+import exception.CannotAttackException;
 import javafx.scene.image.Image;
 
 public abstract class Character extends MoveableEntity {
@@ -68,7 +69,7 @@ public abstract class Character extends MoveableEntity {
 		}
 	}
 	
-	public abstract boolean attack();
+	public abstract void attack() throws CannotAttackException;
 	
 	public abstract void dead();
 	

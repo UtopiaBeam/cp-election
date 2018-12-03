@@ -1,6 +1,7 @@
 package model.npc;
 
 import controller.GameManager;
+import exception.CannotAttackException;
 import javafx.scene.image.Image;
 import model.Character;
 import model.item.Item;
@@ -23,11 +24,10 @@ public class NPC extends Character {
 	}
 	
 	@Override
-	public boolean attack() {
+	public void attack() throws CannotAttackException {
 		if (!canAttack()) {
-			return false;
+			throw new CannotAttackException();
 		}
-		return true;
 	}
 
 	@Override

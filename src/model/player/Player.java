@@ -4,6 +4,7 @@ import java.util.List;
 
 import constants.CCType;
 import controller.GameManager;
+import exception.CannotAttackException;
 import exception.InventoryFullException;
 import input.KeyInput;
 import javafx.scene.image.Image;
@@ -39,15 +40,14 @@ public class Player extends Character {
 	}
 
 	@Override
-	public boolean attack() {
+	public void attack() throws CannotAttackException {
 		if (!canAttack()) {
-			return false;
+			throw new CannotAttackException();
 		}
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 		}
-		return true;
 	}
 	
 	@Override
