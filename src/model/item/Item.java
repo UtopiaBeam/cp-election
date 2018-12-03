@@ -2,8 +2,9 @@ package model.item;
 
 import javafx.scene.image.Image;
 import model.Entity;
+import model.IUpdatable;
 
-public abstract class Item extends Entity {
+public abstract class Item extends Entity implements IUpdatable {
 	
 	protected int count = 1;
 	protected int maxCount;

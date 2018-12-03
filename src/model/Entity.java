@@ -20,8 +20,6 @@ public abstract class Entity extends Frame {
 		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().posX, posY-GameManager.getInstance().getCurrentMap().posY);
 	}
 	
-	public abstract void update();
-	
 	// Getters & Setters
 
 	public String getName() {
