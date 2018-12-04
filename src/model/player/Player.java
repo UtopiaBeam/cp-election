@@ -111,7 +111,7 @@ public class Player extends Character {
 			setSpeedY(isSlowed() ? -3 : -5);
 		}
 		if (KeyInput.pressingKey(KeyCode.DOWN)) {
-			setSpeedY(isSlowed() ? -3 : -5);
+			setSpeedY(isSlowed() ? 3 : 5);
 		}
 		if (!KeyInput.pressingKey(KeyCode.LEFT) && !KeyInput.pressingKey(KeyCode.RIGHT) && !KeyInput.pressingKey(KeyCode.UP) && !KeyInput.pressingKey(KeyCode.DOWN)) {
 			setSpeedX(0);
