@@ -11,6 +11,7 @@ public abstract class Character extends MoveableEntity {
 	protected int atk;
 	protected int def;
 	protected CCType status;
+	protected int attackTick;
 	
 	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY);
@@ -19,6 +20,7 @@ public abstract class Character extends MoveableEntity {
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
+		this.attackTick = 0;
 	}
 
 	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
@@ -28,6 +30,7 @@ public abstract class Character extends MoveableEntity {
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
+		this.attackTick = 0;
 	}
 
 	public boolean isDead() {
@@ -35,7 +38,7 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public boolean canAttack() {
-		return !isDead() && (status == CCType.NONE);
+		return !isDead() && (status == CCType.NONE) && (attackTick == 0);
 	}
 	
 	public boolean isStunned() {

@@ -38,6 +38,7 @@ public class NPC extends Character {
 		if (isCollideWith(player)) {
 			player.takeDamge(atk);
 		}
+		attackTick = 20;
 	}
 
 	@Override

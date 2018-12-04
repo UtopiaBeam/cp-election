@@ -51,6 +51,7 @@ public class Player extends Character {
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 		}
+		attackTick = 20;
 	}
 	
 	@Override
