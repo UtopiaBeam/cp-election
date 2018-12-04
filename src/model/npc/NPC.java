@@ -12,8 +12,8 @@ public class NPC extends Character {
 	private Item dropItem;
 	private double dropChance;
 	
-	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
-		super(name, image, posX, posY, maxHp, atk, def);
+	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
+		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 		setSpeedX(1);
 	}
 	
