@@ -61,7 +61,7 @@ public class Player extends Character {
 	}
 	
 	public Frame getAttackArea() {
-		Frame attackArea = new Frame(posX, posY, width + attackRange, height + attackRange);
+		Frame attackArea = new Frame(posX, posY, width + attackRange, height);
 		if (getFacing() == LEFT) {
 			attackArea.setPosX(posX - attackRange);
 		} else {
