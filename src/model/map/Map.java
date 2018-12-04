@@ -19,11 +19,11 @@ import ui.GameScene;
 
 public class Map extends Frame implements IUpdatable {
 	
-	public static final int X_PADDING = 100;
-	public static final int Y_PADDING = 50;
+	public static final int X_PADDING = 150;
+	public static final int Y_PADDING = 66;
 	
 	private Image img;
-	private double moveSpeed = 5;
+	private double moveSpeed = 4;
 	
 	private MediaPlayer bgm;
 	
@@ -65,7 +65,7 @@ public class Map extends Frame implements IUpdatable {
 		}
 		if (player.getPosY() > GameScene.WINDOW_HEIGHT + posY - player.getHeight() - Y_PADDING) {			
 			posY += moveSpeed;
-		} else if (player.getPosY() < posY + Y_PADDING) {			
+		} else if (player.getPosY() < posY + 333 + Y_PADDING) {			
 			posY -= moveSpeed;
 		}
 
@@ -88,8 +88,8 @@ public class Map extends Frame implements IUpdatable {
 			e.setPosX(0);
 		else if (e.getPosX() + e.getWidth() > width)
 			e.setPosX(width - e.getWidth());
-		if (e.getPosY() < 0)
-			e.setPosY(9);
+		if (e.getPosY() < 333)
+			e.setPosY(333);
 		else if (e.getPosY() + e.getHeight() > height)
 			e.setPosY(height - e.getHeight());
 	}
@@ -106,8 +106,8 @@ public class Map extends Frame implements IUpdatable {
 	}
 	
 	public void spawnRandom() {
-		double x = (Math.random() * height);
-		double y = (Math.random() * width);
+		double x = 333 + (Math.random() * (height/2));
+		double y = 333 + (Math.random() * (width/2));
 		NPC monster = new NPC("mon", Images.monster, x, y, 100, 20, 50);
 		listNPC.add(monster);
 	}
