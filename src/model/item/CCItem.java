@@ -10,12 +10,6 @@ public class CCItem extends Item implements IUpdatable {
 
 	private CCType effect;
 	private int duration;
-	
-	public CCItem(double posX, double posY, double width, double height, String name, int maxCount, Image image, CCType effect, int duration) {
-		super(posX, posY, width, height, name, maxCount, image);
-		this.effect = effect;
-		this.duration = duration * 60;
-	}
 
 	public CCItem(String name, int maxCount, Image image, CCType effect, int duration) {
 		super(name, maxCount, image);

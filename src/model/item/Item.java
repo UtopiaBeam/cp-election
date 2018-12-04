@@ -7,11 +7,6 @@ public abstract class Item extends Entity {
 	
 	protected int count = 1;
 	protected int maxCount;
-
-	public Item(double posX, double posY, double width, double height, String name, int maxCount, Image image) {
-		super(posX, posY, width, height, name, image);
-		this.maxCount = maxCount;
-	}
 	
 	public Item(String name, int maxCount, Image image) {
 		super(0, 0, 0, 0, name, image);
