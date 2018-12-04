@@ -65,16 +65,16 @@ public abstract class Character extends MoveableEntity {
 		this.hp = this.maxHp;
 	}
 	
-	public void takeDamge(int damage) {
-		damage -= def;
-		if (damage < 0) {
-			damage = 0;
+	public boolean takeDamge(int damage) {
+		damage = Math.max(damage - def, 0);
+		if (damage == 0) {
+			return false;
 		}
-		
 		hp -= damage;
 		if (hp <= 0) {
 			dead();
 		}
+		return true;
 	}
 	
 	public abstract void attack() throws CannotAttackException;

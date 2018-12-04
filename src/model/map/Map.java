@@ -125,6 +125,8 @@ public class Map extends Frame implements IUpdatable {
 			e.update();
 		}
 	}
+	
+	// Getters & Setters
 
 	public List<NPC> getListNPC() {
 		return listNPC;

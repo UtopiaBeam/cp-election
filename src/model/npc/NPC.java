@@ -34,6 +34,10 @@ public class NPC extends Character {
 		if (!canAttack()) {
 			throw new CannotAttackException();
 		}
+		Player player = GameManager.getInstance().getPlayer();
+		if (isCollideWith(player)) {
+			player.takeDamge(atk);
+		}
 	}
 
 	@Override
@@ -41,8 +45,14 @@ public class NPC extends Character {
 		if (!isDead()) {
 			return;
 		}
+		if (isDropItem()) {
+			dropItem();
+		}
 	}
 	
+	public void dropItem() {
+		
+	}
 	
 	@Override
 	public void update() {

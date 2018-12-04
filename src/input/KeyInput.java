@@ -20,8 +20,11 @@ public class KeyInput {
 		UNPOLLABLE_KEYS.add(KeyCode.RIGHT);
 		UNPOLLABLE_KEYS.add(KeyCode.UP);
 		UNPOLLABLE_KEYS.add(KeyCode.DOWN);
-		UNPOLLABLE_KEYS.add(KeyCode.SPACE);
-		UNPOLLABLE_KEYS.add(KeyCode.E);
+		UNPOLLABLE_KEYS.add(KeyCode.DIGIT1);
+		UNPOLLABLE_KEYS.add(KeyCode.DIGIT2);
+		UNPOLLABLE_KEYS.add(KeyCode.DIGIT3);
+		UNPOLLABLE_KEYS.add(KeyCode.DIGIT4);
+		UNPOLLABLE_KEYS.add(KeyCode.DIGIT5);
 	}
 	
 	private static void addKey(KeyCode code) {

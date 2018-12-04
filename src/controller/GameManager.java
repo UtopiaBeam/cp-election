@@ -27,7 +27,7 @@ private static GameManager instance = new GameManager();
 		//TODO add player
 		monsterGen = new MonsterGen();
 		monsterAi = new MonsterAi();
-		player = new Player("Netikun", Images.playrerL, Images.playerR, 0, 0, 100, 100, 100);
+		player = new Player("Netikun", Images.playrerL, Images.playerR, 0, 0, 100, 100, 100, 3);
 	}
 	
 	public void render(GraphicsContext gc) {

@@ -36,7 +36,6 @@ public class GameScene extends Scene {
 			}
 		});
 		
-		
 		Timeline gameloop = new Timeline();
 		gameloop.setCycleCount(Timeline.INDEFINITE);
 		gameloop.getKeyFrames().add(kf);

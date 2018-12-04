@@ -21,14 +21,16 @@ public class Player extends Character {
 	
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	private boolean isRevivable = false;
-	private double attackRange = 3;
+	private double attackRange;
 	
-	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
+	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, image, posX, posY, maxHp, atk, def);
+		this.attackRange = attackRange;
 	}
 	
-	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
+	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
+		this.attackRange = attackRange;
 	}
 	
 	public void revive() {
