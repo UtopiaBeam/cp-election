@@ -102,19 +102,17 @@ public class Player extends Character {
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
 			setFacing(LEFT);
 			setSpeedX(isSlowed() ? 3 : 5);
-		}
-		if (KeyInput.pressingKey(KeyCode.RIGHT)) {
+		} else if (KeyInput.pressingKey(KeyCode.RIGHT)) {
 			setFacing(RIGHT);
 			setSpeedX(isSlowed() ? 3 : 5);
+		} else {
+			setSpeedX(0);
 		}
 		if (KeyInput.pressingKey(KeyCode.UP)) {
 			setSpeedY(isSlowed() ? -3 : -5);
-		}
-		if (KeyInput.pressingKey(KeyCode.DOWN)) {
+		} else if (KeyInput.pressingKey(KeyCode.DOWN)) {
 			setSpeedY(isSlowed() ? 3 : 5);
-		}
-		if (!KeyInput.pressingKey(KeyCode.LEFT) && !KeyInput.pressingKey(KeyCode.RIGHT) && !KeyInput.pressingKey(KeyCode.UP) && !KeyInput.pressingKey(KeyCode.DOWN)) {
-			setSpeedX(0);
+		} else {
 			setSpeedY(0);
 		}
 		try {
