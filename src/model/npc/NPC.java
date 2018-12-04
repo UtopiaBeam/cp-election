@@ -11,10 +11,12 @@ public class NPC extends Character {
 
 	private Item dropItem;
 	private double dropChance;
+	private double speed;
 	
 	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
-		setSpeedX(1);
+		speed = 3;
+		setSpeedX(speed);
 	}
 	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
@@ -22,7 +24,7 @@ public class NPC extends Character {
 		super(name, image, posX, posY, maxHp, atk, def);
 		this.dropItem = dropItem;
 		this.dropChance = dropChance;
-		setSpeedX(1);
+		setSpeedX(speed);
 	}
 
 	public boolean isDropItem() {
@@ -57,19 +59,20 @@ public class NPC extends Character {
 	
 	@Override
 	public void update() {
+		speed = 2 + (Math.random()*2);
 		Player player = GameManager.getInstance().getPlayer();
-		if (posX <= player.getPosX()) {
+		if (posX < player.getPosX()-20) {
 			setFacing(RIGHT);
-		} else {
+			setSpeedX(speed);
+		} else if (posX > player.getPosX()+20){
 			setFacing(LEFT);
-		}
-		if (posY + getHeight() < player.getPosY() + player.getHeight()) {
-			setSpeedY(2);
-		} else if (posY + getHeight() > player.getPosY() + player.getHeight()) {
-			setSpeedY(-2);
-		} else {
-			setSpeedY(0);
-		}
+			setSpeedX(speed);
+		} 
+		if (posY + getHeight() < player.getPosY() + player.getHeight()-10) {
+			setSpeedY(speed);
+		} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
+			setSpeedY(-speed);
+		} 
 	}
 
 	// Getters & Setters
