@@ -63,9 +63,9 @@ public class NPC extends Character {
 		} else {
 			setFacing(LEFT);
 		}
-		if (posY < player.getPosY()) {
+		if (posY + getHeight() < player.getPosY() + player.getHeight()) {
 			setSpeedY(2);
-		} else if (posY > player.getPosY()) {
+		} else if (posY + getHeight() > player.getPosY() + player.getHeight()) {
 			setSpeedY(-2);
 		} else {
 			setSpeedY(0);
