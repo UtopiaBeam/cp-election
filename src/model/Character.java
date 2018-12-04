@@ -38,8 +38,16 @@ public abstract class Character extends MoveableEntity {
 		return !isDead() && (status == CCType.NONE);
 	}
 	
-	public boolean canMove() {
-		return !isDead() && (status != CCType.STUN);
+	public boolean isStunned() {
+		return status == CCType.STUN;
+	}
+	
+	public boolean isSlowed() {
+		return status == CCType.SLOW;
+	}
+	
+	public boolean isSilenced() {
+		return status == CCType.SILENCE;
 	}
 	
 	public boolean heal(int hp) {
