@@ -5,6 +5,7 @@ import java.util.List;
 import constants.CCType;
 import controller.GameManager;
 import exception.CannotAttackException;
+import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
 import input.KeyInput;
 import javafx.scene.image.Image;
@@ -80,30 +81,63 @@ public class Player extends Character {
 		throw new InventoryFullException();
 	}
 	
+	public void useItem(int index) throws InventoryEmptyIndexException {
+		if (inventory[index] == null) {
+			throw new InventoryEmptyIndexException("Inventory empty at index = " + index);
+		}
+		inventory[index].use();
+		if (inventory[index].getCount() == 0) {
+			inventory[index] = null;
+		}
+	}
+	
 	public void updateByPressingKeys() {
+		if (isStunned()) {
+			setSpeedX(0);
+			setSpeedY(0);
+			return;
+		}
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
 			setFacing(LEFT);
-			setSpeedX(5);
+			setSpeedX(isSlowed() ? 3 : 5);
 		}
 		if (KeyInput.pressingKey(KeyCode.RIGHT)) {
 			setFacing(RIGHT);
-			setSpeedX(5);
+			setSpeedX(isSlowed() ? 3 : 5);
 		}
 		if (KeyInput.pressingKey(KeyCode.UP)) {
-			setSpeedY(-5);
+			setSpeedY(isSlowed() ? -3 : -5);
 		}
 		if (KeyInput.pressingKey(KeyCode.DOWN)) {
-			setSpeedY(5);
+			setSpeedY(isSlowed() ? -3 : -5);
 		}
 		if (!KeyInput.pressingKey(KeyCode.LEFT) && !KeyInput.pressingKey(KeyCode.RIGHT) && !KeyInput.pressingKey(KeyCode.UP) && !KeyInput.pressingKey(KeyCode.DOWN)) {
 			setSpeedX(0);
 			setSpeedY(0);
 		}
+		try {
+			if (KeyInput.pressingKey(KeyCode.DIGIT1)) {				
+				useItem(0);
+			}
+			if (KeyInput.pressingKey(KeyCode.DIGIT2)) {
+				useItem(1);
+			}
+			if (KeyInput.pressingKey(KeyCode.DIGIT3)) {
+				useItem(2);
+			}
+			if (KeyInput.pressingKey(KeyCode.DIGIT4)) {
+				useItem(3);
+			}
+			if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
+				useItem(4);
+			}
+		} catch (InventoryEmptyIndexException e) {
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	@Override
 	public void update() {
-		// TODO Auto-generated method stub
 		updateByPressingKeys();
 	}
 	
