@@ -40,7 +40,7 @@ public class NPC extends Character {
 		if (isCollideWith(player)) {
 			player.takeDamge(atk);
 		}
-		attackTick = 20;
+		resetAttackTick();
 	}
 
 	@Override
@@ -71,7 +71,9 @@ public class NPC extends Character {
 			setSpeedY(speed);
 		} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
 			setSpeedY(-speed);
-		} 
+		}
+		
+		addAttackTick();
 	}
 
 	// Getters & Setters

@@ -1,5 +1,6 @@
 package model;
 
+import java.util.List;
 import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
@@ -11,6 +12,11 @@ public abstract class MoveableEntity extends Entity {
 
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
+	
+	protected List<Image> imageWalk;
+	protected List<Image> imageAttack;
+	protected List<Image> imageStunned;
+	protected List<Image> imageSlowed;
 	
 	protected double speedX = 0;
 	protected double speedY = 0;
