@@ -19,7 +19,7 @@ public class Images {
 	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
-			normalAttackEffect[i] = new Image("images/effect/attack/"+i+".png");
+			normalAttackEffect[i] = new Image("attack/"+i+".png");
 		}
 	}
 }

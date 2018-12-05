@@ -122,6 +122,9 @@ public class Map extends Frame implements IUpdatable {
 
 	public void update() {
 		for (NPC e: listNPC) {
+			if(e.isDead()) {
+				listNPC.remove(e);
+			}
 			e.update();
 		}
 	}

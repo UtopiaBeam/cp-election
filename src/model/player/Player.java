@@ -8,6 +8,7 @@ import exception.CannotAttackException;
 import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
 import input.KeyInput;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import model.Character;
@@ -22,7 +23,7 @@ public class Player extends Character {
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	private boolean isRevivable = false;
 	private double attackRange;
-	private boolean isAttacking = false;
+	
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, image, posX, posY, maxHp, atk, def);
@@ -48,12 +49,11 @@ public class Player extends Character {
 		if (!canAttack()) {
 			throw new CannotAttackException();
 		}
+		setIsAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 		}
-		resetAttackTick();
-		setIsAttacking(true);
 	}
 	
 	@Override
@@ -135,7 +135,10 @@ public class Player extends Character {
 				useItem(4);
 			}
 			if (KeyInput.pressingKey(KeyCode.SPACE)) {
-				attack();
+				if (isAttacking() == false) {
+					attack();
+				}
+				
 			}
 		} catch (InventoryEmptyIndexException e) {
 			System.out.println(e.getMessage());
@@ -147,7 +150,17 @@ public class Player extends Character {
 	@Override
 	public void update() {
 		updateByPressingKeys();
-		addAttackTick();
+		if(isAttacking()) {
+			addAttackTick();
+		}
+	}
+	
+	@Override
+	public void render(GraphicsContext gc) {
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
+		if (isAttacking()) {
+			renderNormalAtk(gc);
+		}
 	}
 	
 	// Getters & Setters
@@ -164,12 +177,6 @@ public class Player extends Character {
 		this.isRevivable = isRevivable;
 	}
 	
-	public boolean isAttacking() {
-		return this.isAttacking;
-	}
 	
-	public void setIsAttacking(boolean check) {
-		this.isAttacking = check;
-	}
 
 }

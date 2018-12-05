@@ -6,7 +6,6 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.map.Map;
-import model.player.Player;
 
 public abstract class MoveableEntity extends Entity {
 
@@ -65,13 +64,15 @@ public abstract class MoveableEntity extends Entity {
 		Map map = GameManager.getInstance().getCurrentMap();
 		Image img = Images.normalAttackEffect[atkTime/3];
 		if (this.getFacing() == LEFT) {
-			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+50);
+			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+20);
 		}
 		else {
-			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+50, -img.getWidth(), img.getHeight());
+			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+20, -img.getWidth(), img.getHeight());
 		}
 		atkTime++;
-		if (atkTime >= maxAtkTime) atkTime = 0;
+		if (atkTime >= maxAtkTime) {
+			atkTime = 0;
+		}
 	}
 	
 	// Getters & Setters
