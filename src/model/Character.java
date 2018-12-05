@@ -80,6 +80,8 @@ public abstract class Character extends MoveableEntity {
 		return true;
 	}
 	
+	
+	
 	public abstract void attack() throws CannotAttackException;
 	
 	public abstract void dead();

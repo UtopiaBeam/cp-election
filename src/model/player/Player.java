@@ -22,6 +22,7 @@ public class Player extends Character {
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	private boolean isRevivable = false;
 	private double attackRange;
+	private boolean isAttacking = false;
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, image, posX, posY, maxHp, atk, def);
@@ -51,7 +52,8 @@ public class Player extends Character {
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 		}
-		attackTick = 20;
+		attackTick = 30;
+		setIsAttacking(true);
 	}
 	
 	@Override
@@ -132,7 +134,12 @@ public class Player extends Character {
 			if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
 				useItem(4);
 			}
+			if (KeyInput.pressingKey(KeyCode.SPACE)) {
+				attack();
+			}
 		} catch (InventoryEmptyIndexException e) {
+			System.out.println(e.getMessage());
+		} catch (CannotAttackException e) {
 			System.out.println(e.getMessage());
 		}
 	}
@@ -154,6 +161,14 @@ public class Player extends Character {
 
 	public void setRevivable(boolean isRevivable) {
 		this.isRevivable = isRevivable;
+	}
+	
+	public boolean isAttacking() {
+		return this.isAttacking;
+	}
+	
+	public void setIsAttacking(boolean check) {
+		this.isAttacking = check;
 	}
 
 }

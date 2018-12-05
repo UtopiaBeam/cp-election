@@ -25,6 +25,7 @@ public class KeyInput {
 		UNPOLLABLE_KEYS.add(KeyCode.DIGIT3);
 		UNPOLLABLE_KEYS.add(KeyCode.DIGIT4);
 		UNPOLLABLE_KEYS.add(KeyCode.DIGIT5);
+		UNPOLLABLE_KEYS.add(KeyCode.SPACE);
 	}
 	
 	private static void addKey(KeyCode code) {

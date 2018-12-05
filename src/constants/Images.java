@@ -15,4 +15,11 @@ public class Images {
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("soldierL.png").toString(),66,100,false,false);
 	public static final Image soldierR = new Image(ClassLoader.getSystemResource("soldierR.png").toString(),66,100,false,false);
 	
+	public static final Image[] normalAttackEffect = new Image[10];
+	
+	static {
+		for (int i=0; i<normalAttackEffect.length; i++) {
+			normalAttackEffect[i] = new Image("images/effect/attack/"+i+".png");
+		}
+	}
 }

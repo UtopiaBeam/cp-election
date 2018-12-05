@@ -1,6 +1,11 @@
 package model;
 
+import constants.Images;
+import controller.GameManager;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.map.Map;
+import model.player.Player;
 
 public abstract class MoveableEntity extends Entity {
 
@@ -14,6 +19,9 @@ public abstract class MoveableEntity extends Entity {
 	
 	private Image imageL;
 	private Image imageR;
+	
+	private int atkTime = 0;
+	private int maxAtkTime = 30;
 
 	public MoveableEntity(String name, Image image, double posX, double posY) {
 		super(posX, posY, image.getWidth(), image.getHeight(), name, image);
@@ -46,6 +54,19 @@ public abstract class MoveableEntity extends Entity {
 	}
 	
 	public abstract void update();
+	
+	public void renderNormalAtk(GraphicsContext gc) {
+		Map map = GameManager.getInstance().getCurrentMap();
+		Image img = Images.normalAttackEffect[atkTime/3];
+		if (this.getFacing() == LEFT) {
+			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+50);
+		}
+		else {
+			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+50, -img.getWidth(), img.getHeight());
+		}
+		atkTime++;
+		if (atkTime >= maxAtkTime) atkTime = 0;
+	}
 	
 	// Getters & Setters
 	
