@@ -4,7 +4,7 @@ import constants.CCType;
 import exception.CannotAttackException;
 import javafx.scene.image.Image;
 
-public abstract class Character extends MoveableEntity {
+public abstract class Character extends MoveableEntity implements IUpdatable {
 
 	protected int hp;
 	protected int maxHp;
@@ -13,6 +13,8 @@ public abstract class Character extends MoveableEntity {
 	protected CCType status;
 	protected int attackTick;
 	
+	private int maxAttackTick = 30;
+	
 	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, image, posX, posY);
 		this.hp = maxHp;
@@ -20,7 +22,7 @@ public abstract class Character extends MoveableEntity {
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
-		this.attackTick = 0;
+		this.attackTick = maxAttackTick;
 	}
 
 	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
@@ -30,7 +32,7 @@ public abstract class Character extends MoveableEntity {
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
-		this.attackTick = 0;
+		this.attackTick = maxAttackTick;
 	}
 
 	public boolean isDead() {
@@ -38,7 +40,7 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public boolean canAttack() {
-		return !isDead() && (status == CCType.NONE) && (attackTick == 0);
+		return !isDead() && (status == CCType.NONE) && (attackTick == maxAttackTick);
 	}
 	
 	public boolean isStunned() {
@@ -78,6 +80,16 @@ public abstract class Character extends MoveableEntity {
 			dead();
 		}
 		return true;
+	}
+	
+	public void resetAttackTick() {
+		attackTick = 0;
+	}
+	
+	public void addAttackTick() {
+		if (attackTick < maxAttackTick) {
+			attackTick++;
+		}
 	}
 	
 	public abstract void attack() throws CannotAttackException;

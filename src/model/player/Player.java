@@ -51,7 +51,7 @@ public class Player extends Character {
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 		}
-		attackTick = 20;
+		resetAttackTick();
 	}
 	
 	@Override
@@ -140,6 +140,7 @@ public class Player extends Character {
 	@Override
 	public void update() {
 		updateByPressingKeys();
+		addAttackTick();
 	}
 	
 	// Getters & Setters
