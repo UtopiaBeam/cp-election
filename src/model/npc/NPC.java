@@ -15,7 +15,7 @@ public class NPC extends Character {
 	
 	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
-		speed = 3;
+		speed = 1 + (Math.random());
 		setSpeedX(speed);
 	}
 	
@@ -59,7 +59,6 @@ public class NPC extends Character {
 	
 	@Override
 	public void update() {
-		speed = 2 + (Math.random()*2);
 		Player player = GameManager.getInstance().getPlayer();
 		if (posX < player.getPosX()-20) {
 			setFacing(RIGHT);
