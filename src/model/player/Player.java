@@ -5,6 +5,8 @@ import java.util.List;
 import constants.CCType;
 import controller.GameManager;
 import exception.CannotAttackException;
+import exception.CannotMoveException;
+import exception.CannotUseItemException;
 import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
 import input.KeyInput;
@@ -37,6 +39,10 @@ public class Player extends Character {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 		this.attackRange = attackRange;
 		hpBar = new HpBar(this);
+	}
+	
+	public boolean canUseItem() {
+		return !isDead() && (status == CCType.NONE);
 	}
 	
 	public void revive() {
@@ -90,7 +96,10 @@ public class Player extends Character {
 		throw new InventoryFullException();
 	}
 	
-	public void useItem(int index) throws InventoryEmptyIndexException {
+	public void useItem(int index) throws InventoryEmptyIndexException, CannotUseItemException {
+		if (!canUseItem()) {
+			throw new CannotUseItemException();
+		}
 		if (inventory[index] == null) {
 			throw new InventoryEmptyIndexException("Inventory empty at index = " + index);
 		}
@@ -100,11 +109,9 @@ public class Player extends Character {
 		}
 	}
 	
-	public void updateByPressingKeys() {
-		if (isStunned()) {
-			setSpeedX(0);
-			setSpeedY(0);
-			return;
+	public void updateByPressingKeys() throws CannotMoveException, InventoryEmptyIndexException, CannotUseItemException, CannotAttackException {
+		if (!canMove()) {
+			throw new CannotMoveException();
 		}
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
 			setFacing(LEFT);
@@ -122,38 +129,42 @@ public class Player extends Character {
 		} else {
 			setSpeedY(0);
 		}
-		try {
-			if (KeyInput.pressingKey(KeyCode.DIGIT1)) {				
-				useItem(0);
-			}
-			if (KeyInput.pressingKey(KeyCode.DIGIT2)) {
-				useItem(1);
-			}
-			if (KeyInput.pressingKey(KeyCode.DIGIT3)) {
-				useItem(2);
-			}
-			if (KeyInput.pressingKey(KeyCode.DIGIT4)) {
-				useItem(3);
-			}
-			if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
-				useItem(4);
-			}
-			if (KeyInput.pressingKey(KeyCode.SPACE)) {
-				if (isAttacking() == false) {
-					attack();
-				}
-				
-			}
-		} catch (InventoryEmptyIndexException e) {
-			System.out.println(e.getMessage());
-		} catch (CannotAttackException e) {
-			System.out.println(e.getMessage());
+		if (KeyInput.pressingKey(KeyCode.DIGIT1)) {				
+			useItem(0);
 		}
+		if (KeyInput.pressingKey(KeyCode.DIGIT2)) {
+			useItem(1);
+		}
+		if (KeyInput.pressingKey(KeyCode.DIGIT3)) {
+			useItem(2);
+		}
+		if (KeyInput.pressingKey(KeyCode.DIGIT4)) {
+			useItem(3);
+		}
+		if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
+			useItem(4);
+		}
+		if (KeyInput.pressingKey(KeyCode.SPACE)) {
+			if (isAttacking() == false) {
+				attack();
+			}
+		}
+				
 	}
 	
 	@Override
 	public void update() {
-		updateByPressingKeys();
+		try {			
+			updateByPressingKeys();
+		} catch (InventoryEmptyIndexException e) {
+			e.printStackTrace();
+		} catch (CannotMoveException e) {
+			e.printStackTrace();
+		} catch (CannotUseItemException e) {
+			e.printStackTrace();
+		} catch (CannotAttackException e) {
+			e.printStackTrace();
+		}
 		if(isAttacking()) {
 			addAttackTick();
 		}

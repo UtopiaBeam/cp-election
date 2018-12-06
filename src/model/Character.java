@@ -44,6 +44,10 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		return !isDead() && (status == CCType.NONE) && (isAttacking() == false);
 	}
 	
+	public boolean canMove() {
+		return !isDead() && (status != CCType.STUN);
+	}
+	
 	public boolean isStunned() {
 		return status == CCType.STUN;
 	}
