@@ -1,30 +1,42 @@
 package model.item;
 
+import java.util.List;
+
 import constants.CCType;
 import controller.GameManager;
 import javafx.scene.image.Image;
 import model.IUpdatable;
+import model.npc.NPC;
 import model.player.Player;
 
 public class CCItem extends Item implements IUpdatable {
 
-	private CCType effect;
 	private int duration;
 
-	public CCItem(String name, int maxCount, Image image, CCType effect, int duration) {
+	public CCItem(String name, int maxCount, Image image, int duration) {
 		super(name, maxCount, image);
-		this.effect = effect;
 		this.duration = duration * 60;
 	}
 
 	@Override
 	public boolean activate() {
-		Player player = GameManager.getInstance().getPlayer();
-		if (player.getStatus() == CCType.NONE) {			
-			player.setStatus(effect);
-			return true;
+		double random = Math.random();
+		
+		List<NPC> npcs = GameManager.getInstance().getCurrentMap().getListNPC();
+		if (random <= 0.2) {
+			for (NPC npc: npcs) {
+				npc.setStatus(CCType.STUN);
+			}
+		} else if (random <= 0.3) {
+			for (NPC npc: npcs) {
+				npc.setStatus(CCType.SLOW);
+			}
+		} else {
+			for (NPC npc: npcs) {
+				npc.setStatus(CCType.SILENCE);
+			}
 		}
-		return false;
+		return true;
 	}
 	
 	@Override
@@ -36,10 +48,6 @@ public class CCItem extends Item implements IUpdatable {
 	}
 
 	// Getters & Setters
-	
-	public CCType getEffect() {
-		return effect;
-	}
 	
 	public int getDuration() {
 		return duration;
