@@ -13,6 +13,7 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
+import model.effect.HpBar;
 import model.item.Item;
 import model.npc.NPC;
 
@@ -23,16 +24,19 @@ public class Player extends Character {
 	private Item[] inventory = new Item[INVENTORY_SIZE];
 	private boolean isRevivable = false;
 	private double attackRange;
+	private HpBar hpBar;
 	
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, image, posX, posY, maxHp, atk, def);
 		this.attackRange = attackRange;
+		hpBar = new HpBar(this);
 	}
 	
 	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 		this.attackRange = attackRange;
+		hpBar = new HpBar(this);
 	}
 	
 	public void revive() {
@@ -161,6 +165,7 @@ public class Player extends Character {
 		if (isAttacking()) {
 			renderNormalAtk(gc);
 		}
+		hpBar.render(gc);
 	}
 	
 	// Getters & Setters

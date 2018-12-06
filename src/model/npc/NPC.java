@@ -16,11 +16,14 @@ public class NPC extends Character {
 	private double speed;
 	private HpBar hpBar;
 	
+	private int maxAttackTick = 120;
+	
 	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
+		this.attackTick = maxAttackTick;
 	}
 	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
@@ -30,6 +33,7 @@ public class NPC extends Character {
 		this.dropChance = dropChance;
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
+		this.attackTick = maxAttackTick;
 	}
 
 	public boolean isDropItem() {
@@ -42,10 +46,20 @@ public class NPC extends Character {
 			throw new CannotAttackException();
 		}
 		Player player = GameManager.getInstance().getPlayer();
+		
 		if (isCollideWith(player)) {
-			player.takeDamge(atk);
+			if (attackTick >= maxAttackTick) {
+				player.takeDamge(atk);
+				resetAttackTick();
+			}
 		}
-		resetAttackTick();
+	}
+	
+	@Override
+	public void addAttackTick() {
+		if (attackTick < maxAttackTick) {
+			attackTick++;
+		}
 	}
 
 	@Override
@@ -77,7 +91,11 @@ public class NPC extends Character {
 		} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
 			setSpeedY(-speed);
 		}
-		
+		try {
+			attack();
+		} catch (CannotAttackException e) {
+			System.out.println(e.getMessage());
+		}
 		addAttackTick();
 	}
 	
