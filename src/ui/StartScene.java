@@ -1,17 +1,21 @@
 package ui;
 
 import constants.Images;
+import constants.Sounds;
 import controller.GameManager;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import application.Main;
 
 public class StartScene extends Scene {
 	private Pane root;
 	private Canvas canvas;
+	MediaPlayer bgm;
 	
 	public StartScene() {
 		super(new Pane(), 420, 540);
@@ -23,6 +27,10 @@ public class StartScene extends Scene {
 		gc.drawImage(Images.playbutton, 165, 400);
 		
 		addCanvasEventHandler();
+		
+		bgm = new MediaPlayer(new Media(Sounds.startbgm.getSource()));
+		bgm.setCycleCount(MediaPlayer.INDEFINITE);
+		bgm.play();
 		
 		
 		root.getChildren().addAll(canvas);
@@ -46,6 +54,7 @@ public class StartScene extends Scene {
 		});
 		canvas.setOnMouseClicked(e -> {
 			if (isOnPlayButton(e)) {
+				bgm.stop();
 				GameManager.getInstance().startGame();
 				Main.getStage().setScene(Main.getGameScene());
 				Main.setCenter();
