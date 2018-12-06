@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import constants.Images;
+import constants.Sounds;
 import javafx.scene.canvas.GraphicsContext;
 import model.map.Map;
 import model.player.Player;
@@ -43,12 +44,13 @@ private static GameManager instance = new GameManager();
 	
 	private void generateMap() {
 		//TODO add player
-		maps.add(new Map(Images.stage1));
+		maps.add(new Map(Images.stage1, Sounds.bgm));
 		currentMap = maps.get(0);
 	}
 	
 	public void startGame() {
 		isGameRunning = true;
+		currentMap.playBgm();
 	}
 	
 	public void stopGame() {

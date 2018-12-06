@@ -8,6 +8,8 @@ import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.media.AudioClip;
+import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.Entity;
 import model.MoveableEntity;
@@ -32,9 +34,12 @@ public class Map extends Frame implements IUpdatable {
 	private List<Item> listItem = new ArrayList<>();
 
 	
-	public Map(Image img) {
+	public Map(Image img, AudioClip bgm) {
 		super(0, 0, img.getWidth(), img.getHeight());
 		this.img = img;
+		
+		this.bgm = new MediaPlayer(new Media(bgm.getSource()));
+		this.bgm.setCycleCount(MediaPlayer.INDEFINITE);
 	}
 	
 	public List<NPC> collideCharacter(Frame f) {
@@ -133,6 +138,10 @@ public class Map extends Frame implements IUpdatable {
 		}
 	}
 	
+	public void playBgm() {
+		this.bgm.play();
+	}
+	
 	// Getters & Setters
 
 	public List<NPC> getListNPC() {
@@ -142,7 +151,6 @@ public class Map extends Frame implements IUpdatable {
 	public List<Item> getListItem() {
 		return listItem;
 	}
-	
 	
 
 }
