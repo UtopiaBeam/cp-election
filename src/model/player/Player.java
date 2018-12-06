@@ -113,6 +113,7 @@ public class Player extends Character {
 		if (!canMove()) {
 			throw new CannotMoveException();
 		}
+		
 		if (KeyInput.pressingKey(KeyCode.LEFT)) {
 			setFacing(LEFT);
 			setSpeedX(isSlowed() ? 3 : 5);
@@ -129,6 +130,7 @@ public class Player extends Character {
 		} else {
 			setSpeedY(0);
 		}
+		
 		if (KeyInput.pressingKey(KeyCode.DIGIT1)) {				
 			useItem(0);
 		}
@@ -144,6 +146,7 @@ public class Player extends Character {
 		if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
 			useItem(4);
 		}
+		
 		if (KeyInput.pressingKey(KeyCode.SPACE)) {
 			if (isAttacking() == false) {
 				attack();
