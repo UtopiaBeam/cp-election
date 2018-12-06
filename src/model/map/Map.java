@@ -109,7 +109,7 @@ public class Map extends Frame implements IUpdatable {
 	public void spawnRandom() {
 		double x = 333 + (Math.random() * (height/2));
 		double y = 333 + (Math.random() * (width/2));
-		NPC monster = new NPC("Soldier", Images.soldierL, Images.soldierR, x, y, 100, 20, 50);
+		NPC monster = new NPC("Soldier", Images.soldierL, Images.soldierR, x, y, 150, 20, 50);
 		listNPC.add(monster);
 	}
 	

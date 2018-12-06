@@ -110,4 +110,6 @@ public abstract class MoveableEntity extends Entity {
 		this.setImage((facing == LEFT) ? imageL : imageR);
 	}
 	
+	
+	
 }

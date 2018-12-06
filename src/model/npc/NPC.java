@@ -2,21 +2,25 @@ package model.npc;
 
 import controller.GameManager;
 import exception.CannotAttackException;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.Character;
 import model.item.Item;
 import model.player.Player;
+import model.effect.HpBar;;
 
 public class NPC extends Character {
 
 	private Item dropItem;
 	private double dropChance;
 	private double speed;
+	private HpBar hpBar;
 	
 	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
 		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
+		hpBar = new HpBar(this);
 	}
 	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
@@ -25,6 +29,7 @@ public class NPC extends Character {
 		this.dropItem = dropItem;
 		this.dropChance = dropChance;
 		setSpeedX(speed);
+		hpBar = new HpBar(this);
 	}
 
 	public boolean isDropItem() {
@@ -74,6 +79,12 @@ public class NPC extends Character {
 		}
 		
 		addAttackTick();
+	}
+	
+	@Override
+	public void render(GraphicsContext gc) {
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
+		hpBar.render(gc);
 	}
 
 	// Getters & Setters
