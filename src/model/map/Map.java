@@ -1,6 +1,7 @@
 package model.map;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import constants.Images;
@@ -121,10 +122,13 @@ public class Map extends Frame implements IUpdatable {
 	}
 
 	public void update() {
-		for (NPC e: listNPC) {
-			if(e.isDead()) {
-				listNPC.remove(e);
+		Iterator<NPC> it = listNPC.listIterator();
+		while (it.hasNext()) {
+			if(it.next().isDead()) {
+				it.remove();
 			}
+		}
+		for (NPC e: listNPC) {
 			e.update();
 		}
 	}
