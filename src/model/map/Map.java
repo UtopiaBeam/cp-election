@@ -64,6 +64,10 @@ public class Map extends Frame implements IUpdatable {
 		return collideItems;
 	}
 	
+	public void removeItem(Item item) {
+		listItem.remove(item);
+	}
+	
 	private void moveMap() {
 		// Move map by object inside
 		Player player = GameManager.getInstance().getPlayer();

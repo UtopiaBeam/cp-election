@@ -13,12 +13,12 @@ import exception.InventoryFullException;
 import exception.ItemTypeNotFoundException;
 import input.KeyInput;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
 import model.effect.HpBar;
 import model.item.*;
+import model.map.Map;
 import model.npc.NPC;
 
 public class Player extends Character {
@@ -88,28 +88,37 @@ public class Player extends Character {
 		return attackArea;
 	}
 
-	public void collectItems() throws InventoryFullException, ItemTypeNotFoundException {
+	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
+		int index = 0;
+		if (item instanceof AttackItem) {
+			index = 0;
+		} else if (item instanceof ImmuneItem) {
+			index = 1;
+		} else if (item instanceof CCItem) {
+			index = 2;
+		} else if (item instanceof HealItem) {
+			index = 3;
+		} else if (item instanceof ReviveItem) {
+			index = 4;
+		} else {
+			throw new ItemTypeNotFoundException();
+		}
+		if (inventory[index].addCount(1)) {			
+			throw new InventoryFullException();
+		}
+		
+		GameManager.getInstance().getCurrentMap().removeItem(item);
+		
+	}
+	
+	public void collectItems() {
 		List<Item> items = GameManager.getInstance().getCurrentMap().collideItems(getPlayerArea());
-		for (int i = items.size()-1; i >= 0; i--) {
-			Item item = items.get(i);
-			int index = 0;
-			if (item instanceof AttackItem) {
-				index = 0;
-			} else if (item instanceof ImmuneItem) {
-				index = 1;
-			} else if (item instanceof CCItem) {
-				index = 2;
-			} else if (item instanceof HealItem) {
-				index = 3;
-			} else if (item instanceof ReviveItem) {
-				index = 4;
-			} else {
-				throw new ItemTypeNotFoundException();
+		for (Item i: items) {
+			try {
+				collectItem(i);
+			} catch (InventoryFullException | ItemTypeNotFoundException e) {
+				e.printStackTrace();
 			}
-			if (inventory[index].addCount(1)) {			
-				throw new InventoryFullException();
-			}
-			items.remove(i);
 		}
 	}
 	
@@ -121,9 +130,6 @@ public class Player extends Character {
 			throw new InventoryEmptyIndexException("No " + inventory[index].getClass());
 		}
 		inventory[index].use();
-		if (inventory[index].getCount() == 0) {
-			inventory[index] = null;
-		}
 	}
 	
 	public void updateByPressingKeys() throws CannotMoveException, InventoryEmptyIndexException, CannotUseItemException, CannotAttackException {
@@ -179,15 +185,11 @@ public class Player extends Character {
 			collectItems();
 		} catch (InventoryEmptyIndexException e) {
 			e.printStackTrace();
-		} catch (ItemTypeNotFoundException e) {
-			e.printStackTrace();
 		} catch (CannotMoveException e) {
 			e.printStackTrace();
 		} catch (CannotUseItemException e) {
 			e.printStackTrace();
 		} catch (CannotAttackException e) {
-			e.printStackTrace();
-		} catch (InventoryFullException e) {
 			e.printStackTrace();
 		}
 		if(isAttacking()) {
