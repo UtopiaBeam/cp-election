@@ -30,13 +30,13 @@ public class Player extends Character {
 	
 	
 	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
-		super(name, image, posX, posY, maxHp, atk, def);
+		super(name, image, posX, posY, maxHp, atk, def, 30);
 		this.attackRange = attackRange;
 		hpBar = new HpBar(this);
 	}
 	
 	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
-		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
+		super(name, imageL, imageR, posX, posY, maxHp, atk, def, 30);
 		this.attackRange = attackRange;
 		hpBar = new HpBar(this);
 	}

@@ -16,24 +16,20 @@ public class NPC extends Character {
 	private double speed;
 	private HpBar hpBar;
 	
-	private int maxAttackTick = 120;
-	
 	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
-		super(name, imageL, imageR, posX, posY, maxHp, atk, def);
+		super(name, imageL, imageR, posX, posY, maxHp, atk, def, 120);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
-		this.attackTick = maxAttackTick;
 	}
 	
 	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
 			double dropChance) {
-		super(name, image, posX, posY, maxHp, atk, def);
+		super(name, image, posX, posY, maxHp, atk, def, 120);
 		this.dropItem = dropItem;
 		this.dropChance = dropChance;
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
-		this.attackTick = maxAttackTick;
 	}
 
 	public boolean isDropItem() {
@@ -45,20 +41,12 @@ public class NPC extends Character {
 		if (!canAttack()) {
 			throw new CannotAttackException();
 		}
+		
 		Player player = GameManager.getInstance().getPlayer();
 		
-		if (isCollideWith(player)) {
-			if (attackTick >= maxAttackTick) {
-				player.takeDamge(atk);
-				resetAttackTick();
-			}
-		}
-	}
-	
-	@Override
-	public void addAttackTick() {
-		if (attackTick < maxAttackTick) {
-			attackTick++;
+		if (isCollideWith(player)) {	
+			player.takeDamge(atk);
+			resetAttackTick();
 		}
 	}
 

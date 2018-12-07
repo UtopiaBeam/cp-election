@@ -11,28 +11,30 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	protected int atk;
 	protected int def;
 	protected CCType status;
-	protected int attackTick;
 	
-	private int maxAttackTick = 30;
+	private int attackTick;
+	private int maxAttackTick;
 	private boolean isAttacking = false;
 	
-	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def) {
+	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def, int maxAttackTick) {
 		super(name, image, posX, posY);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
+		this.maxAttackTick = maxAttackTick;
 		this.attackTick = maxAttackTick;
 	}
 
-	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
+	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int maxAttackTick) {
 		super(name, imageL, imageR, posX, posY);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
+		this.maxAttackTick = maxAttackTick;
 		this.attackTick = maxAttackTick;
 	}
 
@@ -94,7 +96,8 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	public void addAttackTick() {
 		if (attackTick < maxAttackTick) {
 			attackTick++;
-		} else {
+		}
+		if (attackTick == maxAttackTick) {
 			resetAttackTick();
 			setIsAttacking(false);
 		}
