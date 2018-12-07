@@ -11,7 +11,6 @@ import javafx.scene.image.Image;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import model.Entity;
 import model.MoveableEntity;
 import model.item.Item;
 import model.npc.NPC;
@@ -19,7 +18,7 @@ import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
 import ui.GameScene;
-import ui.statusBar;
+import ui.StatusBar;
 
 public class Map extends Frame implements IUpdatable {
 	
@@ -34,7 +33,7 @@ public class Map extends Frame implements IUpdatable {
 	private List<NPC> listNPC= new ArrayList<>();
 	private List<Item> listItem = new ArrayList<>();
 	
-	private statusBar statusBar = new statusBar();
+	private StatusBar statusBar = new StatusBar();
 
 	
 	public Map(Image img, AudioClip bgm) {

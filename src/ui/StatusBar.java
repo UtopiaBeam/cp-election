@@ -14,7 +14,7 @@ import model.player.Player;
 
 
 
-public class statusBar {
+public class StatusBar {
 	
 	private static Player player;
 	
@@ -34,7 +34,7 @@ public class statusBar {
 	
 	private static Image img = Images.statusbar;
 	
-	public static void render(GraphicsContext gc) {
+	public void render(GraphicsContext gc) {
 		player = GameManager.getInstance().getPlayer();
 		
 		hpWidth = HP_WIDTH*player.getHp()*0.2/player.getMaxHp() + 0.8*hpWidth;
