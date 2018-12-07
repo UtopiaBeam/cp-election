@@ -19,6 +19,7 @@ import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
 import ui.GameScene;
+import ui.statusBar;
 
 public class Map extends Frame implements IUpdatable {
 	
@@ -32,6 +33,8 @@ public class Map extends Frame implements IUpdatable {
 	
 	private List<NPC> listNPC= new ArrayList<>();
 	private List<Item> listItem = new ArrayList<>();
+	
+	private statusBar statusBar = new statusBar();
 
 	
 	public Map(Image img, AudioClip bgm) {
@@ -124,6 +127,8 @@ public class Map extends Frame implements IUpdatable {
 		for (NPC e: listNPC) {			
 			e.render(gc);
 		}
+		statusBar.render(gc);
+		
 	}
 
 	public void update() {

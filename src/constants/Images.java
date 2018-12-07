@@ -17,6 +17,8 @@ public class Images {
 	
 	public static final Image[] normalAttackEffect = new Image[10];
 	
+	public static final Image statusbar = new Image(ClassLoader.getSystemResource("icon/statusbar.png").toString());
+	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
 			normalAttackEffect[i] = new Image("attack/"+i+".png");
