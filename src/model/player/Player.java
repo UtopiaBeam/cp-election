@@ -24,7 +24,7 @@ public class Player extends Character {
 
 	public static final int INVENTORY_SIZE = 5;
 	
-	private Item[] inventory = { new AttackItem(), new ImmuneItem(), new CCItem(), new HealItem(), new ReviveItem() };
+	private Item[] inventory = { new HealItem(), new AttackItem(), new ImmuneItem(), new CCItem(), new ReviveItem() };
 	private boolean isRevivable = false;
 	private double attackRange;
 	private HpBar hpBar;
@@ -89,13 +89,13 @@ public class Player extends Character {
 
 	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
 		int index = 0;
-		if (item instanceof AttackItem) {
+		if (item instanceof HealItem) {
 			index = 0;
-		} else if (item instanceof ImmuneItem) {
+		} else if (item instanceof AttackItem) {
 			index = 1;
-		} else if (item instanceof CCItem) {
+		} else if (item instanceof ImmuneItem) {
 			index = 2;
-		} else if (item instanceof HealItem) {
+		} else if (item instanceof CCItem) {
 			index = 3;
 		} else if (item instanceof ReviveItem) {
 			index = 4;
@@ -125,12 +125,12 @@ public class Player extends Character {
 			throw new CannotUseItemException();
 		}
 		if (inventory[index].getCount() == 0) {
-			throw new InventoryEmptyIndexException("No " + inventory[index].getClass());
+			throw new InventoryEmptyIndexException("No " + inventory[index].getName());
 		}
 		inventory[index].use();
 	}
 	
-	public void updateByPressingKeys() throws CannotMoveException, InventoryEmptyIndexException, CannotUseItemException, CannotAttackException {
+	public void updateByPressingKeys() throws CannotMoveException, CannotUseItemException, CannotAttackException {
 		if (!canMove()) {
 			throw new CannotMoveException();
 		}
@@ -166,9 +166,9 @@ public class Player extends Character {
 			try {
 				useItem(index);
 			} catch (InventoryEmptyIndexException e) {
-				e.printStackTrace();
+				System.out.println(e.getMessage());
 			} catch (CannotUseItemException e) {
-				e.printStackTrace();
+				System.out.println("Cannot use item now");
 			}
 		}
 	}
@@ -182,14 +182,12 @@ public class Player extends Character {
 				updateByPollKey(key);
 			}
 			collectItems();
-		} catch (InventoryEmptyIndexException e) {
-			e.printStackTrace();
 		} catch (CannotMoveException e) {
-			e.printStackTrace();
+			System.out.println("Cannot move now");
 		} catch (CannotUseItemException e) {
-			e.printStackTrace();
+			System.out.println("Cannot use item now");
 		} catch (CannotAttackException e) {
-			e.printStackTrace();
+			System.out.println("Cannot attack now");
 		}
 		if (isAttacking()) {
 			addAttackTick();
