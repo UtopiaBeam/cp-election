@@ -59,7 +59,7 @@ public class Player extends Character {
 		if (!canAttack()) {
 			throw new CannotAttackException();
 		}
-		setIsAttacking(true);
+		setAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());

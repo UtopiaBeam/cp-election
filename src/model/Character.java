@@ -14,7 +14,7 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	
 	private int attackTick;
 	private int coolDown;
-	private boolean isAttacking = false;
+	private boolean isAttacking;
 	
 	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
 		super(name, image, posX, posY);
@@ -25,6 +25,7 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		this.status = CCType.NONE;
 		this.coolDown = coolDown;
 		this.attackTick = 0;
+		this.isAttacking = false;
 	}
 
 	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
@@ -99,7 +100,7 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		}
 		if (attackTick == coolDown) {
 			resetAttackTick();
-			setIsAttacking(false);
+			setAttacking(false);
 		}
 	}
 	
@@ -145,8 +146,8 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		return this.isAttacking;
 	}
 	
-	public void setIsAttacking(boolean check) {
-		this.isAttacking = check;
+	public void setAttacking(boolean isAttacking) {
+		this.isAttacking = isAttacking;
 	}
 	
 }
