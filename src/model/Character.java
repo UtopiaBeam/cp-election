@@ -13,29 +13,29 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	protected CCType status;
 	
 	private int attackTick;
-	private int maxAttackTick;
+	private int coolDown;
 	private boolean isAttacking = false;
 	
-	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def, int maxAttackTick) {
+	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
 		super(name, image, posX, posY);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
-		this.maxAttackTick = maxAttackTick;
-		this.attackTick = maxAttackTick;
+		this.coolDown = coolDown;
+		this.attackTick = 0;
 	}
 
-	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int maxAttackTick) {
+	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
 		super(name, imageL, imageR, posX, posY);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
 		this.status = CCType.NONE;
-		this.maxAttackTick = maxAttackTick;
-		this.attackTick = maxAttackTick;
+		this.coolDown = coolDown;
+		this.attackTick = 0;
 	}
 
 	public boolean isDead() {
@@ -94,10 +94,10 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	}
 	
 	public void addAttackTick() {
-		if (attackTick < maxAttackTick) {
+		if (attackTick < coolDown) {
 			attackTick++;
 		}
-		if (attackTick == maxAttackTick) {
+		if (attackTick == coolDown) {
 			resetAttackTick();
 			setIsAttacking(false);
 		}
