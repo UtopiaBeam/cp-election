@@ -24,7 +24,7 @@ public class Player extends Character {
 
 	public static final int INVENTORY_SIZE = 5;
 	
-	private Item[] inventory = { new HealItem(), new AttackItem(), new ImmuneItem(), new CCItem(), new ReviveItem() };
+	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem(), new ReviveItem() };
 	private boolean isImmune = false;
 	private boolean isCCUsed = false;
 	private boolean isRevivable = false;
@@ -100,7 +100,7 @@ public class Player extends Character {
 	public void dead() {
 		if (!isDead()) {
 			return;
-		}
+		} 
 	}
 	
 	public Frame getPlayerArea() {
@@ -148,13 +148,13 @@ public class Player extends Character {
 	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
 		int index = 0;
 		if (item instanceof HealItem) {
-			index = 0;
-		} else if (item instanceof AttackItem) {
-			index = 1;
-		} else if (item instanceof ImmuneItem) {
 			index = 2;
-		} else if (item instanceof CCItem) {
+		} else if (item instanceof AttackItem) {
+			index = 0;
+		} else if (item instanceof ImmuneItem) {
 			index = 3;
+		} else if (item instanceof CCItem) {
+			index = 1;
 		} else if (item instanceof ReviveItem) {
 			index = 4;
 		} else {

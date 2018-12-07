@@ -47,10 +47,10 @@ public class StatusBar {
 		gc.fillRoundRect(HP_X, HEIGHT+HP_Y, hpWidth, HP_HEIGHT, 5, 5);
 		
 		gc.drawImage(img, 0, 0);
-		gc.drawImage(Images.heal, 50, 100);
-		gc.drawImage(Images.attack, 50, 160);
-		gc.drawImage(Images.immune, 170, 90);
-		gc.drawImage(Images.cc, 180, 160);
+		gc.drawImage(Images.attack, 50, 100);
+		gc.drawImage(Images.heal, 50, 160);
+		gc.drawImage(Images.cc, 180, 100);
+		gc.drawImage(Images.immune, 180, 150);
 		gc.drawImage(Images.revive, 310, 100);
 		
 		//Draw text
@@ -68,8 +68,8 @@ public class StatusBar {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setTextBaseline(VPos.CENTER);
 		gc.fillText(String.format("x %d", player.getInventory()[0].getCount()), 120, 120);
-		gc.fillText(String.format("x %d", player.getInventory()[1].getCount()), 120, 180);
-		gc.fillText(String.format("x %d", player.getInventory()[2].getCount()), 260, 120);
+		gc.fillText(String.format("x %d", player.getInventory()[2].getCount()), 120, 180);
+		gc.fillText(String.format("x %d", player.getInventory()[1].getCount()), 260, 120);
 		gc.fillText(String.format("x %d", player.getInventory()[3].getCount()), 260, 180);
 		gc.fillText(String.format("x %d", player.getInventory()[4].getCount()), 380, 120);
 		
