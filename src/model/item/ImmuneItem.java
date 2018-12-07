@@ -2,41 +2,34 @@ package model.item;
 
 import constants.Images;
 import controller.GameManager;
-import model.IUpdatable;
 import model.player.Player;
 
-public class ImmuneItem extends Item implements IUpdatable {
+public class ImmuneItem extends Item {
 
+	public static final int duration = 180;
+	
 	private int def;
-	private int duration;
 
 	public ImmuneItem() {
 		super("Immune Item", 15, Images.immune);
 		this.def = 100;
-		this.duration = 300;
 		this.setImage(Images.immune);
 	}
 	
 	public ImmuneItem(double posX, double posY) {
 		super("Immune Item", 15, Images.immune, posX, posY);
 		this.def = 100;
-		this.duration = 300;
 		this.setImage(Images.immune);
 	}
 	
 	@Override
 	public boolean activate() {
 		Player player = GameManager.getInstance().getPlayer();
-		player.setDef(player.getDef() + def);
-		return true;
-	}
-
-	@Override
-	public void update() {
-		if (--duration == 0) {
-			Player player = GameManager.getInstance().getPlayer();
-			player.setDef(player.getDef() - def);
+		if (player.isImmune()) {
+			return false;
 		}
+		player.setImmune(true);
+		return true;
 	}
 	
 	// Getters & Setters

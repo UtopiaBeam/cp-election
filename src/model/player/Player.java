@@ -25,7 +25,11 @@ public class Player extends Character {
 	public static final int INVENTORY_SIZE = 5;
 	
 	private Item[] inventory = { new HealItem(), new AttackItem(), new ImmuneItem(), new CCItem(), new ReviveItem() };
+	private boolean isImmune;
+	private boolean isCCused;
 	private boolean isRevivable = false;
+	private int immuneTick = 0;
+	private int ccUsedTick = 0;
 	private double attackRange;
 	private HpBar hpBar;
 	
@@ -86,6 +90,20 @@ public class Player extends Character {
 		}
 		return attackArea;
 	}
+	
+	public void resetImmuneTick() {
+		immuneTick = 0;
+	}
+	
+	public void addImmuneTick() {
+		if (immuneTick < ImmuneItem.duration) {
+			immuneTick++;
+		}
+		if (immuneTick == ImmuneItem.duration) {
+			resetImmuneTick();
+			setImmune(false);
+		}
+	}
 
 	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
 		int index = 0;
@@ -114,8 +132,10 @@ public class Player extends Character {
 		for (Item i: items) {
 			try {
 				collectItem(i);
-			} catch (InventoryFullException | ItemTypeNotFoundException e) {
-				e.printStackTrace();
+			} catch (InventoryFullException e) {
+				System.out.println("Inventory is full");
+			} catch (ItemTypeNotFoundException e) {
+				System.out.println("Item type not found");
 			}
 		}
 	}
@@ -212,9 +232,17 @@ public class Player extends Character {
 	public boolean isRevivable() {
 		return isRevivable;
 	}
+	
+	public boolean isImmune() {
+		return isImmune;
+	}
 
 	public void setRevivable(boolean isRevivable) {
 		this.isRevivable = isRevivable;
+	}
+
+	public void setImmune(boolean isImmune) {
+		this.isImmune = isImmune;
 	}
 	
 	
