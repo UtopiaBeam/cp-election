@@ -44,9 +44,9 @@ public class NPC extends Character {
 		
 		Player player = GameManager.getInstance().getPlayer();
 		
-		if (isCollideWith(player)) {	
+		if (isCollideWith(player)) {
+			setIsAttacking(true);
 			player.takeDamge(atk);
-			resetAttackTick();
 		}
 	}
 
