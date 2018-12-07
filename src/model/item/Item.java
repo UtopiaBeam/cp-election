@@ -20,10 +20,6 @@ public abstract class Item extends Entity {
 		this.maxCount = maxCount;
 	}
 	
-	public boolean isSame(Item item) {
-		return this.getName() == item.getName();
-	}
-	
 	public boolean addCount(int count) {
 		if (this.count + count > this.maxCount) {
 			return false;
