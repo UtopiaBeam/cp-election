@@ -103,11 +103,10 @@ public class Player extends Character {
 			throw new ItemTypeNotFoundException();
 		}
 		if (inventory[index].addCount(1)) {			
-			throw new InventoryFullException();
-		}
-		
-		GameManager.getInstance().getCurrentMap().removeItem(item);
-		
+			GameManager.getInstance().getCurrentMap().removeItem(item);
+		} else {
+			throw new InventoryFullException();			
+		}		
 	}
 	
 	public void collectItems() {
@@ -192,7 +191,7 @@ public class Player extends Character {
 		} catch (CannotAttackException e) {
 			e.printStackTrace();
 		}
-		if(isAttacking()) {
+		if (isAttacking()) {
 			addAttackTick();
 		}
 	}
