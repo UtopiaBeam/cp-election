@@ -13,8 +13,6 @@ import model.effect.HpBar;;
 
 public class NPC extends Character {
 
-	private Item dropItem;
-	private double dropChance;
 	private double speed;
 	private HpBar hpBar;
 	
@@ -23,19 +21,6 @@ public class NPC extends Character {
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
-	}
-	
-	public NPC(String name, Image image, double posX, double posY, int maxHp, int atk, int def, Item dropItem,
-			double dropChance) {
-		super(name, image, posX, posY, maxHp, atk, def, 120);
-		this.dropItem = dropItem;
-		this.dropChance = dropChance;
-		setSpeedX(speed);
-		hpBar = new HpBar(this);
-	}
-
-	public boolean isDropItem() {
-		return dropChance <= Math.random();
 	}
 	
 	@Override
@@ -57,9 +42,7 @@ public class NPC extends Character {
 		if (!isDead()) {
 			return;
 		}
-		if (isDropItem()) {
-			dropItem();
-		}
+		dropItem();
 	}
 	
 	public void dropItem() {
@@ -90,10 +73,10 @@ public class NPC extends Character {
 	@Override
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
-		if (posX < player.getPosX()-20) {
+		if (posX < player.getPosX() - 20) {
 			setFacing(RIGHT);
 			setSpeedX(speed);
-		} else if (posX > player.getPosX()+20){
+		} else if (posX > player.getPosX() + 20){
 			setFacing(LEFT);
 			setSpeedX(speed);
 		} 
@@ -115,16 +98,5 @@ public class NPC extends Character {
 		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
 		hpBar.render(gc);
 	}
-
-	// Getters & Setters
-	
-	public Item getDropItem() {
-		return dropItem;
-	}
-
-	public double getDropChance() {
-		return dropChance;
-	}
-	
 
 }
