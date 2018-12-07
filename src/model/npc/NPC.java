@@ -1,11 +1,13 @@
 package model.npc;
 
+import java.util.List;
+
 import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.Character;
-import model.item.Item;
+import model.item.*;
 import model.player.Player;
 import model.effect.HpBar;;
 
@@ -61,7 +63,28 @@ public class NPC extends Character {
 	}
 	
 	public void dropItem() {
+		double random = Math.random();
+		double dropX = getPosX();
+		double dropY = getPosY() + getHeight() - 40;
 		
+		List<Item> mapItems = GameManager.getInstance().getCurrentMap().getListItem();
+		Item item = null;
+		
+		if (random <= 0.02) {
+			item = new ReviveItem(dropX, dropY);
+		} else if (random <= 0.05) {
+			item = new HealItem(dropX, dropY);
+		} else if (random <= 0.15) {
+			item = new CCItem(dropX, dropY);
+		} else if (random <= 0.30) {
+			item = new ImmuneItem(dropX, dropY);
+		} else if (random <= 0.60) {
+			item = new AttackItem(dropX, dropY);
+		}
+		
+		if (item != null) {
+			mapItems.add(item);
+		}
 	}
 	
 	@Override
