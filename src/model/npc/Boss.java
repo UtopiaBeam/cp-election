@@ -11,10 +11,6 @@ public class Boss extends Character {
 	
 	private Skill[] skills;
 
-	public Boss(Image image, double posX, double posY) {
-		super("Prayut", image, posX, posY, 10000, 1000, 50, 120);
-	}
-	
 	public Boss(Image imageL, Image imageR, double posX, double posY) {
 		super("Prayut", imageL, imageR, posX, posY, 10000, 1000, 50, 120);
 	}
