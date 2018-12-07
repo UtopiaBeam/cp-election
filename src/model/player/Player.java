@@ -18,7 +18,6 @@ import model.Character;
 import model.Frame;
 import model.effect.HpBar;
 import model.item.*;
-import model.map.Map;
 import model.npc.NPC;
 
 public class Player extends Character {
@@ -154,34 +153,35 @@ public class Player extends Character {
 			setSpeedY(0);
 		}
 		
-		if (KeyInput.pressingKey(KeyCode.DIGIT1)) {				
-			useItem(0);
-		}
-		if (KeyInput.pressingKey(KeyCode.DIGIT2)) {
-			useItem(1);
-		}
-		if (KeyInput.pressingKey(KeyCode.DIGIT3)) {
-			useItem(2);
-		}
-		if (KeyInput.pressingKey(KeyCode.DIGIT4)) {
-			useItem(3);
-		}
-		if (KeyInput.pressingKey(KeyCode.DIGIT5)) {
-			useItem(4);
-		}
-		
 		if (KeyInput.pressingKey(KeyCode.SPACE)) {
 			if (isAttacking() == false) {
 				attack();
 			}
+		}			
+	}
+	
+	public void updateByPollKey(KeyCode key) {
+		if (key.isDigitKey()) {
+			int digit = Integer.parseInt(key.toString().substring(5));
+			int index = (digit + 9) % 10;
+			try {
+				useItem(index);
+			} catch (InventoryEmptyIndexException e) {
+				e.printStackTrace();
+			} catch (CannotUseItemException e) {
+				e.printStackTrace();
+			}
 		}
-				
 	}
 	
 	@Override
 	public void update() {
 		try {			
 			updateByPressingKeys();
+			while (KeyInput.isPollAvailable()) {
+				KeyCode key = KeyInput.pollKey();
+				updateByPollKey(key);
+			}
 			collectItems();
 		} catch (InventoryEmptyIndexException e) {
 			e.printStackTrace();
