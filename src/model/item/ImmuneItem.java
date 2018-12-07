@@ -1,19 +1,19 @@
 package model.item;
 
+import constants.Images;
 import controller.GameManager;
-import javafx.scene.image.Image;
 import model.IUpdatable;
 import model.player.Player;
 
-public class DefenseItem extends Item implements IUpdatable {
+public class ImmuneItem extends Item implements IUpdatable {
 
 	private int def;
 	private int duration;
 
-	public DefenseItem(int maxCount, Image image, int def, int duration) {
-		super("Defense Item", maxCount, image);
-		this.def = def;
-		this.duration = duration * 60;
+	public ImmuneItem() {
+		super("Immune Item", 15, Images.immune);
+		this.def = 100;
+		this.duration = 300;
 	}
 	
 	@Override

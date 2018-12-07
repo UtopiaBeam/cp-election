@@ -1,13 +1,13 @@
 package model.item;
 
+import constants.Images;
 import controller.GameManager;
-import javafx.scene.image.Image;
 import model.player.Player;
 
 public class ReviveItem extends Item {
 	
-	public ReviveItem(Image image) {
-		super("Revive Item", 1, image);
+	public ReviveItem() {
+		super("Revive Item", 1, Images.revive);
 	}
 	
 	@Override

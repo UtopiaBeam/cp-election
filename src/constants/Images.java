@@ -23,7 +23,7 @@ public class Images {
 	public static final Image attack = new Image(ClassLoader.getSystemResource("icon/attack.png").toString(),40,40,false,false);
 	public static final Image cc = new Image(ClassLoader.getSystemResource("icon/cc.png").toString(),40,40,false,false);
 	public static final Image revive = new Image(ClassLoader.getSystemResource("icon/revive.png").toString(),40,40,false,false);
-	public static final Image protect = new Image(ClassLoader.getSystemResource("icon/protect.png").toString(),60,60,false,false);
+	public static final Image immune = new Image(ClassLoader.getSystemResource("icon/immune.png").toString(),60,60,false,false);
 	
 	
 	static {

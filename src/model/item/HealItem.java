@@ -1,16 +1,16 @@
 package model.item;
 
+import constants.Images;
 import controller.GameManager;
-import javafx.scene.image.Image;
 import model.player.Player;
 
 public class HealItem extends Item {
 	
 	private int healHp;
 	
-	public HealItem(Image image, int healHp) {
-		super("Heal Potion", 1, image);
-		this.healHp = healHp;
+	public HealItem() {
+		super("Heal Potion", 5, Images.heal);
+		this.healHp = 10;
 	}
 	
 	@Override

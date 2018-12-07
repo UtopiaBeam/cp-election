@@ -5,7 +5,7 @@ import model.Entity;
 
 public abstract class Item extends Entity {
 	
-	protected int count = 1;
+	protected int count = 0;
 	protected int maxCount;
 	
 	public Item(String name, int maxCount, Image image) {

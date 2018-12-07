@@ -3,8 +3,8 @@ package model.item;
 import java.util.List;
 
 import constants.CCType;
+import constants.Images;
 import controller.GameManager;
-import javafx.scene.image.Image;
 import model.IUpdatable;
 import model.npc.NPC;
 import model.player.Player;
@@ -13,9 +13,9 @@ public class CCItem extends Item implements IUpdatable {
 
 	private int duration;
 
-	public CCItem(String name, int maxCount, Image image, int duration) {
-		super(name, maxCount, image);
-		this.duration = duration * 60;
+	public CCItem() {
+		super("Random CC Item", 10, Images.cc);
+		this.duration = 120;
 	}
 
 	@Override
