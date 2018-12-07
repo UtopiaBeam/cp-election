@@ -54,13 +54,14 @@ public class Map extends Frame implements IUpdatable {
 		return npcs;
 	}
 	
-	public Item collideItem(Frame f) {
+	public List<Item> collideItems(Frame f) {
+		List<Item> collideItems = new ArrayList<Item>();
 		for (Item e: listItem) {
 			if (e instanceof Item && f.isCollideWith(e)) {
-				return (Item) e;
+				collideItems.add((Item) e);
 			}
 		}
-		return null;
+		return collideItems;
 	}
 	
 	private void moveMap() {
