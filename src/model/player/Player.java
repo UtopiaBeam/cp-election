@@ -9,6 +9,7 @@ import exception.CannotMoveException;
 import exception.CannotUseItemException;
 import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
+import exception.ItemTypeNotFoundException;
 import input.KeyInput;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -16,7 +17,7 @@ import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
 import model.effect.HpBar;
-import model.item.Item;
+import model.item.*;
 import model.npc.NPC;
 
 public class Player extends Character {
@@ -89,17 +90,24 @@ public class Player extends Character {
 		return attackArea;
 	}
 
-	public void collectItem(Item item) throws InventoryFullException {
-		for (int i = 0; i < inventory.length; i++) {
-			if (inventory[i] == null) {
-				inventory[i] = item;
-				return;
-			}
-			if (inventory[i].isSame(item) && inventory[i].addCount(1)) {
-				return;
-			}
+	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
+		int index = 0;
+		if (item instanceof AttackItem) {
+			index = 0;
+		} else if (item instanceof DefenseItem) {
+			index = 1;
+		} else if (item instanceof CCItem) {
+			index = 2;
+		} else if (item instanceof HealItem) {
+			index = 3;
+		} else if (item instanceof ReviveItem) {
+			index = 4;
+		} else {
+			throw new ItemTypeNotFoundException();
 		}
-		throw new InventoryFullException();
+		if (inventory[index].addCount(1)) {			
+			throw new InventoryFullException();
+		}
 	}
 	
 	public void useItem(int index) throws InventoryEmptyIndexException, CannotUseItemException {
