@@ -11,11 +11,13 @@ public class HealItem extends Item {
 	public HealItem() {
 		super("Heal Potion", 5, Images.heal);
 		this.healHp = 10;
+		this.setImage(Images.heal);
 	}
 	
 	public HealItem(double posX, double posY) {
 		super("Heal Potion", 5, Images.heal, posX, posY);
 		this.healHp = 10;
+		this.setImage(Images.heal);
 	}
 	
 	@Override

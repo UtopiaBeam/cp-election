@@ -126,6 +126,9 @@ public class Map extends Frame implements IUpdatable {
 		for (NPC e: listNPC) {			
 			e.render(gc);
 		}
+		for (Item i:listItem) {
+			i.render(gc);
+		}
 		statusBar.render(gc);
 		
 	}

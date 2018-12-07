@@ -14,12 +14,14 @@ public class ImmuneItem extends Item implements IUpdatable {
 		super("Immune Item", 15, Images.immune);
 		this.def = 100;
 		this.duration = 300;
+		this.setImage(Images.immune);
 	}
 	
 	public ImmuneItem(double posX, double posY) {
 		super("Immune Item", 15, Images.immune, posX, posY);
 		this.def = 100;
 		this.duration = 300;
+		this.setImage(Images.immune);
 	}
 	
 	@Override

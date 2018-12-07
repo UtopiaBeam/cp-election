@@ -1,5 +1,7 @@
 package model.item;
 
+import controller.GameManager;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.Entity;
 
@@ -39,6 +41,10 @@ public abstract class Item extends Entity {
 	}
 	
 	public abstract boolean activate();
+	
+	public void render(GraphicsContext gc){
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
+	}
 	
 	// Getters & Setters
 
