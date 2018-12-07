@@ -114,8 +114,8 @@ public class Player extends Character {
 		if (!canUseItem()) {
 			throw new CannotUseItemException();
 		}
-		if (inventory[index] == null) {
-			throw new InventoryEmptyIndexException("Inventory empty at index = " + index);
+		if (inventory[index].getCount() == 0) {
+			throw new InventoryEmptyIndexException("No " + inventory[index].getClass());
 		}
 		inventory[index].use();
 		if (inventory[index].getCount() == 0) {

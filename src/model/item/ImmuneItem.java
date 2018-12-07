@@ -16,6 +16,12 @@ public class ImmuneItem extends Item implements IUpdatable {
 		this.duration = 300;
 	}
 	
+	public ImmuneItem(double posX, double posY) {
+		super("Immune Item", 15, Images.immune, posX, posY);
+		this.def = 100;
+		this.duration = 300;
+	}
+	
 	@Override
 	public boolean activate() {
 		Player player = GameManager.getInstance().getPlayer();

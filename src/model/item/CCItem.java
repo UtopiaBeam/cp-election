@@ -17,6 +17,11 @@ public class CCItem extends Item implements IUpdatable {
 		super("Random CC Item", 10, Images.cc);
 		this.duration = 120;
 	}
+	
+	public CCItem(double posX, double posY) {
+		super("Random CC Item", 10, Images.cc, posX, posY);
+		this.duration = 120;
+	}
 
 	@Override
 	public boolean activate() {
