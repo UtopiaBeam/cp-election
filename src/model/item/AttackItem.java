@@ -24,7 +24,7 @@ public class AttackItem extends Item {
 		List<NPC> npcs = GameManager.getInstance().getCurrentMap().getListNPC();
 		
 		for (NPC npc: npcs) {
-			npc.takeDamge(Constants.INFINITE);
+			npc.takeDamage(Constants.INFINITE);
 		}
 		return true;
 	}

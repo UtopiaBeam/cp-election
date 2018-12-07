@@ -5,6 +5,7 @@ import java.util.List;
 import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
+import exception.CannotMoveException;
 import javafx.scene.canvas.GraphicsContext;
 import model.Character;
 import model.item.*;
@@ -33,7 +34,7 @@ public class NPC extends Character {
 		
 		if (isCollideWith(player)) {
 			setAttacking(true);
-			player.takeDamge(atk);
+			player.takeDamage(atk);
 		}
 	}
 
@@ -73,22 +74,27 @@ public class NPC extends Character {
 	@Override
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
-		if (posX < player.getPosX() - 20) {
-			setFacing(RIGHT);
-			setSpeedX(speed);
-		} else if (posX > player.getPosX() + 20){
-			setFacing(LEFT);
-			setSpeedX(speed);
-		} 
-		if (posY + getHeight() < player.getPosY() + player.getHeight()-10) {
-			setSpeedY(speed);
-		} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
-			setSpeedY(-speed);
-		}
 		try {
+			if (!canMove()) {
+				throw new CannotMoveException();
+			}
+			if (posX < player.getPosX() - 20) {
+				setFacing(RIGHT);
+				setSpeedX(isSlowed() ? speed/2 : speed);
+			} else if (posX > player.getPosX() + 20){
+				setFacing(LEFT);
+				setSpeedX(isSlowed() ? speed/2 : speed);
+			} 
+			if (posY + getHeight() < player.getPosY() + player.getHeight()-10) {
+				setSpeedY(isSlowed() ? speed/2 : speed);
+			} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
+				setSpeedY(isSlowed() ? -speed/2 : -speed);
+			}
 			attack();
+		} catch (CannotMoveException e) {
+			// Do Nothing
 		} catch (CannotAttackException e) {
-			System.out.println(e.getMessage());
+			// Do Nothing
 		}
 		addAttackTick();
 	}

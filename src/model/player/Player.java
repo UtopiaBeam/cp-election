@@ -25,8 +25,8 @@ public class Player extends Character {
 	public static final int INVENTORY_SIZE = 5;
 	
 	private Item[] inventory = { new HealItem(), new AttackItem(), new ImmuneItem(), new CCItem(), new ReviveItem() };
-	private boolean isImmune;
-	private boolean isCCused;
+	private boolean isImmune = false;
+	private boolean isCCUsed = false;
 	private boolean isRevivable = false;
 	private int immuneTick = 0;
 	private int ccUsedTick = 0;
@@ -39,8 +39,28 @@ public class Player extends Character {
 		hpBar = new HpBar(this);
 	}
 	
+	@Override
+	public boolean isDead() {
+		return super.isDead() && !isRevivable();
+	}
+	
 	public boolean canUseItem() {
 		return !isDead() && (status == CCType.NONE);
+	}
+	
+	public boolean heal(int hp) {
+		if (this.hp == this.maxHp) {
+			return false;
+		}
+		this.hp += hp;
+		if (this.hp > this.maxHp) {
+			this.hp = this.maxHp;
+		}
+		return true;
+	}
+	
+	public void refresh() {
+		this.hp = this.maxHp;
 	}
 	
 	public void revive() {
@@ -60,14 +80,20 @@ public class Player extends Character {
 		setAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
-			n.takeDamge(getAtk());
+			n.takeDamage(getAtk());
 			if (facing==1) {
 				n.setPosX(n.getPosX() + 60);
 			} else {
 				n.setPosX(n.getPosX() - 60);
-			}
-			
+			}	
 		}
+	}
+	
+	public boolean takeDamage(int damage) {
+		if (isImmune()) {
+			return false;
+		}
+		return super.takeDamage(damage);
 	}
 	
 	@Override
@@ -102,6 +128,20 @@ public class Player extends Character {
 		if (immuneTick == ImmuneItem.duration) {
 			resetImmuneTick();
 			setImmune(false);
+		}
+	}
+	
+	public void resetCCUsedTick() {
+		ccUsedTick = 0;
+	}
+	
+	public void addCCUsedTick() {
+		if (ccUsedTick < CCItem.duration) {
+			ccUsedTick++;
+		}
+		if (ccUsedTick == CCItem.duration) {
+			resetCCUsedTick();
+			setCCUsed(false);
 		}
 	}
 
@@ -203,14 +243,20 @@ public class Player extends Character {
 			}
 			collectItems();
 		} catch (CannotMoveException e) {
-			System.out.println("Cannot move now");
+//			System.out.println("Cannot move now");
 		} catch (CannotUseItemException e) {
-			System.out.println("Cannot use item now");
+//			System.out.println("Cannot use item now");
 		} catch (CannotAttackException e) {
-			System.out.println("Cannot attack now");
+//			System.out.println("Cannot attack now");
 		}
 		if (isAttacking()) {
 			addAttackTick();
+		}
+		if (isImmune()) {
+			addImmuneTick();
+		}
+		if (isCCUsed()) {
+			addCCUsedTick();
 		}
 	}
 	
@@ -236,6 +282,10 @@ public class Player extends Character {
 	public boolean isImmune() {
 		return isImmune;
 	}
+	
+	public boolean isCCUsed() {
+		return isCCUsed;
+	}
 
 	public void setRevivable(boolean isRevivable) {
 		this.isRevivable = isRevivable;
@@ -243,6 +293,10 @@ public class Player extends Character {
 
 	public void setImmune(boolean isImmune) {
 		this.isImmune = isImmune;
+	}
+
+	public void setCCUsed(boolean isCCUsed) {
+		this.isCCUsed = isCCUsed;
 	}
 	
 	

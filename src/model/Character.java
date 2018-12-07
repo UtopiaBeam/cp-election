@@ -51,28 +51,13 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		return status == CCType.SILENCE;
 	}
 	
-	public boolean heal(int hp) {
-		if (this.hp == this.maxHp) {
-			return false;
-		}
-		this.hp += hp;
-		if (this.hp > this.maxHp) {
-			this.hp = this.maxHp;
-		}
-		return true;
-	}
-	
-	public void refresh() {
-		this.hp = this.maxHp;
-	}
-	
-	public boolean takeDamge(int damage) {
+	public boolean takeDamage(int damage) {
 		damage = Math.max(damage - def, 0);
 		if (damage == 0) {
 			return false;
 		}
-		hp -= damage;
-		if (hp <= 0) {
+		hp = Math.max(hp - damage, 0);
+		if (hp == 0) {
 			dead();
 		}
 		return true;
