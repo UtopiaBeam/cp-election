@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -121,7 +120,7 @@ public class Map extends Frame implements IUpdatable {
 	public void spawnRandom() {
 		double x = 333 + (Math.random() * (height/2));
 		double y = 333 + (Math.random() * (width/2));
-		NPC monster = new NPC("Soldier", Images.soldierL, Images.soldierR, x, y, 150, 100, 50);
+		NPC monster = new NPC(x, y);
 		listNPC.add(monster);
 	}
 	

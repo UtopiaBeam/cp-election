@@ -2,10 +2,10 @@ package model.npc;
 
 import java.util.List;
 
+import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.image.Image;
 import model.Character;
 import model.item.*;
 import model.player.Player;
@@ -16,8 +16,8 @@ public class NPC extends Character {
 	private double speed;
 	private HpBar hpBar;
 	
-	public NPC(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def) {
-		super(name, imageL, imageR, posX, posY, maxHp, atk, def, 120);
+	public NPC(double posX, double posY) {
+		super("Soldier", Images.soldierL, Images.soldierR, posX, posY, 100, 100, 0, 120);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
 		hpBar = new HpBar(this);
