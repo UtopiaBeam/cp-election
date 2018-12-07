@@ -63,6 +63,12 @@ public class Player extends Character {
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
+			if (facing==1) {
+				n.setPosX(n.getPosX()+60);
+			} else {
+				n.setPosX(n.getPosX()-60);
+			}
+			
 		}
 	}
 	
@@ -74,7 +80,7 @@ public class Player extends Character {
 	}
 	
 	public Frame getAttackArea() {
-		Frame attackArea = new Frame(posX, posY, width + attackRange, height);
+		Frame attackArea = new Frame(posX, posY, width/2 + attackRange, height);
 		if (getFacing() == LEFT) {
 			attackArea.setPosX(posX - attackRange);
 		} else {
