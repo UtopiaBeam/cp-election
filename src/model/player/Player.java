@@ -3,6 +3,7 @@ package model.player;
 import java.util.List;
 
 import constants.CCType;
+import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
 import exception.CannotMoveException;
@@ -29,16 +30,9 @@ public class Player extends Character {
 	private double attackRange;
 	private HpBar hpBar;
 	
-	
-	public Player(String name, Image image, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
-		super(name, image, posX, posY, maxHp, atk, def, 30);
-		this.attackRange = attackRange;
-		hpBar = new HpBar(this);
-	}
-	
-	public Player(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, double attackRange) {
-		super(name, imageL, imageR, posX, posY, maxHp, atk, def, 30);
-		this.attackRange = attackRange;
+	public Player(double posX, double posY) {
+		super("Netikun", Images.playrerL, Images.playerR, posX, posY, 1000, 100, 50, 30);
+		this.attackRange = 30;
 		hpBar = new HpBar(this);
 	}
 	
@@ -80,6 +74,10 @@ public class Player extends Character {
 		}
 	}
 	
+	public Frame getPlayerArea() {
+		return new Frame(posX, posY, width, height);
+	}
+	
 	public Frame getAttackArea() {
 		Frame attackArea = new Frame(posX, posY, width/2 + attackRange, height);
 		if (getFacing() == LEFT) {
@@ -90,23 +88,28 @@ public class Player extends Character {
 		return attackArea;
 	}
 
-	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
-		int index = 0;
-		if (item instanceof AttackItem) {
-			index = 0;
-		} else if (item instanceof ImmuneItem) {
-			index = 1;
-		} else if (item instanceof CCItem) {
-			index = 2;
-		} else if (item instanceof HealItem) {
-			index = 3;
-		} else if (item instanceof ReviveItem) {
-			index = 4;
-		} else {
-			throw new ItemTypeNotFoundException();
-		}
-		if (inventory[index].addCount(1)) {			
-			throw new InventoryFullException();
+	public void collectItems() throws InventoryFullException, ItemTypeNotFoundException {
+		List<Item> items = GameManager.getInstance().getCurrentMap().collideItems(getPlayerArea());
+		for (int i = items.size()-1; i >= 0; i--) {
+			Item item = items.get(i);
+			int index = 0;
+			if (item instanceof AttackItem) {
+				index = 0;
+			} else if (item instanceof ImmuneItem) {
+				index = 1;
+			} else if (item instanceof CCItem) {
+				index = 2;
+			} else if (item instanceof HealItem) {
+				index = 3;
+			} else if (item instanceof ReviveItem) {
+				index = 4;
+			} else {
+				throw new ItemTypeNotFoundException();
+			}
+			if (inventory[index].addCount(1)) {			
+				throw new InventoryFullException();
+			}
+			items.remove(i);
 		}
 	}
 	
@@ -173,13 +176,18 @@ public class Player extends Character {
 	public void update() {
 		try {			
 			updateByPressingKeys();
+			collectItems();
 		} catch (InventoryEmptyIndexException e) {
+			e.printStackTrace();
+		} catch (ItemTypeNotFoundException e) {
 			e.printStackTrace();
 		} catch (CannotMoveException e) {
 			e.printStackTrace();
 		} catch (CannotUseItemException e) {
 			e.printStackTrace();
 		} catch (CannotAttackException e) {
+			e.printStackTrace();
+		} catch (InventoryFullException e) {
 			e.printStackTrace();
 		}
 		if(isAttacking()) {
