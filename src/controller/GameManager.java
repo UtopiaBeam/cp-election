@@ -9,8 +9,6 @@ import javafx.scene.canvas.GraphicsContext;
 import model.map.Map;
 import model.player.Player;
 
-
-
 public class GameManager {
 	
 private static GameManager instance = new GameManager();
@@ -25,7 +23,6 @@ private static GameManager instance = new GameManager();
 	
 	public GameManager() {
 		generateMap();
-		//TODO add player
 		monsterGen = new MonsterGen();
 		monsterAi = new MonsterAi();
 		player = new Player(100, 423);
@@ -43,7 +40,6 @@ private static GameManager instance = new GameManager();
 	}
 	
 	private void generateMap() {
-		//TODO add player
 		maps.add(new Map(Images.stage1, Sounds.bgm));
 		currentMap = maps.get(0);
 	}
@@ -61,8 +57,6 @@ private static GameManager instance = new GameManager();
 		monsterGen.interrupt();
 		monsterAi.interrupt();
 	}
-	
-	
 	
 	// Getters & Setters
 	
