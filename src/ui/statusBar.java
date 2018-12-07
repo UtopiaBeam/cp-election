@@ -46,6 +46,11 @@ public class statusBar {
 		gc.fillRoundRect(HP_X, HEIGHT+HP_Y, hpWidth, HP_HEIGHT, 5, 5);
 		
 		gc.drawImage(img, 0, 0);
+		gc.drawImage(Images.heal, 50, 100);
+		gc.drawImage(Images.attack, 50, 160);
+		gc.drawImage(Images.protect, 180, 90);
+		gc.drawImage(Images.cc, 180, 160);
+		gc.drawImage(Images.revive, 310, 100);
 		
 		//Draw text
 				

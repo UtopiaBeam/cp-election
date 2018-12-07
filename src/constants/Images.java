@@ -15,9 +15,16 @@ public class Images {
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("soldierL.png").toString(),66,100,false,false);
 	public static final Image soldierR = new Image(ClassLoader.getSystemResource("soldierR.png").toString(),66,100,false,false);
 	
+	public static final Image statusbar = new Image(ClassLoader.getSystemResource("icon/statusbar.png").toString());
+	
 	public static final Image[] normalAttackEffect = new Image[10];
 	
-	public static final Image statusbar = new Image(ClassLoader.getSystemResource("icon/statusbar.png").toString());
+	public static final Image heal = new Image(ClassLoader.getSystemResource("icon/heal.png").toString(),40,40,false,false);
+	public static final Image attack = new Image(ClassLoader.getSystemResource("icon/attack.png").toString(),40,40,false,false);
+	public static final Image cc = new Image(ClassLoader.getSystemResource("icon/cc.png").toString(),40,40,false,false);
+	public static final Image revive = new Image(ClassLoader.getSystemResource("icon/revive.png").toString(),40,40,false,false);
+	public static final Image protect = new Image(ClassLoader.getSystemResource("icon/protect.png").toString(),60,60,false,false);
+	
 	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
