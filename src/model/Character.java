@@ -15,18 +15,6 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	private int attackTick;
 	private int coolDown;
 	private boolean isAttacking;
-	
-	public Character(String name, Image image, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
-		super(name, image, posX, posY);
-		this.hp = maxHp;
-		this.maxHp = maxHp;
-		this.atk = atk;
-		this.def = def;
-		this.status = CCType.NONE;
-		this.coolDown = coolDown;
-		this.attackTick = 0;
-		this.isAttacking = false;
-	}
 
 	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
 		super(name, imageL, imageR, posX, posY);
