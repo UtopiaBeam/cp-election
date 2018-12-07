@@ -9,7 +9,12 @@ public abstract class Item extends Entity {
 	protected int maxCount;
 	
 	public Item(String name, int maxCount, Image image) {
-		super(0, 0, 0, 0, name, image);
+		super(0, 0, image.getWidth(), image.getHeight(), name, image);
+		this.maxCount = maxCount;
+	}
+	
+	public Item(String name, int maxCount, Image image, double posX, double posY) {
+		super(posX, posY, image.getWidth(), image.getHeight(), name, image);
 		this.maxCount = maxCount;
 	}
 	

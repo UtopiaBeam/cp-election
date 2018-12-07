@@ -13,6 +13,11 @@ public class HealItem extends Item {
 		this.healHp = 10;
 	}
 	
+	public HealItem(double posX, double posY) {
+		super("Heal Potion", 5, Images.heal, posX, posY);
+		this.healHp = 10;
+	}
+	
 	@Override
 	public boolean activate() {
 		Player player = GameManager.getInstance().getPlayer();

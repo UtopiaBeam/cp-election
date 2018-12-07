@@ -10,6 +10,10 @@ public class ReviveItem extends Item {
 		super("Revive Item", 1, Images.revive);
 	}
 	
+	public ReviveItem(double posX, double posY) {
+		super("Revive Item", 1, Images.revive, posX, posY);
+	}
+	
 	@Override
 	public boolean activate() {
 		Player player = GameManager.getInstance().getPlayer();
