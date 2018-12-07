@@ -29,6 +29,7 @@ public class StatusBar {
 	private static final Color HP_COLOR = Color.GREEN.brighter();
 	
 	private static final Font HP_BAR_FONT = Font.font("Tahoma", FontWeight.BOLD, 12);
+	private static final Font ITEM_FONT = Font.font("Tahoma", FontWeight.BOLD, 15);
 	
 	private static double hpWidth = 0;
 	
@@ -48,7 +49,7 @@ public class StatusBar {
 		gc.drawImage(img, 0, 0);
 		gc.drawImage(Images.heal, 50, 100);
 		gc.drawImage(Images.attack, 50, 160);
-		gc.drawImage(Images.protect, 180, 90);
+		gc.drawImage(Images.immune, 170, 90);
 		gc.drawImage(Images.cc, 180, 160);
 		gc.drawImage(Images.revive, 310, 100);
 		
@@ -60,6 +61,17 @@ public class StatusBar {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setTextBaseline(VPos.CENTER);
 		gc.fillText(String.format("%d / %d", player.getHp(), player.getMaxHp()), HP_X+HP_WIDTH/2, HEIGHT+HP_Y+HP_HEIGHT/2);
+		
+		// Draw item amount 
+		gc.setFill(Color.BLACK);
+		gc.setFont(ITEM_FONT);
+		gc.setTextAlign(TextAlignment.CENTER);
+		gc.setTextBaseline(VPos.CENTER);
+		gc.fillText(String.format("x %d", player.getInventory()[3]), 120, 120);
+		gc.fillText(String.format("x %d", player.getInventory()[0]), 120, 180);
+		gc.fillText(String.format("x %d", player.getInventory()[1]), 260, 120);
+		gc.fillText(String.format("x %d", player.getInventory()[2]), 260, 180);
+		gc.fillText(String.format("x %d", player.getInventory()[4]), 380, 120);
 		
 
 	}
