@@ -24,7 +24,7 @@ public class Player extends Character {
 
 	public static final int INVENTORY_SIZE = 5;
 	
-	private Item[] inventory = new Item[INVENTORY_SIZE];
+	private Item[] inventory = { new AttackItem(), new ImmuneItem(), new CCItem(), new HealItem(), new ReviveItem() };
 	private boolean isRevivable = false;
 	private double attackRange;
 	private HpBar hpBar;
@@ -65,9 +65,9 @@ public class Player extends Character {
 		for (NPC n: collideNPCs) {
 			n.takeDamge(getAtk());
 			if (facing==1) {
-				n.setPosX(n.getPosX()+60);
+				n.setPosX(n.getPosX() + 60);
 			} else {
-				n.setPosX(n.getPosX()-60);
+				n.setPosX(n.getPosX() - 60);
 			}
 			
 		}
@@ -94,7 +94,7 @@ public class Player extends Character {
 		int index = 0;
 		if (item instanceof AttackItem) {
 			index = 0;
-		} else if (item instanceof DefenseItem) {
+		} else if (item instanceof ImmuneItem) {
 			index = 1;
 		} else if (item instanceof CCItem) {
 			index = 2;
