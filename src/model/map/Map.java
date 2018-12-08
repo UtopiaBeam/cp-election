@@ -137,15 +137,24 @@ public class Map extends Frame implements IUpdatable {
 		
 	}
 
+	@Override
 	public void update() {
-		Iterator<NPC> it = listNPC.listIterator();
-		while (it.hasNext()) {
-			if(it.next().isDead()) {
-				it.remove();
+		Iterator<NPC> npcIt = listNPC.listIterator();
+		while (npcIt.hasNext()) {
+			if (npcIt.next().isDead()) {
+				npcIt.remove();
 			}
 		}
+		
 		for (NPC e: listNPC) {
 			e.update();
+		}
+		
+		for (int i = listItem.size()-1; i >= 0; i--) {
+			listItem.get(i).addExpireTick();
+			if (listItem.get(i).isExpired()) {
+				listItem.remove(i);
+			}
 		}
 	}
 	
