@@ -50,7 +50,7 @@ public class NPC extends Character {
 		List<Item> mapItems = GameManager.getInstance().getCurrentMap().getListItem();
 		Item item = null;
 		
-		if (random <= 1) {
+		if (random <= 0.02) {
 			item = new ReviveItem(dropX, dropY);
 		} else if (random <= 0.05) {
 			item = new HealItem(dropX, dropY);
