@@ -15,6 +15,9 @@ public class Images {
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("soldierL.png").toString(),66,100,false,false);
 	public static final Image soldierR = new Image(ClassLoader.getSystemResource("soldierR.png").toString(),66,100,false,false);
 	
+	public static final Image prayutL = new Image(ClassLoader.getSystemResource("").toString());
+	public static final Image prayutR = new Image(ClassLoader.getSystemResource("").toString());
+	
 	public static final Image statusbar = new Image(ClassLoader.getSystemResource("icon/statusbar.png").toString());
 	
 	public static final Image[] normalAttackEffect = new Image[10];
