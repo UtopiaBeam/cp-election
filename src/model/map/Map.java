@@ -129,6 +129,7 @@ public class Map extends Frame implements IUpdatable {
 		GameManager.getInstance().getPlayer().render(gc);
 		for (NPC e: listNPC) {			
 			e.render(gc);
+			e.renderStatusEffect(gc);
 		}
 		for (Item i:listItem) {
 			i.render(gc);

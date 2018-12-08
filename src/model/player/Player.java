@@ -253,6 +253,7 @@ public class Player extends Character {
 		if (isAttacking()) {
 			renderNormalAtk(gc);
 		}
+		renderStatusEffect(gc);
 		hpBar.render(gc);
 	}
 	

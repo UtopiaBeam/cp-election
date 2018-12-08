@@ -1,8 +1,12 @@
 package model;
 
 import constants.CCType;
+import constants.Images;
+import controller.GameManager;
 import exception.CannotAttackException;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.map.Map;
 
 public abstract class Character extends MoveableEntity implements IUpdatable {
 
@@ -95,9 +99,26 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		}
 	}
 	
+	public void renderStatusEffect(GraphicsContext gc) {
+		Map map = GameManager.getInstance().getCurrentMap();
+		if (isSlowed()) {
+			Image img = Images.slowEffect[ccedDuration/41];
+			gc.drawImage(img, this.getPosX()-map.getPosX()-16.5, this.getPosY()-map.getPosY()-16.5);
+		}
+		if (isStunned()) {
+			Image img = Images.stunEffect[ccedDuration/46];
+			gc.drawImage(img, this.getPosX()-map.getPosX()-16.5, this.getPosY()-map.getPosY()-16.5);
+		}
+		if (isSilenced()) {
+			Image img = Images.silenceEffect[ccedDuration/41];
+			gc.drawImage(img, this.getPosX()-map.getPosX()-16.5, this.getPosY()-map.getPosY()-16.5);
+		}
+	}
+	
 	public abstract void attack() throws CannotAttackException;
 	
 	public abstract void dead();
+	
 	
 	// Getters & Setters
 

@@ -75,6 +75,7 @@ public abstract class MoveableEntity extends Entity {
 		}
 	}
 	
+	
 	// Getters & Setters
 	
 	public double getSpeedX() {

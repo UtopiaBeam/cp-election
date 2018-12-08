@@ -26,8 +26,6 @@ public class Images {
 	
 	public static final Image statusbar = new Image(ClassLoader.getSystemResource("ui/statusbar/statusbar.png").toString());
 	
-	public static final Image[] normalAttackEffect = new Image[10];
-	
 	public static final Image heal = new Image(ClassLoader.getSystemResource("ui/statusbar/heal.png").toString(),40,40,false,false);
 	public static final Image attack = new Image(ClassLoader.getSystemResource("ui/statusbar/attack.png").toString(),40,40,false,false);
 	public static final Image cc = new Image(ClassLoader.getSystemResource("ui/statusbar/cc.png").toString(),40,40,false,false);
@@ -35,9 +33,25 @@ public class Images {
 	public static final Image immune = new Image(ClassLoader.getSystemResource("ui/statusbar/immune.png").toString(),60,60,false,false);
 	
 	
+	public static final Image[] normalAttackEffect = new Image[10];
+	public static final Image[] stunEffect = new Image[2];
+	public static final Image[] slowEffect = new Image[3];
+	public static final Image[] silenceEffect = new Image[3];
+	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
-			normalAttackEffect[i] = new Image("effect/attack/"+i+".png");
+			normalAttackEffect[i] = new Image(ClassLoader.getSystemResource("effect/attack/"+i+".png").toString());
 		}
+		for (int i=0; i<stunEffect.length; i++) {
+			stunEffect[i] = new Image(ClassLoader.getSystemResource("effect/stun/"+i+".png").toString(),100,133,false,false);
+		}
+		for (int i=0; i<slowEffect.length; i++) {
+			slowEffect[i] = new Image(ClassLoader.getSystemResource("effect/slow/"+i+".png").toString(),100,133,false,false);
+		}
+		for (int i=0; i<silenceEffect.length; i++) {
+			silenceEffect[i] = new Image(ClassLoader.getSystemResource("effect/silence/"+i+".png").toString(),100,133,false,false);
+		}
+		
+		
 	}
 }
