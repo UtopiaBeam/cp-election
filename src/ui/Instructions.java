@@ -34,16 +34,32 @@ public class Instructions extends Scene{
 		return event.getX() >= 740 && event.getX() < 840 && event.getY() >= 490 && event.getY() < 556;
 	}
 	
+	private boolean isOnPrevButton(MouseEvent event) {
+		return event.getX() >= 65 && event.getX() < 165 && event.getY() >= 490 && event.getY() < 556;
+	}
+	
 	private void addCanvasEventHandler() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		canvas.setOnMouseMoved(e -> {
 			if (isOnNextButton(e)) {
 				gc.drawImage(instructions[count], 0, 0);
 				gc.drawImage(Images.button_highlight, 740, 490);
+				if (count > 0) {
+					gc.drawImage(Images.button, 165, 490, -100, 66);
+				}
+			} else if (isOnPrevButton(e)) {
+				gc.drawImage(instructions[count], 0, 0);
+				gc.drawImage(Images.button, 740, 490);
+				if (count > 0) {
+					gc.drawImage(Images.button_highlight, 165, 490, -100, 66);
+				}
 			}
 			else {
 				gc.drawImage(instructions[count], 0, 0);
 				gc.drawImage(Images.button, 740, 490);
+				if (count > 0) {
+					gc.drawImage(Images.button, 165, 490, -100, 66);
+				}
 			}
 		});
 		canvas.setOnMouseClicked(e -> {
@@ -56,6 +72,16 @@ public class Instructions extends Scene{
 					gc.drawImage(Images.button, 740, 490);
 					Main.getStage().setScene(Main.getStartScene());
 					Main.setCenter();
+				}
+			}
+			if (isOnPrevButton(e)) {
+				if (count > 0) {
+					count --;
+					gc.drawImage(instructions[count], 0, 0);
+					gc.drawImage(Images.button, 740, 490);
+					if (count > 0) {
+						gc.drawImage(Images.button, 165, 490, -100, 66);
+					}
 				}
 			}
 		});
