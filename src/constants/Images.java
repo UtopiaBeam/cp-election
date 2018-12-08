@@ -4,40 +4,40 @@ import javafx.scene.image.Image;
 
 public class Images {
 
-	public static final Image startscreen = new Image(ClassLoader.getSystemResource("startscene.png").toString());
-	public static final Image playbutton_highlight = new Image(ClassLoader.getSystemResource("playbutton_highlight.png").toString(),100,30,false,false);
-	public static final Image playbutton = new Image(ClassLoader.getSystemResource("playbutton.png").toString(),100,30,false,false);
+	public static final Image startscreen = new Image(ClassLoader.getSystemResource("ui/startscreen/startscene.png").toString());
+	public static final Image playbutton_highlight = new Image(ClassLoader.getSystemResource("ui/startscreen/playbutton_highlight.png").toString(),100,30,false,false);
+	public static final Image playbutton = new Image(ClassLoader.getSystemResource("ui/startscreen/playbutton.png").toString(),100,30,false,false);
 	
-	public static final Image instruction1 = new Image(ClassLoader.getSystemResource("instructions/p1.png").toString());
-	public static final Image instruction2 = new Image(ClassLoader.getSystemResource("instructions/p2.png").toString());
-	public static final Image button = new Image(ClassLoader.getSystemResource("instructions/b1.png").toString(),100,66,false,false);
-	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("instructions/b2.png").toString(),100,66,false,false);
-	public static final Image info = new Image(ClassLoader.getSystemResource("instructions/info.png").toString(),40,40,false,false);
+	public static final Image instruction1 = new Image(ClassLoader.getSystemResource("ui/instructions/p1.png").toString());
+	public static final Image instruction2 = new Image(ClassLoader.getSystemResource("ui/instructions/p2.png").toString());
+	public static final Image button = new Image(ClassLoader.getSystemResource("ui/instructions/b1.png").toString(),100,66,false,false);
+	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("ui/instructions/b2.png").toString(),100,66,false,false);
+	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
-	public static final Image playrerL = new Image(ClassLoader.getSystemResource("playerL.png").toString());
-	public static final Image playerR = new Image(ClassLoader.getSystemResource("playerR.png").toString());
-	public static final Image stage1 = new Image(ClassLoader.getSystemResource("stage1.png").toString(),1000,667,false,false);
+	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString());
+	public static final Image playerR = new Image(ClassLoader.getSystemResource("character/playerR.png").toString());
+	public static final Image stage = new Image(ClassLoader.getSystemResource("ui/stage.png").toString(),1000,667,false,false);
 	
-	public static final Image soldierL = new Image(ClassLoader.getSystemResource("soldierL.png").toString(),66,100,false,false);
-	public static final Image soldierR = new Image(ClassLoader.getSystemResource("soldierR.png").toString(),66,100,false,false);
+	public static final Image soldierL = new Image(ClassLoader.getSystemResource("character/soldierL.png").toString(),66,100,false,false);
+	public static final Image soldierR = new Image(ClassLoader.getSystemResource("character/soldierR.png").toString(),66,100,false,false);
 	
 	public static final Image prayutL = new Image(ClassLoader.getSystemResource("").toString());
 	public static final Image prayutR = new Image(ClassLoader.getSystemResource("").toString());
 	
-	public static final Image statusbar = new Image(ClassLoader.getSystemResource("icon/statusbar.png").toString());
+	public static final Image statusbar = new Image(ClassLoader.getSystemResource("ui/statusbar/statusbar.png").toString());
 	
 	public static final Image[] normalAttackEffect = new Image[10];
 	
-	public static final Image heal = new Image(ClassLoader.getSystemResource("icon/heal.png").toString(),40,40,false,false);
-	public static final Image attack = new Image(ClassLoader.getSystemResource("icon/attack.png").toString(),40,40,false,false);
-	public static final Image cc = new Image(ClassLoader.getSystemResource("icon/cc.png").toString(),40,40,false,false);
-	public static final Image revive = new Image(ClassLoader.getSystemResource("icon/revive.png").toString(),40,40,false,false);
-	public static final Image immune = new Image(ClassLoader.getSystemResource("icon/immune.png").toString(),60,60,false,false);
+	public static final Image heal = new Image(ClassLoader.getSystemResource("ui/statusbar/heal.png").toString(),40,40,false,false);
+	public static final Image attack = new Image(ClassLoader.getSystemResource("ui/statusbar/attack.png").toString(),40,40,false,false);
+	public static final Image cc = new Image(ClassLoader.getSystemResource("ui/statusbar/cc.png").toString(),40,40,false,false);
+	public static final Image revive = new Image(ClassLoader.getSystemResource("ui/statusbar/revive.png").toString(),40,40,false,false);
+	public static final Image immune = new Image(ClassLoader.getSystemResource("ui/statusbar/immune.png").toString(),60,60,false,false);
 	
 	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
-			normalAttackEffect[i] = new Image("attack/"+i+".png");
+			normalAttackEffect[i] = new Image("effect/attack/"+i+".png");
 		}
 	}
 }

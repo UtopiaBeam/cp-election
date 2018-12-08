@@ -43,7 +43,7 @@ private static GameManager instance = new GameManager();
 	}
 	
 	private void generateMap() {
-		maps.add(new Map(Images.stage1, Sounds.bgm));
+		maps.add(new Map(Images.stage, Sounds.bgm));
 		currentMap = maps.get(0);
 	}
 	
