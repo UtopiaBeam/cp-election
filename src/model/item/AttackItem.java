@@ -8,17 +8,15 @@ import model.npc.NPC;
 
 public class AttackItem extends Item {
 	
-	private final int minDamage = 100;
+	private final int minDamage = 75;
 	private final int maxDamage = 150;
 	
 	public AttackItem() {
 		super("Attack Item", 5, Images.attack);
-		this.setImage(Images.attack);
 	}
 	
 	public AttackItem(double posX, double posY) {
 		super("Attack Item", 5, Images.attack, posX, posY);
-		this.setImage(Images.attack);
 	}
 	
 	private int getDamage() {
