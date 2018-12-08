@@ -135,41 +135,9 @@ public abstract class Character extends MoveableEntity {
 	public int getMaxHp() {
 		return maxHp;
 	}
-
-	public int getMinAtk() {
-		return minAtk;
-	}
-	
-	public int getMaxAtk() {
-		return maxAtk;
-	}
-
-	public int getDef() {
-		return def;
-	}
-
-	public CCType getStatus() {
-		return status;
-	}
 	
 	public boolean isAttacking() {
 		return this.isAttacking;
-	}
-	
-	public int getCCedDuration() {
-		return ccedDuration;
-	}
-
-	public void setMinAtk(int minAtk) {
-		this.minAtk = minAtk;
-	}
-	
-	public void setMaxAtk(int maxAtk) {
-		this.maxAtk = maxAtk;
-	}
-
-	public void setDef(int def) {
-		this.def = def;
 	}
 
 	public void setStatus(CCType status) {
