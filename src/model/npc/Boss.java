@@ -3,15 +3,13 @@ package model.npc;
 import constants.Images;
 import exception.CannotAttackException;
 import model.Character;
-import skill.Skill;
+import skill.*;
 
 public class Boss extends Character {
-
-	public static final int SKILL_COUNT = 3;
 	
-	private Skill[] skills;
+	private Skill[] skills = { new ShockSkill(), new PodiumSkill() };
 	private int skillTick = 0;
-	private int skillCoolDown;
+	private int skillCoolDown = 90;
 	private boolean isUsingSkill = false;
 
 	public Boss(double posX, double posY) {
@@ -34,8 +32,10 @@ public class Boss extends Character {
 	
 	@Override
 	public void attack() throws CannotAttackException {
-		// TODO Auto-generated method stub
-
+		if (isUsingSkill()) {
+			throw new CannotAttackException();
+		}
+		
 	}
 
 	@Override
