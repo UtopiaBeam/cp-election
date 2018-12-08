@@ -10,7 +10,7 @@ import exception.CannotMoveException;
 import exception.CannotUseItemException;
 import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
-import exception.ItemTypeNotFoundException;
+import exception.ItemTypeNotExistException;
 import input.KeyInput;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
@@ -132,7 +132,7 @@ public class Player extends Character {
 		}
 	}
 
-	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
+	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotExistException {
 		int index = 0;
 		if (item instanceof AttackItem) {
 			index = 0;
@@ -145,7 +145,7 @@ public class Player extends Character {
 		} else if (item instanceof ReviveItem) {
 			index = 4;
 		} else {
-			throw new ItemTypeNotFoundException();
+			throw new ItemTypeNotExistException();
 		}
 		if (inventory[index].addCount(1)) {			
 			GameManager.getInstance().getCurrentMap().removeItem(item);
@@ -161,7 +161,7 @@ public class Player extends Character {
 				collectItem(i);
 			} catch (InventoryFullException e) {
 				System.out.println("Inventory is full");
-			} catch (ItemTypeNotFoundException e) {
+			} catch (ItemTypeNotExistException e) {
 				System.out.println("Item type not found");
 			}
 		}
