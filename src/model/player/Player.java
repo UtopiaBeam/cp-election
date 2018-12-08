@@ -60,6 +60,7 @@ public class Player extends Character {
 		if (!isRevivable()) {
 			return;
 		}
+		setAnimating(true);
 		refresh();
 		setRevivable(false);
 		status = CCType.NONE;
@@ -250,6 +251,7 @@ public class Player extends Character {
 			renderNormalAttack(gc);
 		}
 		renderStatusEffect(gc);
+		renderReviveEffect(gc);
 		hpBar.render(gc);
 	}
 	

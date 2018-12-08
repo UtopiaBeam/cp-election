@@ -19,11 +19,13 @@ public abstract class Character extends MoveableEntity {
 	protected CCType status = CCType.NONE;
 	protected HpBar hpBar;
 	
+	private int animationTick = 0;
 	private int attackTick = 0;
 	private int attackCooldown;
 	private int ccedTick = 0;
 	private int ccedDuration;
 	private boolean isAttacking;
+	private boolean isAnimating = false;
 
 	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk, int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR);
@@ -97,6 +99,20 @@ public abstract class Character extends MoveableEntity {
 		}
 	}
 	
+	public void resetAnimationTick() {
+		animationTick = 0;
+	}
+	
+	public void addAnimationTick() {
+		if (animationTick < 39) {
+			animationTick++;
+		}
+		if (animationTick == 39) {
+			resetAnimationTick();
+			setAnimating(false);
+		}
+	}
+	
 	public void resetCCedTick() {
 		ccedTick = 0;
 	}
@@ -141,6 +157,16 @@ public abstract class Character extends MoveableEntity {
 		}
 	}
 	
+	public void renderReviveEffect(GraphicsContext gc) {
+		if(isAnimating) {
+			Image img = Images.reviveEffect[animationTick/2];
+			double imageX = this.getPosX()+66/2-img.getWidth()/2-GameManager.getInstance().getCurrentMap().getPosX();
+			double imageY = this.getPosY()+100-img.getHeight()-GameManager.getInstance().getCurrentMap().getPosY();
+			gc.drawImage(img, imageX, imageY);
+			addAnimationTick();
+		}
+	}
+	
 	public abstract void attack() throws CannotAttackException;
 	
 	public abstract void dead();
@@ -159,6 +185,10 @@ public abstract class Character extends MoveableEntity {
 	public boolean isAttacking() {
 		return this.isAttacking;
 	}
+	
+	public boolean isAnimating() {
+		return this.isAnimating;
+	}
 
 	public void setStatus(CCType status) {
 		this.status = status;
@@ -166,6 +196,10 @@ public abstract class Character extends MoveableEntity {
 	
 	public void setAttacking(boolean isAttacking) {
 		this.isAttacking = isAttacking;
+	}
+	
+	public void setAnimating(boolean isAnimating) {
+		this.isAnimating = isAnimating;
 	}
 
 	public void setCCedDuration(int ccedDuration) {

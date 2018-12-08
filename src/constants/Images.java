@@ -37,6 +37,7 @@ public class Images {
 	public static final Image[] stunEffect = new Image[2];
 	public static final Image[] slowEffect = new Image[3];
 	public static final Image[] silenceEffect = new Image[3];
+	public static final Image[] reviveEffect = new Image[20];
 	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
@@ -50,6 +51,9 @@ public class Images {
 		}
 		for (int i=0; i<silenceEffect.length; i++) {
 			silenceEffect[i] = new Image(ClassLoader.getSystemResource("effect/silence/"+i+".png").toString(),100,133,false,false);
+		}
+		for (int i=0; i<reviveEffect.length; i++) {
+			reviveEffect[i] = new Image(ClassLoader.getSystemResource("effect/revive/"+i+".png").toString());
 		}
 		
 		
