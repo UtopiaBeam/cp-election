@@ -4,8 +4,9 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.Entity;
+import model.IUseable;
 
-public abstract class Item extends Entity {
+public abstract class Item extends Entity implements IUseable {
 	
 	protected int count = 0;
 	protected int maxCount;
@@ -28,6 +29,7 @@ public abstract class Item extends Entity {
 		return true;
 	}
 	
+	@Override
 	public void use() {
 		if (count > 0) {
 			if (activate()) {				
