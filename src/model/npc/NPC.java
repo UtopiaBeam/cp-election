@@ -5,7 +5,6 @@ import java.util.List;
 import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
-import exception.CannotMoveException;
 import javafx.scene.canvas.GraphicsContext;
 import model.Character;
 import model.item.*;
@@ -75,8 +74,13 @@ public class NPC extends Character {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		try {
+			if (isCCed()) {
+				addCCedTick();
+			}
 			if (!canMove()) {
-				throw new CannotMoveException();
+				setSpeedX(0);
+				setSpeedY(0);
+				return;
 			}
 			if (posX < player.getPosX() - 20) {
 				setFacing(RIGHT);
@@ -91,8 +95,6 @@ public class NPC extends Character {
 				setSpeedY(isSlowed() ? -speed/2 : -speed);
 			}
 			attack();
-		} catch (CannotMoveException e) {
-			// Do Nothing
 		} catch (CannotAttackException e) {
 			// Do Nothing
 		}

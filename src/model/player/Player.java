@@ -26,10 +26,8 @@ public class Player extends Character {
 	
 	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem(), new ReviveItem() };
 	private boolean isImmune = false;
-	private boolean isCCUsed = false;
 	private boolean isRevivable = false;
 	private int immuneTick = 0;
-	private int ccUsedTick = 0;
 	private double attackRange;
 	private HpBar hpBar;
 	
@@ -98,6 +96,9 @@ public class Player extends Character {
 	
 	@Override
 	public void dead() {
+		if (isRevivable()) {
+			revive();
+		}
 		if (!isDead()) {
 			return;
 		} 
@@ -130,31 +131,17 @@ public class Player extends Character {
 			setImmune(false);
 		}
 	}
-	
-	public void resetCCUsedTick() {
-		ccUsedTick = 0;
-	}
-	
-	public void addCCUsedTick() {
-		if (ccUsedTick < CCItem.duration) {
-			ccUsedTick++;
-		}
-		if (ccUsedTick == CCItem.duration) {
-			resetCCUsedTick();
-			setCCUsed(false);
-		}
-	}
 
 	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
 		int index = 0;
-		if (item instanceof HealItem) {
-			index = 2;
-		} else if (item instanceof AttackItem) {
+		if (item instanceof AttackItem) {
 			index = 0;
-		} else if (item instanceof ImmuneItem) {
-			index = 3;
 		} else if (item instanceof CCItem) {
 			index = 1;
+		} else if (item instanceof HealItem) {
+			index = 2;
+		} else if (item instanceof ImmuneItem) {
+			index = 3;
 		} else if (item instanceof ReviveItem) {
 			index = 4;
 		} else {
@@ -255,8 +242,8 @@ public class Player extends Character {
 		if (isImmune()) {
 			addImmuneTick();
 		}
-		if (isCCUsed()) {
-			addCCUsedTick();
+		if (isCCed()) {
+			addCCedTick();
 		}
 	}
 	
@@ -282,10 +269,6 @@ public class Player extends Character {
 	public boolean isImmune() {
 		return isImmune;
 	}
-	
-	public boolean isCCUsed() {
-		return isCCUsed;
-	}
 
 	public void setRevivable(boolean isRevivable) {
 		this.isRevivable = isRevivable;
@@ -294,11 +277,6 @@ public class Player extends Character {
 	public void setImmune(boolean isImmune) {
 		this.isImmune = isImmune;
 	}
-
-	public void setCCUsed(boolean isCCUsed) {
-		this.isCCUsed = isCCUsed;
-	}
-	
 	
 
 }

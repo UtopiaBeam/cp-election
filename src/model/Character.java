@@ -10,10 +10,12 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	protected int maxHp;
 	protected int atk;
 	protected int def;
-	protected CCType status;
+	protected CCType status = CCType.NONE;
 	
-	private int attackTick;
+	private int attackTick = 0;
 	private int coolDown;
+	private int ccedTick = 0;
+	private int ccedDuration;
 	private boolean isAttacking;
 
 	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
@@ -22,13 +24,11 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
-		this.status = CCType.NONE;
 		this.coolDown = coolDown;
-		this.attackTick = 0;
 	}
 
 	public boolean isDead() {
-		return (hp <= 0);
+		return hp <= 0;
 	}
 	
 	public boolean canAttack() {
@@ -37,6 +37,10 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	
 	public boolean canMove() {
 		return !isDead() && (status != CCType.STUN);
+	}
+	
+	public boolean isCCed() {
+		return status != CCType.NONE;
 	}
 	
 	public boolean isStunned() {
@@ -74,6 +78,20 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		if (attackTick == coolDown) {
 			resetAttackTick();
 			setAttacking(false);
+		}
+	}
+	
+	public void resetCCTick() {
+		ccedTick = 0;
+	}
+	
+	public void addCCedTick() {
+		if (ccedTick < ccedDuration) {
+			ccedTick++;
+		}
+		if (ccedTick == ccedDuration) {
+			resetCCTick();
+			setStatus(CCType.NONE);
 		}
 	}
 	
@@ -119,8 +137,16 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		return this.isAttacking;
 	}
 	
+	public int getCCedDuration() {
+		return ccedDuration;
+	}
+	
 	public void setAttacking(boolean isAttacking) {
 		this.isAttacking = isAttacking;
+	}
+
+	public void setCCedDuration(int ccedDuration) {
+		this.ccedDuration = ccedDuration;
 	}
 	
 }

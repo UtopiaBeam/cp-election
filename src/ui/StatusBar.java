@@ -68,8 +68,8 @@ public class StatusBar {
 		gc.setTextAlign(TextAlignment.CENTER);
 		gc.setTextBaseline(VPos.CENTER);
 		gc.fillText(String.format("x %d", player.getInventory()[0].getCount()), 120, 120);
-		gc.fillText(String.format("x %d", player.getInventory()[2].getCount()), 120, 180);
 		gc.fillText(String.format("x %d", player.getInventory()[1].getCount()), 260, 120);
+		gc.fillText(String.format("x %d", player.getInventory()[2].getCount()), 120, 180);
 		gc.fillText(String.format("x %d", player.getInventory()[3].getCount()), 260, 180);
 		gc.fillText(String.format("x %d", player.getInventory()[4].getCount()), 380, 120);
 		

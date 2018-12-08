@@ -6,11 +6,8 @@ import constants.CCType;
 import constants.Images;
 import controller.GameManager;
 import model.npc.NPC;
-import model.player.Player;
 
 public class CCItem extends Item {
-
-	public static final int duration = 90;
 
 	public CCItem() {
 		super("Random CC Item", 10, Images.cc);
@@ -24,30 +21,21 @@ public class CCItem extends Item {
 
 	@Override
 	public boolean activate() {
-		Player player = GameManager.getInstance().getPlayer();
-		if (player.isCCUsed()) {
-			return false;
-		}
-		
-		player.setCCUsed(true);
 		
 		double random = Math.random();
 		
 		List<NPC> npcs = GameManager.getInstance().getCurrentMap().getListNPC();
-		if (random <= 0.2) {
+		if (random <= 1) {
 //			System.out.println("NPCs are stunned");
 			for (NPC npc: npcs) {
 				npc.setStatus(CCType.STUN);
+				npc.setCCedDuration(90);
 			}
-		} else if (random <= 0.5) {
+		} else {
 //			System.out.println("NPCs are slowed");
 			for (NPC npc: npcs) {
 				npc.setStatus(CCType.SLOW);
-			}
-		} else {
-//			System.out.println("NPCs are silenced");
-			for (NPC npc: npcs) {
-				npc.setStatus(CCType.SILENCE);
+				npc.setCCedDuration(120);
 			}
 		}
 		return true;
