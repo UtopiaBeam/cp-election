@@ -6,4 +6,11 @@ public class PodiumSkill extends Skill {
 		super("Throw Podium", 120);
 	}
 	
+	@Override
+	public void use() {
+		if (isCoolingDown()) {
+			return;
+		}
+	}
+	
 }
