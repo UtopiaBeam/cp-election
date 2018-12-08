@@ -1,8 +1,12 @@
 package model;
 
 import constants.CCType;
+import constants.Images;
+import controller.GameManager;
 import exception.CannotAttackException;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.map.Map;
 
 public abstract class Character extends MoveableEntity implements IUpdatable {
 
@@ -93,6 +97,17 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 			resetCCTick();
 			setStatus(CCType.NONE);
 		}
+	}
+
+	public void renderNormalAttack(GraphicsContext gc) {
+		Map map = GameManager.getInstance().getCurrentMap();
+		Image img = Images.normalAttackEffect[attackTick/3];
+		if (this.getFacing() == LEFT) {
+			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+20);
+		} else {
+			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+20, -img.getWidth(), img.getHeight());
+		}
+		addAttackTick();
 	}
 	
 	public abstract void attack() throws CannotAttackException;

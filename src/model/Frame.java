@@ -1,7 +1,5 @@
 package model;
 
-import ui.GameScene;
-
 public class Frame {
 
 	protected double posX;

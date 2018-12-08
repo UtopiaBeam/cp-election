@@ -251,7 +251,7 @@ public class Player extends Character {
 	public void render(GraphicsContext gc) {
 		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
 		if (isAttacking()) {
-			renderNormalAtk(gc);
+			renderNormalAttack(gc);
 		}
 		hpBar.render(gc);
 	}
