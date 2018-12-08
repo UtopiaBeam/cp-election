@@ -136,7 +136,7 @@ public abstract class Character extends MoveableEntity {
 			gc.drawImage(img, this.getPosX()-map.getPosX()-16.5, this.getPosY()-map.getPosY()-16.5);
 		}
 		if (isSilenced()) {
-			Image img = Images.silenceEffect[ccedDuration/41];
+			Image img = Images.silenceEffect[ccedDuration/61];
 			gc.drawImage(img, this.getPosX()-map.getPosX()-16.5, this.getPosY()-map.getPosY()-16.5);
 		}
 	}
