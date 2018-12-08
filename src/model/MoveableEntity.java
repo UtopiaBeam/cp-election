@@ -26,9 +26,9 @@ public abstract class MoveableEntity extends Entity implements IUpdatable {
 		this.posY += speedY;
 	}
 	
-	public void move(double x, double y) {
-		this.posX += x;
-		this.posY += y;
+	public void setFacing(int facing) {
+		this.facing = facing;
+		this.setImage((facing == LEFT) ? imageL : imageR);
 	}
 	
 	// Getters & Setters
@@ -52,12 +52,5 @@ public abstract class MoveableEntity extends Entity implements IUpdatable {
 	public void setSpeedY(double speed) {
 		this.speedY = speed;
 	}
-
-	public void setFacing(int facing) {
-		this.facing = facing;
-		this.setImage((facing == LEFT) ? imageL : imageR);
-	}
-	
-	
 	
 }

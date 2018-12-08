@@ -17,18 +17,18 @@ public abstract class Character extends MoveableEntity {
 	protected CCType status = CCType.NONE;
 	
 	private int attackTick = 0;
-	private int coolDown;
+	private int attackCooldown;
 	private int ccedTick = 0;
 	private int ccedDuration;
 	private boolean isAttacking;
 
-	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int atk, int def, int coolDown) {
+	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int atk, int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
 		this.def = def;
-		this.coolDown = coolDown;
+		this.attackCooldown = attackCooldown;
 	}
 
 	public boolean isDead() {
@@ -76,10 +76,10 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public void addAttackTick() {
-		if (attackTick < coolDown) {
+		if (attackTick < attackCooldown) {
 			attackTick++;
 		}
-		if (attackTick == coolDown) {
+		if (attackTick == attackCooldown) {
 			resetAttackTick();
 			setAttacking(false);
 		}
