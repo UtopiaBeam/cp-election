@@ -16,7 +16,6 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
-import model.effect.HpBar;
 import model.item.*;
 import model.npc.NPC;
 
