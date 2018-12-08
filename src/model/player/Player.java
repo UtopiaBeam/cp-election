@@ -32,7 +32,7 @@ public class Player extends Character {
 	private HpBar hpBar;
 	
 	public Player(double posX, double posY) {
-		super("Netikun", Images.playrerL, Images.playerR, posX, posY, 1000, 100, 50, 30);
+		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 100, 50, 30);
 		this.attackRange = 30;
 		hpBar = new HpBar(this);
 	}

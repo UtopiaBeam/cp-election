@@ -2,7 +2,7 @@ package model;
 
 import javafx.scene.image.Image;
 
-public abstract class MoveableEntity extends Entity {
+public abstract class MoveableEntity extends Entity implements IUpdatable {
 
 	public static final int LEFT = -1;
 	public static final int RIGHT = 1;
@@ -13,25 +13,12 @@ public abstract class MoveableEntity extends Entity {
 	
 	private Image imageL;
 	private Image imageR;
-
-	public MoveableEntity(String name, Image image, double posX, double posY) {
-		super(posX, posY, image.getWidth(), image.getHeight(), name, image);
-		this.imageL = image;
-		this.imageR = image;
-	}
 	
-	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY) {
+	public MoveableEntity(double posX, double posY, String name, Image imageL, Image imageR) {
 		super(posX, posY, imageL.getWidth(), imageL.getHeight(), name, null);
 		this.imageL = imageL;
 		this.imageR = imageR;
 		setFacing(RIGHT);
-	}
-	
-	public MoveableEntity(String name, Image imageL, Image imageR, double posX, double posY, int facing) {
-		super(posX, posY, imageL.getWidth(), imageL.getHeight(), name, null);
-		this.imageL = imageL;
-		this.imageR = imageR;
-		setFacing(facing);
 	}
 	
 	public void move() {
@@ -43,8 +30,6 @@ public abstract class MoveableEntity extends Entity {
 		this.posX += x;
 		this.posY += y;
 	}
-	
-	public abstract void update();
 	
 	// Getters & Setters
 	

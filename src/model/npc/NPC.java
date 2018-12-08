@@ -17,7 +17,7 @@ public class NPC extends Character {
 	private HpBar hpBar;
 	
 	public NPC(double posX, double posY) {
-		super("Soldier", Images.soldierL, Images.soldierR, posX, posY, 100, 100, 0, 120);
+		super(posX, posY, "Soldier", Images.soldierL, Images.soldierR, 100, 100, 0, 120);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
 		hpBar = new HpBar(this);

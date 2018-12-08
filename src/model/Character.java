@@ -8,7 +8,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.map.Map;
 
-public abstract class Character extends MoveableEntity implements IUpdatable {
+public abstract class Character extends MoveableEntity {
 
 	protected int hp;
 	protected int maxHp;
@@ -22,8 +22,8 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	private int ccedDuration;
 	private boolean isAttacking;
 
-	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
-		super(name, imageL, imageR, posX, posY);
+	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int atk, int def, int coolDown) {
+		super(posX, posY, name, imageL, imageR);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
 		this.atk = atk;
