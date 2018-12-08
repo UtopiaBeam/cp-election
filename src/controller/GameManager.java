@@ -7,6 +7,7 @@ import constants.Images;
 import constants.Sounds;
 import javafx.scene.canvas.GraphicsContext;
 import model.map.Map;
+import model.npc.Boss;
 import model.player.Player;
 
 public class GameManager {
@@ -17,6 +18,7 @@ private static GameManager instance = new GameManager();
 	private boolean isPausing = false;
 	private List<Map> maps = new ArrayList<>();
 	private Player player;
+	private Boss boss;
 	private MonsterGen monsterGen;
 	private MonsterAi monsterAi;
 	private Map currentMap;
@@ -26,6 +28,7 @@ private static GameManager instance = new GameManager();
 		monsterGen = new MonsterGen();
 		monsterAi = new MonsterAi();
 		player = new Player(100, 423);
+		boss = new Boss(0, 0);
 	}
 	
 	public void render(GraphicsContext gc) {
@@ -67,6 +70,10 @@ private static GameManager instance = new GameManager();
 	public Player getPlayer() {
 		return player;
 	}
+	
+	public Boss getBoss() {
+		return boss;
+	}
 
 	public Map getCurrentMap() {
 		return currentMap;
@@ -74,6 +81,10 @@ private static GameManager instance = new GameManager();
 	
 	public void setPlayer(Player p) {
 		player = p;
+	}
+	
+	public void setBoss(Boss b) {
+		boss = b;
 	}
 	
 	public void setCurrentMap(Map m) {
