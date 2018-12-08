@@ -6,30 +6,25 @@ import model.player.Player;
 
 public class HealItem extends Item {
 	
-	private int healHp;
+	private final int minHealHp = 50;
+	private final int maxHealHp = 200;
 	
 	public HealItem() {
 		super("Heal Potion", 5, Images.heal);
-		this.healHp = 50;
-		this.setImage(Images.heal);
 	}
 	
 	public HealItem(double posX, double posY) {
 		super("Heal Potion", 5, Images.heal, posX, posY);
-		this.healHp = 50;
-		this.setImage(Images.heal);
+	}
+	
+	private int getHealHp() {
+		return minHealHp + (int) (Math.random() * (maxHealHp - minHealHp + 1));
 	}
 	
 	@Override
 	public boolean activate() {
 		Player player = GameManager.getInstance().getPlayer();
-		return player.heal(healHp);
-	}
-	
-	// Getters & Setters
-	
-	public int getHealHp() {
-		return healHp;
+		return player.heal(getHealHp());
 	}
 
 }

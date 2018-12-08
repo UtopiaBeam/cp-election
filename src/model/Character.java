@@ -6,29 +6,34 @@ import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.effect.HpBar;
 import model.map.Map;
 
-public abstract class Character extends MoveableEntity implements IUpdatable {
+public abstract class Character extends MoveableEntity {
 
 	protected int hp;
 	protected int maxHp;
-	protected int atk;
+	protected int minAtk;
+	protected int maxAtk;
 	protected int def;
 	protected CCType status = CCType.NONE;
+	protected HpBar hpBar;
 	
 	private int attackTick = 0;
-	private int coolDown;
+	private int attackCooldown;
 	private int ccedTick = 0;
 	private int ccedDuration;
 	private boolean isAttacking;
 
-	public Character(String name, Image imageL, Image imageR, double posX, double posY, int maxHp, int atk, int def, int coolDown) {
-		super(name, imageL, imageR, posX, posY);
+	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk, int def, int attackCooldown) {
+		super(posX, posY, name, imageL, imageR);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
-		this.atk = atk;
+		this.minAtk = minAtk;
+		this.maxAtk = maxAtk;
 		this.def = def;
-		this.coolDown = coolDown;
+		this.attackCooldown = attackCooldown;
+		this.hpBar = new HpBar(this);
 	}
 
 	public boolean isDead() {
@@ -59,6 +64,10 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 		return status == CCType.SILENCE;
 	}
 	
+	public int getDamage() {
+		return minAtk + (int) (Math.random() * (maxAtk - minAtk + 1));
+	}
+	
 	public boolean takeDamage(int damage) {
 		damage = Math.max(damage - def, 0);
 		if (damage == 0) {
@@ -76,27 +85,44 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	}
 	
 	public void addAttackTick() {
-		if (attackTick < coolDown) {
+		if (!isAttacking()) {
+			return;
+		}
+		if (attackTick < attackCooldown) {
 			attackTick++;
 		}
-		if (attackTick == coolDown) {
+		if (attackTick == attackCooldown) {
 			resetAttackTick();
 			setAttacking(false);
 		}
 	}
 	
-	public void resetCCTick() {
+	public void resetCCedTick() {
 		ccedTick = 0;
 	}
 	
 	public void addCCedTick() {
+		if (!isCCed()) {
+			return;
+		}
 		if (ccedTick < ccedDuration) {
 			ccedTick++;
 		}
 		if (ccedTick == ccedDuration) {
-			resetCCTick();
+			resetCCedTick();
 			setStatus(CCType.NONE);
 		}
+	}
+
+	public void renderNormalAttack(GraphicsContext gc) {
+		Map map = GameManager.getInstance().getCurrentMap();
+		Image img = Images.normalAttackEffect[attackTick/3];
+		if (this.getFacing() == LEFT) {
+			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+20);
+		} else {
+			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+20, -img.getWidth(), img.getHeight());
+		}
+		addAttackTick();
 	}
 	
 	public void renderStatusEffect(GraphicsContext gc) {
@@ -129,37 +155,13 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	public int getMaxHp() {
 		return maxHp;
 	}
-
-	public int getAtk() {
-		return atk;
-	}
-
-	public int getDef() {
-		return def;
-	}
-
-	public CCType getStatus() {
-		return status;
-	}
-
-	public void setAtk(int atk) {
-		this.atk = atk;
-	}
-
-	public void setDef(int def) {
-		this.def = def;
-	}
-
-	public void setStatus(CCType status) {
-		this.status = status;
-	}
 	
 	public boolean isAttacking() {
 		return this.isAttacking;
 	}
-	
-	public int getCCedDuration() {
-		return ccedDuration;
+
+	public void setStatus(CCType status) {
+		this.status = status;
 	}
 	
 	public void setAttacking(boolean isAttacking) {

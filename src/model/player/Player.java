@@ -10,31 +10,26 @@ import exception.CannotMoveException;
 import exception.CannotUseItemException;
 import exception.InventoryEmptyIndexException;
 import exception.InventoryFullException;
-import exception.ItemTypeNotFoundException;
+import exception.ItemTypeNotExistException;
 import input.KeyInput;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
-import model.effect.HpBar;
 import model.item.*;
 import model.npc.NPC;
 
 public class Player extends Character {
-
-	public static final int INVENTORY_SIZE = 5;
 	
-	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem(), new ReviveItem() };
+	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem() };
 	private boolean isImmune = false;
 	private boolean isRevivable = false;
 	private int immuneTick = 0;
 	private double attackRange;
-	private HpBar hpBar;
 	
 	public Player(double posX, double posY) {
-		super("Netikun", Images.playrerL, Images.playerR, posX, posY, 1000, 100, 50, 30);
+		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 50, 150, 50, 30);
 		this.attackRange = 30;
-		hpBar = new HpBar(this);
 	}
 	
 	@Override
@@ -78,8 +73,8 @@ public class Player extends Character {
 		setAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
-			n.takeDamage(getAtk());
-			if (facing==1) {
+			n.takeDamage(getDamage());
+			if (getFacing() == RIGHT) {
 				n.setPosX(n.getPosX() + 60);
 			} else {
 				n.setPosX(n.getPosX() - 60);
@@ -101,7 +96,9 @@ public class Player extends Character {
 		}
 		if (!isDead()) {
 			return;
-		} 
+		}
+		setSpeedX(0);
+		setSpeedY(0);
 	}
 	
 	public Frame getPlayerArea() {
@@ -123,6 +120,9 @@ public class Player extends Character {
 	}
 	
 	public void addImmuneTick() {
+		if (!isImmune()) {
+			return;
+		}
 		if (immuneTick < ImmuneItem.duration) {
 			immuneTick++;
 		}
@@ -132,7 +132,7 @@ public class Player extends Character {
 		}
 	}
 
-	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotFoundException {
+	public void collectItem(Item item) throws InventoryFullException, ItemTypeNotExistException {
 		int index = 0;
 		if (item instanceof AttackItem) {
 			index = 0;
@@ -143,11 +143,11 @@ public class Player extends Character {
 		} else if (item instanceof ImmuneItem) {
 			index = 3;
 		} else if (item instanceof ReviveItem) {
-			index = 4;
+			((ReviveItem) item).activate();
 		} else {
-			throw new ItemTypeNotFoundException();
+			throw new ItemTypeNotExistException();
 		}
-		if (inventory[index].addCount(1)) {			
+		if (item instanceof ReviveItem || inventory[index].addCount(1)) {			
 			GameManager.getInstance().getCurrentMap().removeItem(item);
 		} else {
 			throw new InventoryFullException();			
@@ -161,7 +161,7 @@ public class Player extends Character {
 				collectItem(i);
 			} catch (InventoryFullException e) {
 				System.out.println("Inventory is full");
-			} catch (ItemTypeNotFoundException e) {
+			} catch (ItemTypeNotExistException e) {
 				System.out.println("Item type not found");
 			}
 		}
@@ -216,6 +216,8 @@ public class Player extends Character {
 				System.out.println(e.getMessage());
 			} catch (CannotUseItemException e) {
 				System.out.println("Cannot use item now");
+			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Index out of range");
 			}
 		}
 	}
@@ -236,22 +238,16 @@ public class Player extends Character {
 		} catch (CannotAttackException e) {
 //			System.out.println("Cannot attack now");
 		}
-		if (isAttacking()) {
-			addAttackTick();
-		}
-		if (isImmune()) {
-			addImmuneTick();
-		}
-		if (isCCed()) {
-			addCCedTick();
-		}
+		addAttackTick();
+		addImmuneTick();
+		addCCedTick();
 	}
 	
 	@Override
 	public void render(GraphicsContext gc) {
 		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
 		if (isAttacking()) {
-			renderNormalAtk(gc);
+			renderNormalAttack(gc);
 		}
 		renderStatusEffect(gc);
 		hpBar.render(gc);

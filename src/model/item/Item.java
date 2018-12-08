@@ -4,12 +4,15 @@ import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 import model.Entity;
+import model.IUpdatable;
 import model.IUseable;
 
-public abstract class Item extends Entity implements IUseable {
+public abstract class Item extends Entity implements IUpdatable, IUseable {
 	
-	protected int count = 0;
-	protected int maxCount;
+	private int count = 0;
+	private int maxCount;
+	private final int expireTime = 300;
+	private int expireTick = 0;
 	
 	public Item(String name, int maxCount, Image image) {
 		super(0, 0, image.getWidth(), image.getHeight(), name, image);
@@ -21,12 +24,27 @@ public abstract class Item extends Entity implements IUseable {
 		this.maxCount = maxCount;
 	}
 	
+	public boolean isExpired() {
+		return expireTick >= expireTime;
+	}
+	
 	public boolean addCount(int count) {
 		if (this.count + count > this.maxCount) {
 			return false;
 		}
 		this.count += count;
 		return true;
+	}
+	
+	public void addExpireTick() {
+		if (expireTick < expireTime) {
+			expireTick++;
+		}
+	}
+	
+	@Override
+	public void update() {
+		addExpireTick();
 	}
 	
 	@Override
@@ -48,10 +66,6 @@ public abstract class Item extends Entity implements IUseable {
 
 	public int getCount() {
 		return count;
-	}
-
-	public int getMaxCount() {
-		return maxCount;
 	}
 	
 }

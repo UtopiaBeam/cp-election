@@ -9,11 +9,11 @@ public class ImmuneItem extends Item {
 	public static final int duration = 180;
 
 	public ImmuneItem() {
-		super("Immune Item", 15, Images.immune);
+		super("Immune Item", 5, Images.immune);
 	}
 	
 	public ImmuneItem(double posX, double posY) {
-		super("Immune Item", 15, Images.immune, posX, posY);
+		super("Immune Item", 5, Images.immune, posX, posY);
 	}
 	
 	@Override

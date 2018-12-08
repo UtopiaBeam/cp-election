@@ -1,7 +1,5 @@
 package model;
 
-import ui.GameScene;
-
 public class Frame {
 
 	protected double posX;
@@ -19,11 +17,6 @@ public class Frame {
 	public boolean isCollideWith(Frame f) {
 		return (posX < f.posX + f.width) && (posX + width > f.posX) && 
 			(posY < f.posY + f.height) && (height + posY > f.posY);
-	}
-	
-	public boolean isInWindow() {
-		return (posX >= 0) && (posX + width < GameScene.WINDOW_WIDTH) &&
-				(posY >= 0) && (posY + height < GameScene.WINDOW_HEIGHT);
 	}
 	
 	// Getters & Setters

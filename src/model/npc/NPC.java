@@ -9,18 +9,15 @@ import javafx.scene.canvas.GraphicsContext;
 import model.Character;
 import model.item.*;
 import model.player.Player;
-import model.effect.HpBar;;
 
 public class NPC extends Character {
 
 	private double speed;
-	private HpBar hpBar;
 	
 	public NPC(double posX, double posY) {
-		super("Soldier", Images.soldierL, Images.soldierR, posX, posY, 100, 100, 0, 120);
+		super(posX, posY, "Soldier", Images.soldierL, Images.soldierR, 100, 50, 150, 50, 120);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
-		hpBar = new HpBar(this);
 	}
 	
 	@Override
@@ -33,7 +30,7 @@ public class NPC extends Character {
 		
 		if (isCollideWith(player)) {
 			setAttacking(true);
-			player.takeDamage(atk);
+			player.takeDamage(getDamage());
 		}
 	}
 
@@ -55,11 +52,11 @@ public class NPC extends Character {
 		
 		if (random <= 0.02) {
 			item = new ReviveItem(dropX, dropY);
-		} else if (random <= 0.05) {
+		} else if (random <= 0.10) {
 			item = new HealItem(dropX, dropY);
-		} else if (random <= 0.15) {
+		} else if (random <= 0.20) {
 			item = new CCItem(dropX, dropY);
-		} else if (random <= 0.30) {
+		} else if (random <= 0.35) {
 			item = new ImmuneItem(dropX, dropY);
 		} else if (random <= 0.60) {
 			item = new AttackItem(dropX, dropY);
@@ -74,14 +71,15 @@ public class NPC extends Character {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		try {
-			if (isCCed()) {
-				addCCedTick();
-			}
+			addCCedTick();
+			addAttackTick();
+			
 			if (!canMove()) {
 				setSpeedX(0);
 				setSpeedY(0);
 				return;
 			}
+			
 			if (posX < player.getPosX() - 20) {
 				setFacing(RIGHT);
 				setSpeedX(isSlowed() ? speed/2 : speed);
@@ -94,11 +92,11 @@ public class NPC extends Character {
 			} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
 				setSpeedY(isSlowed() ? -speed/2 : -speed);
 			}
+			
 			attack();
 		} catch (CannotAttackException e) {
 			// Do Nothing
 		}
-		addAttackTick();
 	}
 	
 	@Override
