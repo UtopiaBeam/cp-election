@@ -67,9 +67,5 @@ public abstract class Item extends Entity implements IUpdatable, IUseable {
 	public int getCount() {
 		return count;
 	}
-
-	public int getMaxCount() {
-		return maxCount;
-	}
 	
 }
