@@ -74,14 +74,15 @@ public class NPC extends Character {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		try {
-			if (isCCed()) {
-				addCCedTick();
-			}
+			addCCedTick();
+			addAttackTick();
+			
 			if (!canMove()) {
 				setSpeedX(0);
 				setSpeedY(0);
 				return;
 			}
+			
 			if (posX < player.getPosX() - 20) {
 				setFacing(RIGHT);
 				setSpeedX(isSlowed() ? speed/2 : speed);
@@ -94,11 +95,11 @@ public class NPC extends Character {
 			} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
 				setSpeedY(isSlowed() ? -speed/2 : -speed);
 			}
+			
 			attack();
 		} catch (CannotAttackException e) {
 			// Do Nothing
 		}
-		addAttackTick();
 	}
 	
 	@Override

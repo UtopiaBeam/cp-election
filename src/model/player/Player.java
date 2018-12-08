@@ -125,6 +125,9 @@ public class Player extends Character {
 	}
 	
 	public void addImmuneTick() {
+		if (!isImmune()) {
+			return;
+		}
 		if (immuneTick < ImmuneItem.duration) {
 			immuneTick++;
 		}
@@ -238,15 +241,9 @@ public class Player extends Character {
 		} catch (CannotAttackException e) {
 //			System.out.println("Cannot attack now");
 		}
-		if (isAttacking()) {
-			addAttackTick();
-		}
-		if (isImmune()) {
-			addImmuneTick();
-		}
-		if (isCCed()) {
-			addCCedTick();
-		}
+		addAttackTick();
+		addImmuneTick();
+		addCCedTick();
 	}
 	
 	@Override

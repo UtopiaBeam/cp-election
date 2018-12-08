@@ -82,6 +82,9 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public void addAttackTick() {
+		if (!isAttacking()) {
+			return;
+		}
 		if (attackTick < attackCooldown) {
 			attackTick++;
 		}
@@ -96,6 +99,9 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public void addCCedTick() {
+		if (!isCCed()) {
+			return;
+		}
 		if (ccedTick < ccedDuration) {
 			ccedTick++;
 		}
