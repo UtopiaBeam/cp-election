@@ -78,7 +78,7 @@ public class Player extends Character {
 		setAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
-			n.takeDamage(getAtk());
+			n.takeDamage(getDamage());
 			if (getFacing() == RIGHT) {
 				n.setPosX(n.getPosX() + 60);
 			} else {

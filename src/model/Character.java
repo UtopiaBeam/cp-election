@@ -61,7 +61,7 @@ public abstract class Character extends MoveableEntity {
 		return status == CCType.SILENCE;
 	}
 	
-	public int getAtk() {
+	public int getDamage() {
 		return minAtk + (int) (Math.random() * (maxAtk - minAtk + 1));
 	}
 	

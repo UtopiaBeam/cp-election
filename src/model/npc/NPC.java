@@ -33,7 +33,7 @@ public class NPC extends Character {
 		
 		if (isCollideWith(player)) {
 			setAttacking(true);
-			player.takeDamage(getAtk());
+			player.takeDamage(getDamage());
 		}
 	}
 
