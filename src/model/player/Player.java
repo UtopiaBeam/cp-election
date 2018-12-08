@@ -221,6 +221,8 @@ public class Player extends Character {
 				System.out.println(e.getMessage());
 			} catch (CannotUseItemException e) {
 				System.out.println("Cannot use item now");
+			} catch (ArrayIndexOutOfBoundsException e) {
+				System.out.println("Index out of range");
 			}
 		}
 	}
