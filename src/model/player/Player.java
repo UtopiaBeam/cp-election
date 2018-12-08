@@ -101,7 +101,9 @@ public class Player extends Character {
 		}
 		if (!isDead()) {
 			return;
-		} 
+		}
+		setSpeedX(0);
+		setSpeedY(0);
 	}
 	
 	public Frame getPlayerArea() {
