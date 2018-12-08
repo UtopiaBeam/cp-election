@@ -52,11 +52,11 @@ public class NPC extends Character {
 		
 		if (random <= 0.02) {
 			item = new ReviveItem(dropX, dropY);
-		} else if (random <= 0.05) {
+		} else if (random <= 0.10) {
 			item = new HealItem(dropX, dropY);
-		} else if (random <= 0.15) {
+		} else if (random <= 0.20) {
 			item = new CCItem(dropX, dropY);
-		} else if (random <= 0.30) {
+		} else if (random <= 0.35) {
 			item = new ImmuneItem(dropX, dropY);
 		} else if (random <= 0.60) {
 			item = new AttackItem(dropX, dropY);
