@@ -23,15 +23,20 @@ public class CCItem extends Item {
 		double random = Math.random();
 		
 		List<NPC> npcs = GameManager.getInstance().getCurrentMap().getListNPC();
-		if (random <= 1) {
+		if (random <= 0.2) {
 			for (NPC npc: npcs) {
 				npc.setStatus(CCType.STUN);
 				npc.setCCedDuration(90);
 			}
-		} else {
+		} else if (random <= 0.5) {
 			for (NPC npc: npcs) {
 				npc.setStatus(CCType.SLOW);
 				npc.setCCedDuration(120);
+			}
+		} else {
+			for (NPC npc: npcs) {
+				npc.setStatus(CCType.SILENCE);
+				npc.setCCedDuration(180);
 			}
 		}
 		return true;
