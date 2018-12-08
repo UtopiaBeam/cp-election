@@ -25,6 +25,7 @@ public class StartScene extends Scene {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.drawImage(Images.startscreen, 0, 0);
 		gc.drawImage(Images.playbutton, 165, 400);
+		gc.drawImage(Images.info, 370, 10);
 		
 		addCanvasEventHandler();
 		
@@ -40,17 +41,24 @@ public class StartScene extends Scene {
 		return event.getX() >= 165 && event.getX() < 265 && event.getY() >= 400 && event.getY() < 430;
 	}
 	
+	private boolean isOnInstructionsButton(MouseEvent event) {
+		return event.getX() >= 370 && event.getX() < 410 && event.getY() >= 10 && event.getY() < 50;
+	}
+	
 	private void addCanvasEventHandler() {
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		canvas.setOnMouseMoved(e -> {
 			if (isOnPlayButton(e)) {
 				gc.drawImage(Images.startscreen, 0, 0);
 				gc.drawImage(Images.playbutton_highlight, 165, 400);
+				gc.drawImage(Images.info, 370, 10);
 			}
 			else {
 				gc.drawImage(Images.startscreen, 0, 0);
 				gc.drawImage(Images.playbutton, 165, 400);
+				gc.drawImage(Images.info, 370, 10);
 			}
+			
 		});
 		canvas.setOnMouseClicked(e -> {
 			if (isOnPlayButton(e)) {
@@ -59,6 +67,12 @@ public class StartScene extends Scene {
 				Main.getStage().setScene(Main.getGameScene());
 				Main.setCenter();
 			}
+			
+			if (isOnInstructionsButton(e)) {
+				Main.getStage().setScene(Main.getInstructionsScene());
+				Main.setCenter();
+			}
 		});
+		
 	}
 }

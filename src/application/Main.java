@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import ui.GameScene;
+import ui.Instructions;
 import ui.StartScene;
 
 
@@ -11,6 +12,7 @@ public class Main extends Application {
 	
 	private static Stage stage;
 	private static StartScene startScene;
+	private static Scene instructions = new Instructions();
 	private static Scene gameScene = new GameScene();
 	
 	public static void main(String[] args) {
@@ -45,6 +47,10 @@ public class Main extends Application {
 
 	public static Scene getGameScene() {
 		return gameScene;
+	}
+	
+	public static Scene getInstructionsScene() {
+		return instructions;
 	}
 	
 	public static void setCenter() {

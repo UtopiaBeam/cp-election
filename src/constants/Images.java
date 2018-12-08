@@ -8,6 +8,12 @@ public class Images {
 	public static final Image playbutton_highlight = new Image(ClassLoader.getSystemResource("playbutton_highlight.png").toString(),100,30,false,false);
 	public static final Image playbutton = new Image(ClassLoader.getSystemResource("playbutton.png").toString(),100,30,false,false);
 	
+	public static final Image instruction1 = new Image(ClassLoader.getSystemResource("instructions/p1.png").toString());
+	public static final Image instruction2 = new Image(ClassLoader.getSystemResource("instructions/p2.png").toString());
+	public static final Image button = new Image(ClassLoader.getSystemResource("instructions/b1.png").toString(),100,66,false,false);
+	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("instructions/b2.png").toString(),100,66,false,false);
+	public static final Image info = new Image(ClassLoader.getSystemResource("instructions/info.png").toString(),40,40,false,false);
+	
 	public static final Image playrerL = new Image(ClassLoader.getSystemResource("playerL.png").toString());
 	public static final Image playerR = new Image(ClassLoader.getSystemResource("playerR.png").toString());
 	public static final Image stage1 = new Image(ClassLoader.getSystemResource("stage1.png").toString(),1000,667,false,false);
