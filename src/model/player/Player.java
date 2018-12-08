@@ -21,10 +21,8 @@ import model.item.*;
 import model.npc.NPC;
 
 public class Player extends Character {
-
-	public static final int INVENTORY_SIZE = 5;
 	
-	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem(), new ReviveItem() };
+	private Item[] inventory = { new AttackItem(), new CCItem(), new HealItem(), new ImmuneItem() };
 	private boolean isImmune = false;
 	private boolean isRevivable = false;
 	private int immuneTick = 0;
@@ -148,11 +146,11 @@ public class Player extends Character {
 		} else if (item instanceof ImmuneItem) {
 			index = 3;
 		} else if (item instanceof ReviveItem) {
-			index = 4;
+			((ReviveItem) item).activate();
 		} else {
 			throw new ItemTypeNotExistException();
 		}
-		if (inventory[index].addCount(1)) {			
+		if (item instanceof ReviveItem || inventory[index].addCount(1)) {			
 			GameManager.getInstance().getCurrentMap().removeItem(item);
 		} else {
 			throw new InventoryFullException();			
