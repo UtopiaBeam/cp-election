@@ -13,7 +13,7 @@ public class Boss extends Character {
 	private boolean isUsingSkill = false;
 
 	public Boss(double posX, double posY) {
-		super(posX, posY, "Prayut", Images.prayutL, Images.prayutR, 10000, 1000, 50, 120);
+		super(posX, posY, "Prayut", Images.prayutL, Images.prayutR, 10000, 100, 1000, 100, 120);
 	}
 
 	public void resetSkillTick() {

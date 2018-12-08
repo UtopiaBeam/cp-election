@@ -32,7 +32,7 @@ public class Player extends Character {
 	private HpBar hpBar;
 	
 	public Player(double posX, double posY) {
-		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 100, 50, 30);
+		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 50, 150, 50, 30);
 		this.attackRange = 30;
 		hpBar = new HpBar(this);
 	}
@@ -79,7 +79,7 @@ public class Player extends Character {
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamage(getAtk());
-			if (facing==1) {
+			if (getFacing() == RIGHT) {
 				n.setPosX(n.getPosX() + 60);
 			} else {
 				n.setPosX(n.getPosX() - 60);

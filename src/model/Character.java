@@ -12,7 +12,8 @@ public abstract class Character extends MoveableEntity {
 
 	protected int hp;
 	protected int maxHp;
-	protected int atk;
+	protected int minAtk;
+	protected int maxAtk;
 	protected int def;
 	protected CCType status = CCType.NONE;
 	
@@ -22,11 +23,12 @@ public abstract class Character extends MoveableEntity {
 	private int ccedDuration;
 	private boolean isAttacking;
 
-	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int atk, int def, int attackCooldown) {
+	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk, int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR);
 		this.hp = maxHp;
 		this.maxHp = maxHp;
-		this.atk = atk;
+		this.minAtk = minAtk;
+		this.maxAtk = maxAtk;
 		this.def = def;
 		this.attackCooldown = attackCooldown;
 	}
@@ -57,6 +59,10 @@ public abstract class Character extends MoveableEntity {
 	
 	public boolean isSilenced() {
 		return status == CCType.SILENCE;
+	}
+	
+	public int getAtk() {
+		return minAtk + (int) (Math.random() * (maxAtk - minAtk + 1));
 	}
 	
 	public boolean takeDamage(int damage) {
@@ -124,8 +130,12 @@ public abstract class Character extends MoveableEntity {
 		return maxHp;
 	}
 
-	public int getAtk() {
-		return atk;
+	public int getMinAtk() {
+		return minAtk;
+	}
+	
+	public int getMaxAtk() {
+		return maxAtk;
 	}
 
 	public int getDef() {
@@ -144,8 +154,12 @@ public abstract class Character extends MoveableEntity {
 		return ccedDuration;
 	}
 
-	public void setAtk(int atk) {
-		this.atk = atk;
+	public void setMinAtk(int minAtk) {
+		this.minAtk = minAtk;
+	}
+	
+	public void setMaxAtk(int maxAtk) {
+		this.maxAtk = maxAtk;
 	}
 
 	public void setDef(int def) {
