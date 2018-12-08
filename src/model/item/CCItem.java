@@ -10,12 +10,12 @@ import model.npc.NPC;
 public class CCItem extends Item {
 
 	public CCItem() {
-		super("Random CC Item", 10, Images.cc);
+		super("Random CC Item", 5, Images.cc);
 		this.setImage(Images.cc);
 	}
 	
 	public CCItem(double posX, double posY) {
-		super("Random CC Item", 10, Images.cc, posX, posY);
+		super("Random CC Item", 5, Images.cc, posX, posY);
 		this.setImage(Images.cc);
 	}
 
