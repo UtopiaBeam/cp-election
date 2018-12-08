@@ -85,7 +85,7 @@ public abstract class Character extends MoveableEntity {
 		}
 	}
 	
-	public void resetCCTick() {
+	public void resetCCedTick() {
 		ccedTick = 0;
 	}
 	
@@ -94,7 +94,7 @@ public abstract class Character extends MoveableEntity {
 			ccedTick++;
 		}
 		if (ccedTick == ccedDuration) {
-			resetCCTick();
+			resetCCedTick();
 			setStatus(CCType.NONE);
 		}
 	}
@@ -135,6 +135,14 @@ public abstract class Character extends MoveableEntity {
 	public CCType getStatus() {
 		return status;
 	}
+	
+	public boolean isAttacking() {
+		return this.isAttacking;
+	}
+	
+	public int getCCedDuration() {
+		return ccedDuration;
+	}
 
 	public void setAtk(int atk) {
 		this.atk = atk;
@@ -146,14 +154,6 @@ public abstract class Character extends MoveableEntity {
 
 	public void setStatus(CCType status) {
 		this.status = status;
-	}
-	
-	public boolean isAttacking() {
-		return this.isAttacking;
-	}
-	
-	public int getCCedDuration() {
-		return ccedDuration;
 	}
 	
 	public void setAttacking(boolean isAttacking) {
