@@ -6,6 +6,7 @@ import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import model.effect.HpBar;
 import model.map.Map;
 
 public abstract class Character extends MoveableEntity {
@@ -16,6 +17,7 @@ public abstract class Character extends MoveableEntity {
 	protected int maxAtk;
 	protected int def;
 	protected CCType status = CCType.NONE;
+	protected HpBar hpBar;
 	
 	private int attackTick = 0;
 	private int attackCooldown;
@@ -31,6 +33,7 @@ public abstract class Character extends MoveableEntity {
 		this.maxAtk = maxAtk;
 		this.def = def;
 		this.attackCooldown = attackCooldown;
+		this.hpBar = new HpBar(this);
 	}
 
 	public boolean isDead() {

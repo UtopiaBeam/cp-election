@@ -9,18 +9,15 @@ import javafx.scene.canvas.GraphicsContext;
 import model.Character;
 import model.item.*;
 import model.player.Player;
-import model.effect.HpBar;;
 
 public class NPC extends Character {
 
 	private double speed;
-	private HpBar hpBar;
 	
 	public NPC(double posX, double posY) {
 		super(posX, posY, "Soldier", Images.soldierL, Images.soldierR, 100, 50, 150, 50, 120);
 		speed = 1 + (Math.random());
 		setSpeedX(speed);
-		hpBar = new HpBar(this);
 	}
 	
 	@Override
@@ -53,7 +50,7 @@ public class NPC extends Character {
 		List<Item> mapItems = GameManager.getInstance().getCurrentMap().getListItem();
 		Item item = null;
 		
-		if (random <= 0.02) {
+		if (random <= 1) {
 			item = new ReviveItem(dropX, dropY);
 		} else if (random <= 0.05) {
 			item = new HealItem(dropX, dropY);

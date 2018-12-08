@@ -27,12 +27,10 @@ public class Player extends Character {
 	private boolean isRevivable = false;
 	private int immuneTick = 0;
 	private double attackRange;
-	private HpBar hpBar;
 	
 	public Player(double posX, double posY) {
 		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 50, 150, 50, 30);
 		this.attackRange = 30;
-		hpBar = new HpBar(this);
 	}
 	
 	@Override
