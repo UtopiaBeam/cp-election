@@ -1,6 +1,8 @@
 package skill;
 
-public abstract class Skill {
+import model.IUseable;
+
+public abstract class Skill implements IUseable {
 
 	private String name;
 	private int coolDownTime;

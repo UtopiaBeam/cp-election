@@ -6,4 +6,11 @@ public class ShockSkill extends Skill {
 		super("Shock", 300);
 	}
 	
+	@Override
+	public void use() {
+		if (isCoolingDown()) {
+			return;
+		}
+	}
+	
 }
