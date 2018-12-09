@@ -1,6 +1,7 @@
 package model.map;
 
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
@@ -14,9 +15,7 @@ import javafx.scene.media.MediaPlayer;
 import model.MoveableEntity;
 import model.effect.Podium;
 import model.item.Item;
-import model.npc.Boss;
-import model.npc.NPC;
-import model.npc.Prayut;
+import model.npc.*;
 import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
@@ -156,9 +155,13 @@ public class Map extends Frame implements IUpdatable {
 	public void spawnBossRandom() {
 		double x = 333 + (int) (Math.random() * (height/2));
 		double y = 333 + (int) (Math.random() * (width/2));
-		Boss boss = new Prayut(x, y);
-		listBoss.add(boss);
-		System.out.println("Spawned at (" + x + ", " + y + ")");
+		Boss prayut = new Prayut(x, y);
+		listBoss.add(prayut);
+		
+		x = 333 + (int) (Math.random() * (height/2));
+		y = 333 + (int) (Math.random() * (width/2));
+		Boss prawit = new Prawit(x, y);
+		listBoss.add(prawit);
 	}
 	
 	public void render(GraphicsContext gc) {
@@ -183,47 +186,48 @@ public class Map extends Frame implements IUpdatable {
 
 	@Override
 	public void update() {
-		if (GameManager.getInstance().getTimeCount() == 10.0) {
+		if (GameManager.getInstance().getTimeCount() == 5.0) {
 			spawnBossRandom();
 		}
 		
-		Iterator<NPC> npcIt = listNPC.listIterator();
-		while (npcIt.hasNext()) {
-			if (npcIt.next().isDead()) {
-				Sounds.deadsound.play();
-				npcIt.remove();
+		try {			
+			for (Iterator<NPC> it = listNPC.listIterator(); it.hasNext(); ) {
+				NPC npc = it.next();
+				if (npc.isDead()) {
+					Sounds.deadsound.play();
+					it.remove();
+				} else {
+					npc.update();				
+				}
 			}
-		}
-		for (NPC e: listNPC) {
-			e.update();
-		}
-		
-		for (int i = listItem.size()-1; i >= 0; i--) {
-			listItem.get(i).addExpireTick();
-			if (listItem.get(i).isExpired()) {
-				listItem.remove(i);
+			
+			for (Iterator<Item> it = listItem.listIterator(); it.hasNext(); ) {
+				Item item = it.next();
+				item.addExpireTick();
+				if (item.isExpired()) {
+					it.remove();
+				}
 			}
-		}
-		
-		Iterator<Boss> bossIt = listBoss.listIterator();
-		while (bossIt.hasNext()) {
-			if (bossIt.next().isDead()) {
-				bossIt.remove();
+			
+			for (Iterator<Boss> it = listBoss.listIterator(); it.hasNext(); ) {
+				Boss boss = it.next();
+				if (boss.isDead()) {
+					it.remove();
+				} else {
+					boss.update();				
+				}
 			}
-		}
-		
-		for (Boss b: listBoss) {
-			b.update();
-		}
-		
-		Iterator<Podium> podiumIt = listPodium.listIterator();
-		while (podiumIt.hasNext()) {
-			if (podiumIt.next().isOutOfWindow()) {
-				podiumIt.remove();
+			
+			for (Iterator<Podium> it = listPodium.listIterator(); it.hasNext(); ) {
+				Podium podium = it.next();
+				if (podium.isOutOfWindow()) {
+					it.remove();
+				} else {				
+					podium.update();
+				}
 			}
-		}
-		for (Podium p: listPodium) {
-			p.update();
+		} catch (ConcurrentModificationException e) {
+			// Do Nothing
 		}
 	}
 	

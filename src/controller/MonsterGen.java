@@ -14,7 +14,7 @@ public class MonsterGen extends Thread {
 						System.out.println("MonsterGen thread has been interrupted.");
 						break;
 					}
-					if (GameManager.getInstance().isGameRunning() && GameManager.getInstance().getCurrentMap().getListNPC().size() < 25 ) {
+					if (GameManager.getInstance().isGameRunning() && GameManager.getInstance().getCurrentMap().getListNPC().size() < 10) {
 						GameManager.getInstance().getCurrentMap().spawnMonsterRandom();
 					}
 				}

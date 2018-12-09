@@ -7,7 +7,7 @@ import model.player.Player;
 public class WatchSkill extends Skill {
 
 	public WatchSkill() {
-		super("Shiny Watch", 480);
+		super("Shiny Watch", 600);
 	}
 	
 	@Override
@@ -21,14 +21,15 @@ public class WatchSkill extends Skill {
 		
 		if (random <= 0.2) {
 			player.setStatus(CCType.STUN);
-			player.setCCedDuration(90);
+			player.setCCedDuration(30);
 		} else if (random <= 0.5) {
 			player.setStatus(CCType.SLOW);
-			player.setCCedDuration(120);
+			player.setCCedDuration(60);
 		} else {
 			player.setStatus(CCType.SILENCE);
-			player.setCCedDuration(180);
+			player.setCCedDuration(90);
 		}
+		setCoolingDown(true);
 	}
 
 }
