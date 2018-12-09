@@ -44,7 +44,7 @@ public class GameScene extends Scene {
 				GameManager.getInstance().render(gc);
 				if (GameManager.getInstance().getPlayer().isDead()) {
 					gc.drawImage(Images.deathScreen, 0, 0);
-					gc.drawImage(Images.retry_highlight, 300, 450);
+					gc.drawImage(Images.quit, 300, 450);
 					addCanvasEventHandler();
 				}
 			}

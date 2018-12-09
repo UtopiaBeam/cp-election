@@ -15,8 +15,7 @@ public class Images {
 	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
 	public static final Image deathScreen = new Image(ClassLoader.getSystemResource("ui/deathscreen.png").toString());
-	public static final Image retry = new Image(ClassLoader.getSystemResource("ui/retry.png").toString());
-	public static final Image retry_highlight = new Image(ClassLoader.getSystemResource("ui/retry_highlight.png").toString());
+	public static final Image quit = new Image(ClassLoader.getSystemResource("ui/quit.png").toString());
 	
 	
 	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString(),66,100,false,false);
