@@ -9,7 +9,7 @@ import javafx.scene.image.Image;
 import model.effect.HpBar;
 import model.map.Map;
 
-public abstract class Character extends MoveableEntity {
+public abstract class Character extends MoveableEntity implements IUpdatable {
 
 	protected int hp;
 	protected int maxHp;
