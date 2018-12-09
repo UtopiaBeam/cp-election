@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import constants.Images;
 import constants.Sounds;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
@@ -16,9 +17,11 @@ import model.effect.Podium;
 import model.item.Item;
 import model.npc.Boss;
 import model.npc.NPC;
+import model.npc.Prayut;
 import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
+import skill.PodiumSkill;
 import ui.GameScene;
 import ui.StatusBar;
 
@@ -137,29 +140,24 @@ public class Map extends Frame implements IUpdatable {
 		for (NPC i: listNPC) {
 			motion(i);
 		}
-		for (Boss b: listBoss) {
-			motion(b);
-		}
 		for (Podium p: listPodium) {
 			p.move();
 		}
 	}
 	
 	public void spawnMonsterRandom() {
-		double x = 333 + (Math.random() * (height/2));
-		double y = 333 + (Math.random() * (width/2));
+		double x = 333 + (int) (Math.random() * (height/2));
+		double y = 333 + (int) (Math.random() * (width/2));
 		NPC monster = new NPC(x, y);
 		listNPC.add(monster);
 	}
 	
 	public void spawnBossRandom() {
-		if (listBoss.size() >= 10) {
-			return;
-		}
-		double x = 333 + (Math.random() * (height/2));
-		double y = 333 + (Math.random() * (width/2));
-		Boss boss = new Boss(x, y);
+		double x = 333 + (int) (Math.random() * (height/2));
+		double y = 333 + (int) (Math.random() * (width/2));
+		Boss boss = new Prayut(x, y);
 		listBoss.add(boss);
+		System.out.println("Spawned at (" + x + ", " + y + ")");
 	}
 	
 	public void render(GraphicsContext gc) {
