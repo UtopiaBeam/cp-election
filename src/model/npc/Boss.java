@@ -17,7 +17,7 @@ public class Boss extends NPC {
 	@Override
 	public void attack() throws CannotAttackException {
 		super.attack();
-//		skill.use();
+		skill.use();
 	}
 	
 	@Override
