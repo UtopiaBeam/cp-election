@@ -184,9 +184,8 @@ public class Map extends Frame implements IUpdatable {
 
 	@Override
 	public void update() {
-		if (GameManager.getInstance().getTimeCount() == 10.0) {
+		if (GameManager.getInstance().getTimeCount() == 5.0) {
 			spawnBossRandom();
-			System.out.println("Boss spawned");
 		}
 		
 		Iterator<NPC> npcIt = listNPC.listIterator();
