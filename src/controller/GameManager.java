@@ -32,13 +32,18 @@ public class GameManager {
 	public void render(GraphicsContext gc) {
 		if (!isPausing) {
 			currentMap.render(gc);
+			if (player.isDead()) {
+				gc.drawImage(Images.deathScreen, 0, 0);
+			}
 		}
 	}
 	
 	public void update() {
 		player.update();
 		currentMap.update();
-		timeCount++;
+		if (!player.isDead()){
+			timeCount++;
+		}
 	}
 	
 	private void generateMap() {

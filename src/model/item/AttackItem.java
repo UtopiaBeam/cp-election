@@ -30,6 +30,11 @@ public class AttackItem extends Item {
 		
 		for (NPC npc: npcs) {
 			npc.takeDamage(damage);
+			if (GameManager.getInstance().getPlayer().getPosX()<npc.getPosX()) {
+				npc.setPosX(npc.getPosX() + 60);
+			} else {
+				npc.setPosX(npc.getPosX() - 60);
+			}
 		}
 		return true;
 	}

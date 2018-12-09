@@ -14,6 +14,8 @@ public class Images {
 	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("ui/instructions/b2.png").toString(),100,66,false,false);
 	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
+	public static final Image deathScreen = new Image(ClassLoader.getSystemResource("ui/deathscreen.png").toString());
+	
 	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString(),66,100,false,false);
 	public static final Image playerR = new Image(ClassLoader.getSystemResource("character/playerR.png").toString(),66,100,false,false);
 	public static final Image stage = new Image(ClassLoader.getSystemResource("ui/stage.png").toString(),1000,667,false,false);
