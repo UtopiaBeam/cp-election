@@ -32,9 +32,6 @@ public class GameManager {
 	public void render(GraphicsContext gc) {
 		if (!isPausing) {
 			currentMap.render(gc);
-			if (player.isDead()) {
-				gc.drawImage(Images.deathScreen, 0, 0);
-			}
 		}
 	}
 	
@@ -58,6 +55,7 @@ public class GameManager {
 	
 	public void stopGame() {
 		terminate();
+		System.exit(0);
 	}
 	
 	public void terminate() {
