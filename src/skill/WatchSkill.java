@@ -1,9 +1,9 @@
 package skill;
 
-public class ShockSkill extends Skill {
+public class WatchSkill extends Skill {
 
-	public ShockSkill() {
-		super("Shock", 300);
+	public WatchSkill() {
+		super("Shiny Watch", 480);
 	}
 	
 	@Override
@@ -12,5 +12,5 @@ public class ShockSkill extends Skill {
 			return;
 		}
 	}
-	
+
 }

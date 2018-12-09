@@ -3,7 +3,7 @@ package skill;
 public class PodiumSkill extends Skill {
 
 	public PodiumSkill() {
-		super("Throw Podium", 120);
+		super("Podium Throwing", 120);
 	}
 	
 	@Override
