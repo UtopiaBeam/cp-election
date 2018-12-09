@@ -1,8 +1,9 @@
 package skill;
 
+import model.IUpdatable;
 import model.IUseable;
 
-public abstract class Skill implements IUseable {
+public abstract class Skill implements IUseable, IUpdatable {
 
 	private String name;
 	private int coolDownTime;
@@ -27,6 +28,11 @@ public abstract class Skill implements IUseable {
 			resetCoolDownTick();
 			setCoolingDown(false);
 		}
+	}
+	
+	@Override
+	public void update() {
+		addCoolDownTick();
 	}
 	
 	// Getters & Setters
