@@ -7,7 +7,7 @@ import skill.*;
 
 public class Boss extends Character {
 	
-	private Skill[] skills = { new PodiumSkill() };
+	private Skill[] skills = { new PodiumSkill(), new WatchSkill() , new StandySkill() };
 
 	public Boss(double posX, double posY) {
 		super(posX, posY, "Prayut", Images.prayutL, Images.prayutR, 10000, 100, 1000, 100, 120);

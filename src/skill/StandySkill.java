@@ -1,5 +1,7 @@
 package skill;
 
+import controller.GameManager;
+
 public class StandySkill extends Skill {
 
 	public StandySkill() {
@@ -11,6 +13,8 @@ public class StandySkill extends Skill {
 		if (isCoolingDown()) {
 			return;
 		}
+		
+		GameManager.getInstance().getCurrentMap().spawnBossRandom();
 	}
 
 }
