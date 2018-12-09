@@ -59,8 +59,8 @@ public class StatusBar {
 		
 		//Time Count
 		int time = (int) GameManager.getInstance().getTimeCount();
-		int sec = time%60;
-		int min = time/60;
+		int sec = time % 60;
+		int min = time / 60;
 		gc.setFill(Color.BLACK);
 		gc.setFont(TIME_FONT);
 		gc.setTextAlign(TextAlignment.CENTER);

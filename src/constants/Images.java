@@ -25,11 +25,11 @@ public class Images {
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("character/soldierL.png").toString(),66,100,false,false);
 	public static final Image soldierR = new Image(ClassLoader.getSystemResource("character/soldierR.png").toString(),66,100,false,false);
 	
-	public static final Image prayutL = new Image(ClassLoader.getSystemResource("").toString());
-	public static final Image prayutR = new Image(ClassLoader.getSystemResource("").toString());
+	public static final Image prayutL = new Image(ClassLoader.getSystemResource("character/prayut.png").toString());
+	public static final Image prayutR = new Image(ClassLoader.getSystemResource("character/prayut.png").toString());
 	
-	public static final Image podiumL = new Image(ClassLoader.getSystemResource("").toString());
-	public static final Image podiumR = new Image(ClassLoader.getSystemResource("").toString());
+	public static final Image podiumL = new Image(ClassLoader.getSystemResource("character/pL.png").toString());
+	public static final Image podiumR = new Image(ClassLoader.getSystemResource("character/pR.png").toString());
 	
 	public static final Image statusbar = new Image(ClassLoader.getSystemResource("ui/statusbar/statusbar.png").toString());
 	
