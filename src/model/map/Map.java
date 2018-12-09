@@ -5,7 +5,6 @@ import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
 
-import constants.Images;
 import constants.Sounds;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
