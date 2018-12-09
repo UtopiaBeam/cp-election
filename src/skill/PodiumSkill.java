@@ -7,7 +7,7 @@ import ui.GameScene;
 public class PodiumSkill extends Skill {
 
 	public PodiumSkill() {
-		super("Podium Throwing", 120);
+		super("Podium Throwing", 240);
 	}
 	
 	@Override
@@ -19,6 +19,7 @@ public class PodiumSkill extends Skill {
 		double y = 400 + (int) (Math.random() * (GameScene.WINDOW_HEIGHT - 400));
 		
 		GameManager.getInstance().getCurrentMap().addPodium(new Podium(x, y));
+		setCoolingDown(true);
 	}
 	
 }
