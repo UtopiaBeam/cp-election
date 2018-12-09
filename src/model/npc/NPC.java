@@ -6,6 +6,7 @@ import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import model.Character;
 import model.item.*;
 import model.player.Player;
@@ -16,10 +17,15 @@ public class NPC extends Character {
 	
 	public NPC(double posX, double posY) {
 		super(posX, posY, "Soldier", Images.soldierL, Images.soldierR, 100, 50, 150, 50, 120);
-		speed = 1 + (Math.random());
-		setSpeedX(speed);
+		this.speed = 1 + (Math.random());
 	}
 	
+	public NPC(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk,
+			int def, int attackCooldown) {
+		super(posX, posY, name, imageL, imageR, maxHp, minAtk, maxAtk, def, attackCooldown);
+		this.speed = 8;
+	}
+
 	@Override
 	public void attack() throws CannotAttackException {
 		if (!canAttack()) {
@@ -87,9 +93,9 @@ public class NPC extends Character {
 				setFacing(LEFT);
 				setSpeedX(isSlowed() ? speed/2 : speed);
 			} 
-			if (posY + getHeight() < player.getPosY() + player.getHeight()-10) {
+			if (posY + getHeight() < player.getPosY() + player.getHeight() - 10) {
 				setSpeedY(isSlowed() ? speed/2 : speed);
-			} else if (posY + getHeight() > player.getPosY() + player.getHeight()+10) {
+			} else if (posY + getHeight() > player.getPosY() + player.getHeight() + 10) {
 				setSpeedY(isSlowed() ? -speed/2 : -speed);
 			}
 			

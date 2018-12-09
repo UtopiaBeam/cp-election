@@ -11,6 +11,7 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.MoveableEntity;
+import model.effect.Podium;
 import model.item.Item;
 import model.npc.Boss;
 import model.npc.NPC;
@@ -30,9 +31,10 @@ public class Map extends Frame implements IUpdatable {
 	
 	private MediaPlayer bgm;
 	
-	private List<NPC> listNPC= new ArrayList<>();
-	private List<Item> listItem = new ArrayList<>();
+	private List<NPC> listNPC= new ArrayList<NPC>();
+	private List<Item> listItem = new ArrayList<Item>();
 	private List<Boss> listBoss = new ArrayList<Boss>();
+	private List<Podium> listPodium = new ArrayList<Podium>();
 	
 	private StatusBar statusBar = new StatusBar();
 
@@ -117,6 +119,12 @@ public class Map extends Frame implements IUpdatable {
 		for (NPC i: listNPC) {
 			motion(i);
 		}
+		for (Boss b: listBoss) {
+			motion(b);
+		}
+		for (Podium p: listPodium) {
+			p.move();
+		}
 	}
 	
 	public void spawnMonsterRandom() {
@@ -143,8 +151,14 @@ public class Map extends Frame implements IUpdatable {
 			e.render(gc);
 			e.renderStatusEffect(gc);
 		}
-		for (Item i:listItem) {
+		for (Item i: listItem) {
 			i.render(gc);
+		}
+		for (Boss b: listBoss) {
+			b.render(gc);
+		}
+		for (Podium p: listPodium) {
+			p.render(gc);
 		}
 		statusBar.render(gc);
 		
@@ -158,7 +172,6 @@ public class Map extends Frame implements IUpdatable {
 				npcIt.remove();
 			}
 		}
-		
 		for (NPC e: listNPC) {
 			e.update();
 		}
@@ -167,6 +180,24 @@ public class Map extends Frame implements IUpdatable {
 			listItem.get(i).addExpireTick();
 			if (listItem.get(i).isExpired()) {
 				listItem.remove(i);
+			}
+		}
+		
+		Iterator<Boss> bossIt = listBoss.listIterator();
+		while (bossIt.hasNext()) {
+			if (bossIt.next().isDead()) {
+				bossIt.remove();
+			}
+		}
+		
+		for (Boss b: listBoss) {
+			b.update();
+		}
+		
+		Iterator<Podium> podiumIt = listPodium.listIterator();
+		while (podiumIt.hasNext()) {
+			if (podiumIt.next().isOutOfWindow()) {
+				podiumIt.remove();
 			}
 		}
 	}
@@ -187,6 +218,10 @@ public class Map extends Frame implements IUpdatable {
 	
 	public List<Boss> getListBoss() {
 		return listBoss;
+	}
+	
+	public List<Podium> getListPodium() {
+		return listPodium;
 	}
 
 }

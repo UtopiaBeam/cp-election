@@ -2,10 +2,9 @@ package model.npc;
 
 import constants.Images;
 import exception.CannotAttackException;
-import model.Character;
 import skill.*;
 
-public class Boss extends Character {
+public class Boss extends NPC {
 	
 	private Skill[] skills = { new PodiumSkill(), new WatchSkill() , new StandySkill() };
 
@@ -19,17 +18,22 @@ public class Boss extends Character {
 			throw new CannotAttackException();
 		}
 		
+		for (Skill s: skills) {
+			if (s.isCoolingDown()) {
+				continue;
+			}
+			setAttacking(true);
+			s.use();
+			return;
+		}
+		
 	}
 
 	@Override
 	public void dead() {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
-	public void update() {
-		addAttackTick();
+		if (!isDead()) {
+			return;
+		}
 	}
 	
 	// Getters & Setters
