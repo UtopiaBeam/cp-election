@@ -1,7 +1,5 @@
 package model.npc;
 
-import java.util.List;
-
 import constants.Images;
 import controller.GameManager;
 import exception.CannotAttackException;
