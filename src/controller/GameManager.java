@@ -77,8 +77,8 @@ public class GameManager {
 		return currentMap;
 	}
 	
-	public int getTimeCount() {
-		return timeCount/60;
+	public double getTimeCount() {
+		return timeCount / 60.;
 	}
 	
 	public void setPlayer(Player p) {
