@@ -38,7 +38,7 @@ public class GameManager {
 	public void update() {
 		player.update();
 		currentMap.update();
-		if (!player.isDead()){
+		if (!player.isDead()) {
 			timeCount++;
 		}
 	}
@@ -77,8 +77,8 @@ public class GameManager {
 		return currentMap;
 	}
 	
-	public int getTimeCount() {
-		return timeCount/60;
+	public double getTimeCount() {
+		return timeCount / 60.;
 	}
 	
 	public void setPlayer(Player p) {

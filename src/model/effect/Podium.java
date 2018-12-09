@@ -31,7 +31,7 @@ public class Podium extends MoveableEntity implements IUpdatable {
 	public void update() {
 		Player player = GameManager.getInstance().getPlayer();
 		if (isCollideWith(player.getPlayerArea())) {
-			player.takeDamage(300);
+			player.takeDamage(200);
 			player.setStatus(CCType.STUN);
 			player.setCCedDuration(60);
 			GameManager.getInstance().getCurrentMap().removePodium(this);
