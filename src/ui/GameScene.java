@@ -1,6 +1,5 @@
 package ui;
 
-
 import constants.Images;
 import controller.GameManager;
 import input.KeyInput;
@@ -46,8 +45,7 @@ public class GameScene extends Scene {
 					addCanvasEventHandler();
 				}
 			}
-				
-			GameManager.getInstance().render(canvas.getGraphicsContext2D());
+			
 		});
 		
 		Timeline gameloop = new Timeline();
