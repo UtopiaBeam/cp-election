@@ -206,6 +206,10 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 
 	public void setStatus(CCType status) {
 		this.status = status;
+		if (status == CCType.STUN) {
+			setSpeedX(0);
+			setSpeedY(0);
+		}
 	}
 	
 	public void setAttacking(boolean isAttacking) {
