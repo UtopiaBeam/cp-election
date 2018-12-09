@@ -1,9 +1,11 @@
 package model.effect;
 
+import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 import model.Character;
+import model.player.Player;
 
 public class HpBar {
 	
@@ -29,6 +31,10 @@ public class HpBar {
 		gc.setStroke(Color.BLACK);
 		gc.setLineWidth(1);
 		gc.strokeRect(startX-mapX, entity.getPosY()+100+HEIGHT-mapY, WIDTH, HEIGHT);
+		
+		if (entity instanceof Player && ((Player) entity).isRevivable()) {
+			gc.drawImage(Images.revive, startX-mapX+WIDTH+5, entity.getPosY()+100+HEIGHT-mapY-7, 20, 20);
+		}
 	}
 	
 	
