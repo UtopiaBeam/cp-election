@@ -55,6 +55,7 @@ public class GameManager {
 	
 	public void stopGame() {
 		terminate();
+		System.exit(0);
 	}
 	
 	public void terminate() {
