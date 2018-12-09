@@ -12,6 +12,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import model.MoveableEntity;
 import model.item.Item;
+import model.npc.Boss;
 import model.npc.NPC;
 import model.Frame;
 import model.IUpdatable;
@@ -31,6 +32,7 @@ public class Map extends Frame implements IUpdatable {
 	
 	private List<NPC> listNPC= new ArrayList<>();
 	private List<Item> listItem = new ArrayList<>();
+	private List<Boss> listBoss = new ArrayList<Boss>();
 	
 	private StatusBar statusBar = new StatusBar();
 
@@ -117,11 +119,21 @@ public class Map extends Frame implements IUpdatable {
 		}
 	}
 	
-	public void spawnRandom() {
+	public void spawnMonsterRandom() {
 		double x = 333 + (Math.random() * (height/2));
 		double y = 333 + (Math.random() * (width/2));
 		NPC monster = new NPC(x, y);
 		listNPC.add(monster);
+	}
+	
+	public void spawnBossRandom() {
+		if (listBoss.size() >= 10) {
+			return;
+		}
+		double x = 333 + (Math.random() * (height/2));
+		double y = 333 + (Math.random() * (width/2));
+		Boss boss = new Boss(x, y);
+		listBoss.add(boss);
 	}
 	
 	public void render(GraphicsContext gc) {
@@ -173,5 +185,8 @@ public class Map extends Frame implements IUpdatable {
 		return listItem;
 	}
 	
+	public List<Boss> getListBoss() {
+		return listBoss;
+	}
 
 }

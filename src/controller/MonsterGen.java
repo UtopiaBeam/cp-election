@@ -15,7 +15,7 @@ public class MonsterGen extends Thread {
 						break;
 					}
 					if (GameManager.getInstance().isGameRunning() && GameManager.getInstance().getCurrentMap().getListNPC().size() < 25 ) {
-						GameManager.getInstance().getCurrentMap().spawnRandom();
+						GameManager.getInstance().getCurrentMap().spawnMonsterRandom();
 					}
 				}
 			}
