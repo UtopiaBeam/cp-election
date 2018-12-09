@@ -24,6 +24,9 @@ public class Images {
 	public static final Image prayutL = new Image(ClassLoader.getSystemResource("").toString());
 	public static final Image prayutR = new Image(ClassLoader.getSystemResource("").toString());
 	
+	public static final Image podiumL = new Image(ClassLoader.getSystemResource("").toString());
+	public static final Image podiumR = new Image(ClassLoader.getSystemResource("").toString());
+	
 	public static final Image statusbar = new Image(ClassLoader.getSystemResource("ui/statusbar/statusbar.png").toString());
 	
 	public static final Image heal = new Image(ClassLoader.getSystemResource("ui/statusbar/heal.png").toString(),40,40,false,false);
