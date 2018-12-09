@@ -28,6 +28,9 @@ public class Images {
 	public static final Image prayutL = new Image(ClassLoader.getSystemResource("character/prayutL.png").toString());
 	public static final Image prayutR = new Image(ClassLoader.getSystemResource("character/prayutR.png").toString());
 	
+	public static final Image prawitL = new Image(ClassLoader.getSystemResource("character/prayutL.png").toString());
+	public static final Image prawitR = new Image(ClassLoader.getSystemResource("character/prayutR.png").toString());
+	
 	public static final Image podiumL = new Image(ClassLoader.getSystemResource("character/pL.png").toString());
 	public static final Image podiumR = new Image(ClassLoader.getSystemResource("character/pR.png").toString());
 	
