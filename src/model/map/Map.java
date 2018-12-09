@@ -152,14 +152,16 @@ public class Map extends Frame implements IUpdatable {
 		listNPC.add(monster);
 	}
 	
-	public void spawnBossRandom() {
+	public void spawnBossPrayutRandom() {
 		double x = 333 + (int) (Math.random() * (height/2));
 		double y = 333 + (int) (Math.random() * (width/2));
 		Boss prayut = new Prayut(x, y);
 		listBoss.add(prayut);
-		
-		x = 333 + (int) (Math.random() * (height/2));
-		y = 333 + (int) (Math.random() * (width/2));
+	}
+	
+	public void spawnBossPrawitRandom() {
+		double x = 333 + (int) (Math.random() * (height/2));
+		double y = 333 + (int) (Math.random() * (width/2));
 		Boss prawit = new Prawit(x, y);
 		listBoss.add(prawit);
 	}
@@ -186,8 +188,11 @@ public class Map extends Frame implements IUpdatable {
 
 	@Override
 	public void update() {
-		if (GameManager.getInstance().getTimeCount() == 5.0) {
-			spawnBossRandom();
+		if (GameManager.getInstance().getTimeCount() == 60.0) {
+			spawnBossPrawitRandom();
+		}
+		if (GameManager.getInstance().getTimeCount() == 120.0) {
+			spawnBossPrayutRandom();
 		}
 		
 		try {			
@@ -214,6 +219,14 @@ public class Map extends Frame implements IUpdatable {
 				if (boss.isDead()) {
 					it.remove();
 				} else {
+					double speedprayut = 0.5 + (Math.random());
+					double speedprawit = 0.8 + (Math.random());
+					if (boss instanceof Prayut) {
+						boss.setSpeed(speedprayut);
+					}
+					if (boss instanceof Prawit) {
+						boss.setSpeed(speedprawit);
+					}
 					boss.update();				
 				}
 			}

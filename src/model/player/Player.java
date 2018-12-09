@@ -31,7 +31,7 @@ public class Player extends Character {
 	private double attackRange = 30;
 	
 	public Player(double posX, double posY) {
-		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 1000, 50, 150, 50, 30);
+		super(posX, posY, "Netikun", Images.playrerL, Images.playerR, 3000, 50, 150, 50, 30);
 	}
 	
 	@Override

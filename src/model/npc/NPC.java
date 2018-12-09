@@ -21,7 +21,7 @@ public class NPC extends Character {
 	public NPC(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk,
 			int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR, maxHp, minAtk, maxAtk, def, attackCooldown);
-		this.speed = 0.5;
+		this.speed = 0.5 + (Math.random());
 	}
 
 	@Override
@@ -104,6 +104,10 @@ public class NPC extends Character {
 	public void render(GraphicsContext gc) {
 		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
 		hpBar.render(gc);
+	}
+	
+	public void setSpeed(double speed) {
+		this.speed = speed;
 	}
 
 }

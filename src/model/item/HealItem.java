@@ -7,8 +7,8 @@ import model.player.Player;
 
 public class HealItem extends Item {
 	
-	private final int minHealHp = 50;
-	private final int maxHealHp = 200;
+	private final int minHealHp = 200;
+	private final int maxHealHp = 500;
 	
 	public HealItem() {
 		super("Heal Potion", 5, Images.heal);
