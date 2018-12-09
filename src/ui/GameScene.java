@@ -16,7 +16,7 @@ public class GameScene extends Scene {
 	
 	public GameScene() {
 		super(new StackPane(), WINDOW_WIDTH, WINDOW_HEIGHT);
-		StackPane root = (StackPane)getRoot();
+		StackPane root = (StackPane) getRoot();
 		
 		Canvas canvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
 		root.getChildren().add(canvas);
@@ -24,16 +24,14 @@ public class GameScene extends Scene {
 		KeyInput.bindScene(this);
 		
 		KeyFrame kf = new KeyFrame(Duration.seconds(1./60), e -> {
+			
 			if (GameManager.getInstance().isGameRunning()) {
-                
-				if (!GameManager.getInstance().isPausing()) {
-					GameManager.getInstance().getCurrentMap().motionPlayer(GameManager.getInstance().getPlayer());
-					GameManager.getInstance().getCurrentMap().motionAll();
-					GameManager.getInstance().update();
-				}
-				
-				GameManager.getInstance().render(canvas.getGraphicsContext2D());
+				GameManager.getInstance().getCurrentMap().motionPlayer(GameManager.getInstance().getPlayer());
+				GameManager.getInstance().getCurrentMap().motionAll();
+				GameManager.getInstance().update();
 			}
+				
+			GameManager.getInstance().render(canvas.getGraphicsContext2D());
 		});
 		
 		Timeline gameloop = new Timeline();

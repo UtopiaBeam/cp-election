@@ -14,7 +14,6 @@ public class GameManager {
 	private static GameManager instance = new GameManager();
 	
 	private boolean isGameRunning = false;
-	private boolean isPausing = false;
 	private List<Map> maps = new ArrayList<>();
 	private Player player;
 	private MonsterGen monsterGen;
@@ -30,11 +29,9 @@ public class GameManager {
 	}
 	
 	public void render(GraphicsContext gc) {
-		if (!isPausing) {
-			currentMap.render(gc);
-			if (player.isDead()) {
-				gc.drawImage(Images.deathScreen, 0, 0);
-			}
+		currentMap.render(gc);
+		if (player.isDead()) {
+			gc.drawImage(Images.deathScreen, 0, 0);
 		}
 	}
 	
@@ -101,14 +98,6 @@ public class GameManager {
 	
 	public void setGameRunning(boolean isGameRunning) {
 		this.isGameRunning = isGameRunning;
-	}
-	
-	public boolean isPausing() {
-		return isPausing;
-	}
-	
-	public void setPausing(boolean isPausing) {
-		this.isPausing = isPausing;
 	}
 
 }
