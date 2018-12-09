@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import constants.Images;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -20,7 +19,6 @@ import model.npc.Prayut;
 import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
-import skill.PodiumSkill;
 import ui.GameScene;
 import ui.StatusBar;
 
@@ -141,6 +139,9 @@ public class Map extends Frame implements IUpdatable {
 		}
 		for (Podium p: listPodium) {
 			p.move();
+		}
+		for (Boss b: listBoss) {
+			b.move();
 		}
 	}
 	
