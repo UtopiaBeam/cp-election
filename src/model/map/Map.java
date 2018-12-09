@@ -153,6 +153,7 @@ public class Map extends Frame implements IUpdatable {
 	}
 	
 	public void spawnBossPrayutRandom() {
+		Sounds.spawnbosssound.play();
 		double x = 333 + (int) (Math.random() * (height/2));
 		double y = 333 + (int) (Math.random() * (width/2));
 		Boss prayut = new Prayut(x, y);
@@ -160,6 +161,7 @@ public class Map extends Frame implements IUpdatable {
 	}
 	
 	public void spawnBossPrawitRandom() {
+		Sounds.spawnbosssound.play();
 		double x = 333 + (int) (Math.random() * (height/2));
 		double y = 333 + (int) (Math.random() * (width/2));
 		Boss prawit = new Prawit(x, y);

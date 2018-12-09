@@ -14,6 +14,8 @@ public class Sounds {
 	public static final AudioClip ccsound = new AudioClip(ClassLoader.getSystemResource("audio/ccsound.wav").toString());
 	public static final AudioClip immunesound = new AudioClip(ClassLoader.getSystemResource("audio/immunesound.wav").toString());
 	
+	public static final AudioClip spawnbosssound = new AudioClip(ClassLoader.getSystemResource("audio/spawnbosssound.m4a").toString());
+
 	
 	static {
 		bgm.setVolume(0.01);
