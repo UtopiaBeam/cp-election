@@ -30,6 +30,7 @@ public class StatusBar {
 	
 	private static final Font HP_BAR_FONT = Font.font("Tahoma", FontWeight.BOLD, 12);
 	private static final Font ITEM_FONT = Font.font("Tahoma", FontWeight.BOLD, 15);
+	private static final Font TIME_FONT = Font.font("Tahoma", FontWeight.BOLD, 20);
 	
 	private static double hpWidth = 0;
 	
@@ -39,6 +40,7 @@ public class StatusBar {
 		player = GameManager.getInstance().getPlayer();
 		
 		hpWidth = HP_WIDTH*player.getHp()*0.2/player.getMaxHp() + 0.8*hpWidth;
+		
 		
 		//HP bar
 		gc.setFill(Color.GRAY);
@@ -54,6 +56,17 @@ public class StatusBar {
 //		gc.drawImage(Images.revive, 310, 100);
 		
 		//Draw text
+		
+		//Time Count
+		int time = GameManager.getInstance().getTimeCount();
+		int sec = time%60;
+		int min = time/60;
+		gc.setFill(Color.BLACK);
+		gc.setFont(TIME_FONT);
+		gc.setTextAlign(TextAlignment.CENTER);
+		gc.setTextBaseline(VPos.CENTER);
+		gc.fillText(String.format("%02d : %02d", min, sec), 800, 70);
+				
 				
 		// HP MP Value
 		gc.setFill(Color.WHITE);
