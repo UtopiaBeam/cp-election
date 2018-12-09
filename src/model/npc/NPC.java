@@ -53,7 +53,6 @@ public class NPC extends Character {
 		double dropX = getPosX();
 		double dropY = getPosY() + getHeight() - 40;
 		
-		List<Item> mapItems = GameManager.getInstance().getCurrentMap().getListItem();
 		Item item = null;
 		
 		if (random <= 0.02) {
@@ -69,7 +68,7 @@ public class NPC extends Character {
 		}
 		
 		if (item != null) {
-			mapItems.add(item);
+			GameManager.getInstance().getCurrentMap().addItem(item);
 		}
 	}
 	

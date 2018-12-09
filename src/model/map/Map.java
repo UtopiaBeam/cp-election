@@ -67,8 +67,16 @@ public class Map extends Frame implements IUpdatable {
 		return collideItems;
 	}
 	
+	public void addItem(Item item) {
+		listItem.add(item);
+	}
+	
 	public void removeItem(Item item) {
 		listItem.remove(item);
+	}
+	
+	public void addPodium(Podium podium) {
+		listPodium.add(podium);
 	}
 	
 	public void removePodium(Podium podium) {
