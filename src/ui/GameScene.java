@@ -13,6 +13,7 @@ public class GameScene extends Scene {
 	
 	public static final int WINDOW_WIDTH = 900;
 	public static final int WINDOW_HEIGHT = 600;
+	private int timeCount;
 	
 	public GameScene() {
 		super(new StackPane(), WINDOW_WIDTH, WINDOW_HEIGHT);
@@ -30,6 +31,7 @@ public class GameScene extends Scene {
 					GameManager.getInstance().getCurrentMap().motionPlayer(GameManager.getInstance().getPlayer());
 					GameManager.getInstance().getCurrentMap().motionAll();
 					GameManager.getInstance().update();
+					timeCount++;
 				}
 				
 				GameManager.getInstance().render(canvas.getGraphicsContext2D());
@@ -41,5 +43,9 @@ public class GameScene extends Scene {
 		gameloop.getKeyFrames().add(kf);
 		gameloop.play();
 		
+	}
+	
+	public int getTimeCount() {
+		return timeCount/60;
 	}
 }
