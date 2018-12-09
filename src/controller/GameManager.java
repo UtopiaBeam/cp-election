@@ -20,6 +20,7 @@ public class GameManager {
 	private MonsterGen monsterGen;
 	private MonsterAi monsterAi;
 	private Map currentMap;
+	private int timeCount = 0;
 	
 	public GameManager() {
 		generateMap();
@@ -37,6 +38,7 @@ public class GameManager {
 	public void update() {
 		player.update();
 		currentMap.update();
+		timeCount++;
 	}
 	
 	private void generateMap() {
@@ -70,6 +72,10 @@ public class GameManager {
 
 	public Map getCurrentMap() {
 		return currentMap;
+	}
+	
+	public int getTimeCount() {
+		return timeCount/60;
 	}
 	
 	public void setPlayer(Player p) {
