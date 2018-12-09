@@ -13,10 +13,12 @@ import exception.InventoryFullException;
 import exception.ItemTypeNotExistException;
 import input.KeyInput;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
 import model.Character;
 import model.Frame;
 import model.item.*;
+import model.map.Map;
 import model.npc.NPC;
 
 public class Player extends Character {
@@ -49,6 +51,7 @@ public class Player extends Character {
 		if (this.hp > this.maxHp) {
 			this.hp = this.maxHp;
 		}
+		setHealAnimating(true);
 		return true;
 	}
 	
@@ -60,7 +63,7 @@ public class Player extends Character {
 		if (!isRevivable()) {
 			return;
 		}
-		setAnimating(true);
+		setReviveAnimating(true);
 		refresh();
 		setRevivable(false);
 		status = CCType.NONE;
@@ -244,14 +247,24 @@ public class Player extends Character {
 		addCCedTick();
 	}
 	
+	public void renderImmuneEffect(GraphicsContext gc){
+		Map map = GameManager.getInstance().getCurrentMap();
+		if (isImmune()) {
+			Image img = Images.immuneEffect;
+			gc.drawImage(img, this.getPosX()-map.getPosX()-20, this.getPosY()-map.getPosY());
+		}
+	}
+	
 	@Override
 	public void render(GraphicsContext gc) {
-		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY());
+		gc.drawImage(getImage(), posX-GameManager.getInstance().getCurrentMap().getPosX(), posY-GameManager.getInstance().getCurrentMap().getPosY()+5);
 		if (isAttacking()) {
 			renderNormalAttack(gc);
 		}
 		renderStatusEffect(gc);
 		renderReviveEffect(gc);
+		renderImmuneEffect(gc);
+		renderHealEffect(gc);
 		hpBar.render(gc);
 	}
 	
