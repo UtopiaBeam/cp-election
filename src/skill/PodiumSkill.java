@@ -15,9 +15,8 @@ public class PodiumSkill extends Skill {
 		if (isCoolingDown()) {
 			return;
 		}
-		
 		double x = (Math.random() <= 0.5) ? 0 : GameScene.WINDOW_WIDTH;
-		double y = GameManager.getInstance().getPlayer().getPosY();
+		double y = 400 + (int) (Math.random() * (GameScene.WINDOW_HEIGHT - 400));
 		
 		GameManager.getInstance().getCurrentMap().addPodium(new Podium(x, y));
 	}
