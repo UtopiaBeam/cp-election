@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import constants.Sounds;
 import controller.GameManager;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
@@ -183,7 +184,7 @@ public class Map extends Frame implements IUpdatable {
 
 	@Override
 	public void update() {
-		if (GameManager.getInstance().getTimeCount() == 5.0) {
+		if (GameManager.getInstance().getTimeCount() == 60.0) {
 			spawnBossRandom();
 			System.out.println("Boss spawned");
 		}
@@ -191,6 +192,7 @@ public class Map extends Frame implements IUpdatable {
 		Iterator<NPC> npcIt = listNPC.listIterator();
 		while (npcIt.hasNext()) {
 			if (npcIt.next().isDead()) {
+				Sounds.deadsound.play();
 				npcIt.remove();
 			}
 		}

@@ -4,6 +4,7 @@ import java.util.List;
 
 import constants.CCType;
 import constants.Images;
+import constants.Sounds;
 import controller.GameManager;
 import model.npc.NPC;
 
@@ -19,6 +20,8 @@ public class CCItem extends Item {
 
 	@Override
 	public boolean activate() {
+		
+		Sounds.ccsound.play();
 		
 		double random = Math.random();
 		

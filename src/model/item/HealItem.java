@@ -1,6 +1,7 @@
 package model.item;
 
 import constants.Images;
+import constants.Sounds;
 import controller.GameManager;
 import model.player.Player;
 
@@ -23,6 +24,7 @@ public class HealItem extends Item {
 	
 	@Override
 	public boolean activate() {
+		Sounds.healsound.play();
 		Player player = GameManager.getInstance().getPlayer();
 		return player.heal(getHealHp());
 	}

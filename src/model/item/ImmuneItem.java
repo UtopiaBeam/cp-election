@@ -1,6 +1,7 @@
 package model.item;
 
 import constants.Images;
+import constants.Sounds;
 import controller.GameManager;
 import model.player.Player;
 
@@ -22,6 +23,7 @@ public class ImmuneItem extends Item {
 		if (player.isImmune()) {
 			return false;
 		}
+		Sounds.immunesound.play();
 		player.setImmune(true);
 		return true;
 	}

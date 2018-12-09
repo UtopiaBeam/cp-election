@@ -4,6 +4,7 @@ import java.util.List;
 
 import constants.CCType;
 import constants.Images;
+import constants.Sounds;
 import controller.GameManager;
 import exception.CannotAttackException;
 import exception.CannotMoveException;
@@ -63,6 +64,7 @@ public class Player extends Character {
 			return;
 		}
 		setReviveAnimating(true);
+		Sounds.revivesound.play();
 		refresh();
 		setRevivable(false);
 		status = CCType.NONE;
@@ -73,6 +75,7 @@ public class Player extends Character {
 		if (!canAttack()) {
 			throw new CannotAttackException();
 		}
+		Sounds.attacksound.play();
 		setAttacking(true);
 		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideNPCs(getAttackArea());
 		for (NPC n: collideNPCs) {
