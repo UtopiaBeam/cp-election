@@ -31,7 +31,7 @@ public class Map extends Frame implements IUpdatable {
 	
 	private MediaPlayer bgm;
 	
-	private List<NPC> listNPC= new ArrayList<NPC>();
+	private List<NPC> listNPC = new ArrayList<NPC>();
 	private List<Item> listItem = new ArrayList<Item>();
 	private List<Boss> listBoss = new ArrayList<Boss>();
 	private List<Podium> listPodium = new ArrayList<Podium>();
@@ -47,11 +47,16 @@ public class Map extends Frame implements IUpdatable {
 		this.bgm.setCycleCount(MediaPlayer.INDEFINITE);
 	}
 	
-	public List<NPC> collideCharacter(Frame f) {
+	public List<NPC> collideNPCs(Frame f) {
 		List<NPC> npcs = new ArrayList<NPC>();
-		for (NPC e: listNPC) {
-			if (e instanceof NPC && f.isCollideWith(e)) {
-				npcs.add((NPC) e);
+		for (NPC n: listNPC) {
+			if (f.isCollideWith(n)) {
+				npcs.add((NPC) n);
+			}
+		}
+		for (Boss b: listBoss) {
+			if (f.isCollideWith(b)) {
+				npcs.add((NPC) b);
 			}
 		}
 		return npcs;

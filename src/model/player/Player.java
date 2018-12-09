@@ -75,7 +75,7 @@ public class Player extends Character {
 			throw new CannotAttackException();
 		}
 		setAttacking(true);
-		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideCharacter(getAttackArea());
+		List<NPC> collideNPCs = GameManager.getInstance().getCurrentMap().collideNPCs(getAttackArea());
 		for (NPC n: collideNPCs) {
 			n.takeDamage(getDamage());
 			if (getFacing() == RIGHT) {
