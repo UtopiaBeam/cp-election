@@ -14,8 +14,8 @@ public class Images {
 	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("ui/instructions/b2.png").toString(),100,66,false,false);
 	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
-	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString());
-	public static final Image playerR = new Image(ClassLoader.getSystemResource("character/playerR.png").toString());
+	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString(),66,100,false,false);
+	public static final Image playerR = new Image(ClassLoader.getSystemResource("character/playerR.png").toString(),66,100,false,false);
 	public static final Image stage = new Image(ClassLoader.getSystemResource("ui/stage.png").toString(),1000,667,false,false);
 	
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("character/soldierL.png").toString(),66,100,false,false);
@@ -32,8 +32,10 @@ public class Images {
 	public static final Image revive = new Image(ClassLoader.getSystemResource("ui/statusbar/revive.png").toString(),40,40,false,false);
 	public static final Image immune = new Image(ClassLoader.getSystemResource("ui/statusbar/immune.png").toString(),60,60,false,false);
 	
+	public static final Image immuneEffect = new Image(ClassLoader.getSystemResource("effect/immune.png").toString(),110,110,false,false);
 	
 	public static final Image[] normalAttackEffect = new Image[10];
+	public static final Image[] healEffect = new Image[2];
 	public static final Image[] stunEffect = new Image[2];
 	public static final Image[] slowEffect = new Image[3];
 	public static final Image[] silenceEffect = new Image[3];
@@ -41,7 +43,10 @@ public class Images {
 	
 	static {
 		for (int i=0; i<normalAttackEffect.length; i++) {
-			normalAttackEffect[i] = new Image(ClassLoader.getSystemResource("effect/attack/"+i+".png").toString());
+			normalAttackEffect[i] = new Image(ClassLoader.getSystemResource("effect/attack/"+i+".png").toString(),50,60,false,false);
+		}
+		for (int i=0; i<healEffect.length; i++) {
+			healEffect[i] = new Image(ClassLoader.getSystemResource("effect/heal/"+i+".png").toString(),100,133,false,false);
 		}
 		for (int i=0; i<stunEffect.length; i++) {
 			stunEffect[i] = new Image(ClassLoader.getSystemResource("effect/stun/"+i+".png").toString(),100,133,false,false);

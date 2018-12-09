@@ -25,7 +25,8 @@ public abstract class Character extends MoveableEntity {
 	private int ccedTick = 0;
 	private int ccedDuration;
 	private boolean isAttacking;
-	private boolean isAnimating = false;
+	private boolean isReviveAnimating = false;
+	private boolean isHealAnimating = false;
 
 	public Character(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk, int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR);
@@ -104,12 +105,12 @@ public abstract class Character extends MoveableEntity {
 	}
 	
 	public void addAnimationTick() {
-		if (animationTick < 39) {
+		if (animationTick < 59) {
 			animationTick++;
-		}
-		if (animationTick == 39) {
+		} else {
 			resetAnimationTick();
-			setAnimating(false);
+			setReviveAnimating(false);
+			setHealAnimating(false);
 		}
 	}
 	
@@ -134,9 +135,9 @@ public abstract class Character extends MoveableEntity {
 		Map map = GameManager.getInstance().getCurrentMap();
 		Image img = Images.normalAttackEffect[attackTick/3];
 		if (this.getFacing() == LEFT) {
-			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+20);
+			gc.drawImage(img, this.getPosX()-img.getWidth()-map.getPosX()+10, this.getPosY()-map.getPosY()+30);
 		} else {
-			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+20, -img.getWidth(), img.getHeight());
+			gc.drawImage(img, this.getPosX()+this.getWidth()+img.getWidth()-map.getPosX()-10, this.getPosY()-map.getPosY()+30, -img.getWidth(), img.getHeight());
 		}
 		addAttackTick();
 	}
@@ -157,9 +158,18 @@ public abstract class Character extends MoveableEntity {
 		}
 	}
 	
+	public void renderHealEffect(GraphicsContext gc) {
+		if(isHealAnimating) {
+			Map map = GameManager.getInstance().getCurrentMap();
+			Image img = Images.healEffect[animationTick/30];
+			gc.drawImage(img, this.getPosX()-map.getPosX()-18, this.getPosY()-map.getPosY()-16.5);
+			addAnimationTick();
+		}
+	}
+	
 	public void renderReviveEffect(GraphicsContext gc) {
-		if(isAnimating) {
-			Image img = Images.reviveEffect[animationTick/2];
+		if(isReviveAnimating) {
+			Image img = Images.reviveEffect[animationTick/3];
 			double imageX = this.getPosX()+66/2-img.getWidth()/2-GameManager.getInstance().getCurrentMap().getPosX();
 			double imageY = this.getPosY()+100-img.getHeight()-GameManager.getInstance().getCurrentMap().getPosY();
 			gc.drawImage(img, imageX, imageY);
@@ -186,8 +196,12 @@ public abstract class Character extends MoveableEntity {
 		return this.isAttacking;
 	}
 	
-	public boolean isAnimating() {
-		return this.isAnimating;
+	public boolean isReviveAnimating() {
+		return this.isReviveAnimating;
+	}
+	
+	public boolean isHealAnimating() {
+		return this.isHealAnimating;
 	}
 
 	public void setStatus(CCType status) {
@@ -198,8 +212,12 @@ public abstract class Character extends MoveableEntity {
 		this.isAttacking = isAttacking;
 	}
 	
-	public void setAnimating(boolean isAnimating) {
-		this.isAnimating = isAnimating;
+	public void setReviveAnimating(boolean isAnimating) {
+		this.isReviveAnimating = isAnimating;
+	}
+	
+	public void setHealAnimating(boolean isAnimating) {
+		this.isHealAnimating = isAnimating;
 	}
 
 	public void setCCedDuration(int ccedDuration) {
