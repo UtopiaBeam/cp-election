@@ -9,7 +9,7 @@ public class Boss extends NPC {
 	private Skill[] skills = { new PodiumSkill(), new WatchSkill() , new StandySkill() };
 
 	public Boss(double posX, double posY) {
-		super(posX, posY, "Prayut", Images.prayutL, Images.prayutR, 10000, 100, 500, 100, 120);
+		super(posX, posY, "Prayut", Images.prayutL, Images.prayutR, 10000, 100, 50, 100, 120);
 	}
 	
 	@Override
