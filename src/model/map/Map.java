@@ -248,6 +248,10 @@ public class Map extends Frame implements IUpdatable {
 		this.bgm.play();
 	}
 	
+	public void stopBgm() {
+		this.bgm.stop();
+	}
+	
 	// Getters & Setters
 
 	public List<NPC> getListNPC() {

@@ -20,6 +20,7 @@ public class GameManager {
 	private MonsterAi monsterAi;
 	private Map currentMap;
 	private int timeCount = 0;
+	private boolean isPlayingDeadBgm = false;
 	
 	public GameManager() {
 		generateMap();
@@ -40,6 +41,11 @@ public class GameManager {
 		currentMap.update();
 		if (!player.isDead()) {
 			timeCount++;
+		} 
+		if (player.isDead() && !isPlayingDeadBgm){
+			isPlayingDeadBgm = true;
+			currentMap.stopBgm();
+			Sounds.deadscenebgm.play();
 		}
 	}
 	
