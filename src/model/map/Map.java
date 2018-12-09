@@ -16,6 +16,7 @@ import model.effect.Podium;
 import model.item.Item;
 import model.npc.Boss;
 import model.npc.NPC;
+import model.npc.Prayut;
 import model.Frame;
 import model.IUpdatable;
 import model.player.Player;
@@ -137,29 +138,27 @@ public class Map extends Frame implements IUpdatable {
 		for (NPC i: listNPC) {
 			motion(i);
 		}
-		for (Boss b: listBoss) {
-			motion(b);
-		}
 		for (Podium p: listPodium) {
 			p.move();
+		}
+		for (Boss b: listBoss) {
+			b.move();
 		}
 	}
 	
 	public void spawnMonsterRandom() {
-		double x = 333 + (Math.random() * (height/2));
-		double y = 333 + (Math.random() * (width/2));
+		double x = 333 + (int) (Math.random() * (height/2));
+		double y = 333 + (int) (Math.random() * (width/2));
 		NPC monster = new NPC(x, y);
 		listNPC.add(monster);
 	}
 	
 	public void spawnBossRandom() {
-		if (listBoss.size() >= 10) {
-			return;
-		}
-		double x = 333 + (Math.random() * (height/2));
-		double y = 333 + (Math.random() * (width/2));
-		Boss boss = new Boss(x, y);
+		double x = 333 + (int) (Math.random() * (height/2));
+		double y = 333 + (int) (Math.random() * (width/2));
+		Boss boss = new Prayut(x, y);
 		listBoss.add(boss);
+		System.out.println("Spawned at (" + x + ", " + y + ")");
 	}
 	
 	public void render(GraphicsContext gc) {
@@ -186,7 +185,6 @@ public class Map extends Frame implements IUpdatable {
 	public void update() {
 		if (GameManager.getInstance().getTimeCount() == 10.0) {
 			spawnBossRandom();
-			System.out.println("Boss spawned");
 		}
 		
 		Iterator<NPC> npcIt = listNPC.listIterator();

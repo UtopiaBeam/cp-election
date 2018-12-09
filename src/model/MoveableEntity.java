@@ -27,11 +27,6 @@ public abstract class MoveableEntity extends Entity implements IMoveable {
 		this.posY += speedY;
 	}
 	
-	public void setFacing(int facing) {
-		this.facing = facing;
-		this.setImage((facing == LEFT) ? imageL : imageR);
-	}
-	
 	// Getters & Setters
 	
 	public double getSpeedX() {
@@ -52,6 +47,11 @@ public abstract class MoveableEntity extends Entity implements IMoveable {
 	
 	public void setSpeedY(double speed) {
 		this.speedY = speed;
+	}
+	
+	public void setFacing(int facing) {
+		this.facing = facing;
+		this.setImage((facing == LEFT) ? imageL : imageR);
 	}
 	
 }

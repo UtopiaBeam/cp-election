@@ -12,7 +12,9 @@ public class Podium extends MoveableEntity implements IUpdatable {
 	
 	public Podium(double posX, double posY) {
 		super(posX, posY, "Podium", Images.podiumL, Images.podiumR);
-		setSpeedX(10);
+		
+		double speed = 2 + (int) (Math.random() + 5);
+		setSpeedX(speed);
 		setSpeedY(0);
 		
 		Player player = GameManager.getInstance().getPlayer();
@@ -24,7 +26,7 @@ public class Podium extends MoveableEntity implements IUpdatable {
 	}
 
 	public boolean isOutOfWindow() {
-		return (posX + width < 0) || (posX >= GameScene.WINDOW_HEIGHT); 
+		return (posX + width < 0) || (posX > GameScene.WINDOW_WIDTH); 
 	}
 	
 	@Override
