@@ -71,6 +71,10 @@ public class Map extends Frame implements IUpdatable {
 		listItem.remove(item);
 	}
 	
+	public void removePodium(Podium podium) {
+		listPodium.remove(podium);
+	}
+	
 	private void moveMap() {
 		// Move map by object inside
 		Player player = GameManager.getInstance().getPlayer();
@@ -199,6 +203,9 @@ public class Map extends Frame implements IUpdatable {
 			if (podiumIt.next().isOutOfWindow()) {
 				podiumIt.remove();
 			}
+		}
+		for (Podium p: listPodium) {
+			p.update();
 		}
 	}
 	
