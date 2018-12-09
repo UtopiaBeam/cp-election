@@ -32,7 +32,7 @@ public class GameManager {
 	public void render(GraphicsContext gc) {
 		currentMap.render(gc);
 		if (player.isDead()) {
-			gc.drawImage(Images.deathScreen, 0, 0);
+			gc.drawImage(Images.deadscreen, 0, 0);
 		}
 	}
 	

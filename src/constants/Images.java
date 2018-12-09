@@ -5,22 +5,22 @@ import javafx.scene.image.Image;
 public class Images {
 
 	public static final Image startscreen = new Image(ClassLoader.getSystemResource("ui/startscreen/startscene.png").toString());
-	public static final Image playbutton_highlight = new Image(ClassLoader.getSystemResource("ui/startscreen/playbutton_highlight.png").toString(),100,30,false,false);
 	public static final Image playbutton = new Image(ClassLoader.getSystemResource("ui/startscreen/playbutton.png").toString(),100,30,false,false);
+	public static final Image playbutton_highlight = new Image(ClassLoader.getSystemResource("ui/startscreen/playbutton_highlight.png").toString(),100,30,false,false);
+	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
 	public static final Image instruction1 = new Image(ClassLoader.getSystemResource("ui/instructions/p1.png").toString());
 	public static final Image instruction2 = new Image(ClassLoader.getSystemResource("ui/instructions/p2.png").toString());
 	public static final Image button = new Image(ClassLoader.getSystemResource("ui/instructions/b1.png").toString(),100,66,false,false);
 	public static final Image button_highlight = new Image(ClassLoader.getSystemResource("ui/instructions/b2.png").toString(),100,66,false,false);
-	public static final Image info = new Image(ClassLoader.getSystemResource("ui/instructions/info.png").toString(),40,40,false,false);
 	
-	public static final Image deathScreen = new Image(ClassLoader.getSystemResource("ui/deathscreen.png").toString());
+	public static final Image deadscreen = new Image(ClassLoader.getSystemResource("ui/deathscreen.png").toString());
 	public static final Image quit = new Image(ClassLoader.getSystemResource("ui/quit.png").toString());
 	
+	public static final Image stage = new Image(ClassLoader.getSystemResource("ui/stage.png").toString(),1000,667,false,false);
 	
 	public static final Image playrerL = new Image(ClassLoader.getSystemResource("character/playerL.png").toString(),66,100,false,false);
 	public static final Image playerR = new Image(ClassLoader.getSystemResource("character/playerR.png").toString(),66,100,false,false);
-	public static final Image stage = new Image(ClassLoader.getSystemResource("ui/stage.png").toString(),1000,667,false,false);
 	
 	public static final Image soldierL = new Image(ClassLoader.getSystemResource("character/soldierL.png").toString(),66,100,false,false);
 	public static final Image soldierR = new Image(ClassLoader.getSystemResource("character/soldierR.png").toString(),66,100,false,false);
