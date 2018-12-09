@@ -122,6 +122,9 @@ public class Map extends Frame implements IUpdatable {
 		for (Boss b: listBoss) {
 			motion(b);
 		}
+		for (Podium p: listPodium) {
+			p.move();
+		}
 	}
 	
 	public void spawnMonsterRandom() {
