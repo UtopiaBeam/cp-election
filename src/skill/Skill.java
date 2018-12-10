@@ -5,45 +5,35 @@ import model.IUseable;
 
 public abstract class Skill implements IUseable, IUpdatable {
 
-	private String name;
-	private int coolDownTime;
-	private int coolDownTick;
+	private int cooldownTime;
+	private int cooldownTick;
 	private boolean isCoolingDown;
 	
-	public Skill(String name, int coolDownTime) {
-		this.name = name;
-		this.coolDownTime = coolDownTime;
+	public Skill(int cooldownTime) {
+		this.cooldownTime = cooldownTime;
 		this.isCoolingDown = false;
 	}
 	
-	public void resetCoolDownTick() {
-		coolDownTick = 0;
+	public void resetCooldownTick() {
+		cooldownTick = 0;
 	}
 	
-	public void addCoolDownTick() {
-		if (coolDownTick < coolDownTime) {
-			coolDownTick++;
+	public void addCooldownTick() {
+		if (cooldownTick < cooldownTime) {
+			cooldownTick++;
 		}
-		if (coolDownTick == coolDownTime) {
-			resetCoolDownTick();
+		if (cooldownTick == cooldownTime) {
+			resetCooldownTick();
 			setCoolingDown(false);
 		}
 	}
 	
 	@Override
 	public void update() {
-		addCoolDownTick();
+		addCooldownTick();
 	}
 	
 	// Getters & Setters
-	
-	public String getName() {
-		return name;
-	}
-	
-	public int getCoolDownTime() {
-		return coolDownTime;
-	}
 	
 	public boolean isCoolingDown() {
 		return isCoolingDown;

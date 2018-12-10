@@ -7,7 +7,7 @@ import model.player.Player;
 public class WatchSkill extends Skill {
 
 	public WatchSkill() {
-		super("Shiny Watch", 600);
+		super(600);
 	}
 	
 	@Override
