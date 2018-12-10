@@ -33,8 +33,7 @@ public class StatusBar {
 	public void render(GraphicsContext gc) {
 		Player player = GameManager.getInstance().getPlayer();
 		
-		hpWidth = HP_WIDTH*player.getHp()*0.2/player.getMaxHp() + 0.8*hpWidth;
-		
+		hpWidth = HP_WIDTH * player.getHp() * 0.2 / player.getMaxHp() + 0.8 * hpWidth;
 		
 		//HP bar
 		gc.setFill(Color.GRAY);

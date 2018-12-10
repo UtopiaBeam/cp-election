@@ -9,8 +9,8 @@ import model.player.Player;
 
 public class HpBar {
 	
-	public static final int WIDTH = 60;
-	public static final int HEIGHT = 6;
+	public static final double WIDTH = 60;
+	public static final double HEIGHT = 6;
 	private Character entity;
 	
 	public HpBar(Character entity) {
