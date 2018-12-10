@@ -53,5 +53,4 @@ public class Frame {
 		this.height = height;
 	}
 	
-	
 }

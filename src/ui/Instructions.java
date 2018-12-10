@@ -9,7 +9,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 
-public class Instructions extends Scene{
+public class Instructions extends Scene {
+	
 	private Pane root;
 	private Canvas canvas;
 	private Image[] instructions = { Images.instruction1, Images.instruction2 };
@@ -86,4 +87,5 @@ public class Instructions extends Scene{
 			}
 		});
 	}
+	
 }

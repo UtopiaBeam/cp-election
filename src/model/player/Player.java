@@ -238,11 +238,11 @@ public class Player extends Character {
 			}
 			collectItems();
 		} catch (CannotMoveException e) {
-//			System.out.println("Cannot move now");
+			// Do Nothing
 		} catch (CannotUseItemException e) {
-//			System.out.println("Cannot use item now");
+			// Do Nothing
 		} catch (CannotAttackException e) {
-//			System.out.println("Cannot attack now");
+			// Do Nothing
 		}
 		addAttackTick();
 		addImmuneTick();

@@ -13,6 +13,7 @@ import javafx.scene.media.MediaPlayer;
 import application.Main;
 
 public class StartScene extends Scene {
+	
 	private Pane root;
 	private Canvas canvas;
 	MediaPlayer bgm;
@@ -75,4 +76,5 @@ public class StartScene extends Scene {
 		});
 		
 	}
+	
 }

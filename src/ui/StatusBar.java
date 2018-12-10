@@ -1,6 +1,5 @@
 package ui;
 
-
 import constants.Images;
 import controller.GameManager;
 import javafx.geometry.VPos;
@@ -11,8 +10,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 import model.player.Player;
-
-
 
 public class StatusBar {
 	
@@ -25,7 +22,6 @@ public class StatusBar {
 	public static final double HP_X = 100;
 	public static final double HP_Y = 10;
 	
-
 	private static final Color HP_COLOR = Color.GREEN.brighter();
 	
 	private static final Font HP_BAR_FONT = Font.font("Tahoma", FontWeight.BOLD, 12);
@@ -53,11 +49,10 @@ public class StatusBar {
 		gc.drawImage(Images.heal, 50, 160);
 		gc.drawImage(Images.cc, 180, 100);
 		gc.drawImage(Images.immune, 180, 150);
-//		gc.drawImage(Images.revive, 310, 100);
 		
-		//Draw text
+		// ================= Draw Text ================= //
 		
-		//Time Count
+		// Time Count
 		int time = (int) GameManager.getInstance().getTimeCount();
 		int sec = time % 60;
 		int min = time / 60;
@@ -84,8 +79,6 @@ public class StatusBar {
 		gc.fillText(String.format("x %d", player.getInventory()[1].getCount()), 260, 120);
 		gc.fillText(String.format("x %d", player.getInventory()[2].getCount()), 120, 180);
 		gc.fillText(String.format("x %d", player.getInventory()[3].getCount()), 260, 180);
-//		gc.fillText(String.format("x %d", player.getInventory()[4].getCount()), 380, 120);
-		
-
 	}
+	
 }

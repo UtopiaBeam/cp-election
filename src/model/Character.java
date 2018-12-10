@@ -181,7 +181,6 @@ public abstract class Character extends MoveableEntity implements IUpdatable {
 	
 	public abstract void dead();
 	
-	
 	// Getters & Setters
 
 	public int getHp() {
