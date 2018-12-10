@@ -3,15 +3,13 @@ package application;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import ui.GameScene;
-import ui.Instructions;
-import ui.StartScene;
+import ui.*;
 
 public class Main extends Application {
 	
 	private static Stage stage;
 	private static StartScene startScene;
-	private static Scene instructions = new Instructions();
+	private static InstructionsScene instructionsScene = new InstructionsScene();
 	private static GameScene gameScene = new GameScene();
 	
 	public static void main(String[] args) {
@@ -52,7 +50,7 @@ public class Main extends Application {
 	}
 	
 	public static Scene getInstructionsScene() {
-		return instructions;
+		return instructionsScene;
 	}
 	
 	public static void setCenter() {

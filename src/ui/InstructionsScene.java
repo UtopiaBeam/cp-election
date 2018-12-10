@@ -9,14 +9,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 
-public class Instructions extends Scene {
+public class InstructionsScene extends Scene {
 	
 	private Pane root;
 	private Canvas canvas;
 	private Image[] instructions = { Images.instruction1, Images.instruction2 };
 	private int count = 0;
 	
-	public Instructions() {
+	public InstructionsScene() {
 		super(new Pane(), 900, 600);
 		root = (Pane) getRoot();
 		
