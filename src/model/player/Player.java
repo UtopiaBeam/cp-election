@@ -165,10 +165,8 @@ public class Player extends Character {
 		for (Item i: items) {
 			try {
 				collectItem(i);
-			} catch (InventoryFullException e) {
-				System.out.println("Inventory is full");
-			} catch (ItemTypeNotExistException e) {
-				System.out.println("Item type not found");
+			} catch (InventoryFullException | ItemTypeNotExistException e) {
+				// Do Nothing
 			}
 		}
 	}
