@@ -19,4 +19,5 @@ public class InventoryFullException extends Exception {
 	public InventoryFullException(String message, Throwable cause) {
 		super(message, cause);
 	}
+	
 }

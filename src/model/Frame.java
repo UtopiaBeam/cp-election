@@ -19,11 +19,6 @@ public class Frame {
 			(posY < f.posY + f.height) && (height + posY > f.posY);
 	}
 	
-	public boolean isInWindow() {
-		return (posX >= 0) && (posX + width < Constant.WINDOW_WIDTH) &&
-				(posY >= 0) && (posY + height < Constant.WINDOW_HEIGHT);
-	}
-	
 	// Getters & Setters
 
 	public double getPosX() {
