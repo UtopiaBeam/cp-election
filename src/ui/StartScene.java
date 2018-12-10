@@ -14,15 +14,18 @@ import application.Main;
 
 public class StartScene extends Scene {
 	
+	public static final int WINDOW_WIDTH = 420;
+	public static final int WINDOW_HEIGHT = 540;
+	
 	private Pane root;
 	private Canvas canvas;
 	MediaPlayer bgm;
 	
 	public StartScene() {
-		super(new Pane(), 420, 540);
+		super(new Pane(), WINDOW_WIDTH, WINDOW_HEIGHT);
 		root = (Pane) getRoot();
 		
-		canvas = new Canvas(420, 540);
+		canvas = new Canvas(WINDOW_WIDTH, WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.drawImage(Images.startscreen, 0, 0);
 		gc.drawImage(Images.playbutton, 165, 400);
