@@ -13,8 +13,6 @@ import model.player.Player;
 
 public class StatusBar {
 	
-	private static Player player;
-	
 	public static final double WINDOW_HEIGHT = 600;
 	public static final double HEIGHT = 50;
 	public static final double HP_WIDTH = 200;
@@ -33,7 +31,7 @@ public class StatusBar {
 	private static Image img = Images.statusbar;
 	
 	public void render(GraphicsContext gc) {
-		player = GameManager.getInstance().getPlayer();
+		Player player = GameManager.getInstance().getPlayer();
 		
 		hpWidth = HP_WIDTH*player.getHp()*0.2/player.getMaxHp() + 0.8*hpWidth;
 		
