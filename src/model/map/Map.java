@@ -189,10 +189,10 @@ public class Map extends Frame implements IUpdatable {
 
 	@Override
 	public void update() {
-		if (GameManager.getInstance().getTimeCount() == 60.0) {
+		if (GameManager.getInstance().getTimeCount() == 30.0) {
 			spawnBossPrawitRandom();
 		}
-		if (GameManager.getInstance().getTimeCount() == 120.0) {
+		if (GameManager.getInstance().getTimeCount() == 60.0) {
 			spawnBossPrayutRandom();
 		}
 		
