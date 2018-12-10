@@ -20,8 +20,6 @@ public class Sounds {
 	static {
 		bgm.setVolume(0.01);
 		attacksound.setVolume(0.1);
-		ccsound.setVolume(1.5);
-		immunesound.setVolume(1.5);
 		
 	}
 }
