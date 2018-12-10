@@ -17,10 +17,10 @@ public class InstructionsScene extends Scene {
 	private int count = 0;
 	
 	public InstructionsScene() {
-		super(new Pane(), 900, 600);
+		super(new Pane(), GameScene.WINDOW_WIDTH, GameScene.WINDOW_HEIGHT);
 		root = (Pane) getRoot();
 		
-		canvas = new Canvas(900, 600);
+		canvas = new Canvas(GameScene.WINDOW_WIDTH, GameScene.WINDOW_HEIGHT);
 		GraphicsContext gc = canvas.getGraphicsContext2D();
 		gc.drawImage(instructions[count], 0, 0);
 		gc.drawImage(Images.button, 740, 490);
