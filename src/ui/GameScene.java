@@ -65,8 +65,6 @@ public class GameScene extends Scene {
 				GameManager.getInstance().stopGame();
 			}
 		});
-		
 	}
 
-	
 }

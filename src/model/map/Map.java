@@ -185,7 +185,6 @@ public class Map extends Frame implements IUpdatable {
 			p.render(gc);
 		}
 		statusBar.render(gc);
-		
 	}
 
 	@Override

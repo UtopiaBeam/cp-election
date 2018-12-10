@@ -165,10 +165,8 @@ public class Player extends Character {
 		for (Item i: items) {
 			try {
 				collectItem(i);
-			} catch (InventoryFullException e) {
-				System.out.println("Inventory is full");
-			} catch (ItemTypeNotExistException e) {
-				System.out.println("Item type not found");
+			} catch (InventoryFullException | ItemTypeNotExistException e) {
+				// Do Nothing
 			}
 		}
 	}
@@ -238,11 +236,11 @@ public class Player extends Character {
 			}
 			collectItems();
 		} catch (CannotMoveException e) {
-//			System.out.println("Cannot move now");
+			// Do Nothing
 		} catch (CannotUseItemException e) {
-//			System.out.println("Cannot use item now");
+			// Do Nothing
 		} catch (CannotAttackException e) {
-//			System.out.println("Cannot attack now");
+			// Do Nothing
 		}
 		addAttackTick();
 		addImmuneTick();

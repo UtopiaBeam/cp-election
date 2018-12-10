@@ -7,13 +7,12 @@ import ui.GameScene;
 import ui.Instructions;
 import ui.StartScene;
 
-
 public class Main extends Application {
 	
 	private static Stage stage;
 	private static StartScene startScene;
 	private static Scene instructions = new Instructions();
-	private static Scene gameScene = new GameScene();
+	private static GameScene gameScene = new GameScene();
 	
 	public static void main(String[] args) {
 		launch(args);
@@ -27,7 +26,10 @@ public class Main extends Application {
 			stage.setTitle("CP-Election4.0!");
 			stage.setScene(startScene);
 			stage.show();
-
+			stage.setOnCloseRequest(e -> {
+				stage.close();
+				System.exit(0);
+			});
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
