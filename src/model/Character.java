@@ -6,8 +6,8 @@ import controller.GameManager;
 import exception.CannotAttackException;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import model.effect.HpBar;
 import model.map.Map;
+import ui.HpBar;
 
 public abstract class Character extends MoveableEntity implements IUpdatable {
 
