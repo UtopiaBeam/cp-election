@@ -67,6 +67,11 @@ public class InstructionsScene extends Scene {
 			if (isOnNextButton(e)) {
 				if (count < instructions.length-1) {
 					count++;
+					gc.drawImage(instructions[count], 0, 0);
+					gc.drawImage(Images.button, 740, 490);
+					if (count > 0) {
+						gc.drawImage(Images.button, 165, 490, -100, 66);
+					}
 				} else {
 					count = 0;
 					gc.drawImage(instructions[count], 0, 0);
