@@ -7,7 +7,7 @@ import ui.GameScene;
 public class PodiumSkill extends Skill {
 
 	public PodiumSkill() {
-		super("Podium Throwing", 240);
+		super(240);
 	}
 	
 	@Override
