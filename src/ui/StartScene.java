@@ -14,8 +14,8 @@ import application.Main;
 
 public class StartScene extends Scene {
 	
-	public static final int WINDOW_WIDTH = 420;
-	public static final int WINDOW_HEIGHT = 540;
+	public static final double WINDOW_WIDTH = 420;
+	public static final double WINDOW_HEIGHT = 540;
 	
 	private Pane root;
 	private Canvas canvas;

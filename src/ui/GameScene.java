@@ -14,8 +14,8 @@ import javafx.util.Duration;
 
 public class GameScene extends Scene {
 	
-	public static final int WINDOW_WIDTH = 900;
-	public static final int WINDOW_HEIGHT = 600;
+	public static final double WINDOW_WIDTH = 900;
+	public static final double WINDOW_HEIGHT = 600;
 	
 	private Canvas canvas;
 	
