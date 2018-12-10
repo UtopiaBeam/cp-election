@@ -19,7 +19,7 @@ public class StartScene extends Scene {
 	
 	private Pane root;
 	private Canvas canvas;
-	MediaPlayer bgm;
+	private MediaPlayer bgm;
 	
 	public StartScene() {
 		super(new Pane(), WINDOW_WIDTH, WINDOW_HEIGHT);
