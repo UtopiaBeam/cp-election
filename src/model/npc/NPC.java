@@ -21,7 +21,7 @@ public class NPC extends Character {
 	public NPC(double posX, double posY, String name, Image imageL, Image imageR, int maxHp, int minAtk, int maxAtk,
 			int def, int attackCooldown) {
 		super(posX, posY, name, imageL, imageR, maxHp, minAtk, maxAtk, def, attackCooldown);
-		this.speed = 0.5 + (Math.random());
+		this.speed = 0;
 	}
 
 	@Override
